@@ -20,7 +20,6 @@
             top: 0;
             left: 0;
             z-index: 1;
-            background-color: #e5e7eb;
         }
         .ui-layer {
             position: relative;
@@ -30,169 +29,159 @@
         .interactive-element {
             pointer-events: auto;
         }
-        /* Style for Leaflet tiles to look clean/grayscale */
+        /* استایل مونوکروم و تمیز نقشه لوفلت */
         .leaflet-tile-pane {
-            filter: grayscale(80%) contrast(90%) brightness(105%);
+            filter: grayscale(85%) contrast(90%) brightness(105%);
         }
     </style>
 </head>
 <body class="font-sans antialiased overflow-hidden select-none bg-gray-100 text-gray-800">
 
-    <!-- 1. پس‌زمینه نقشه GIS -->
+    <!-- 1. نقشه GIS تمام صفحه -->
     <div id="map"></div>
 
-    <!-- 2. لایه خوش‌آمدگویی و راهنمای اولیه (Intro Modal) -->
+    <!-- 2. لایه راهنمای اولیه (Intro Modal) -->
     <div id="introModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 transition-opacity duration-300">
-        <div class="bg-white/90 backdrop-blur-md rounded-2xl max-w-2xl w-full p-8 shadow-2xl border border-white/20 text-right space-y-6">
+        <div class="bg-white/90 backdrop-blur-md rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-white/20 text-right space-y-4">
             <div class="text-center">
-                <h1 class="text-3xl font-black tracking-widest text-gray-900">NOVO-BAY</h1>
-                <p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">[GLOBAL CENTER FOR IDEA GENERATION, ANALYSIS & INVESTMENT]</p>
+                <h1 class="text-2xl font-black tracking-widest text-gray-900">NOVO-BAY</h1>
+                <p class="text-[10px] text-gray-500 mt-0.5 uppercase tracking-wider">[GLOBAL CENTER FOR IDEA GENERATION, ANALYSIS & INVESTMENT]</p>
             </div>
             
-            <div class="space-y-4 text-sm text-gray-700 leading-relaxed border-y border-gray-200/60 py-4">
-                <p class="font-bold text-gray-900 text-base">به چرخه تعاملی و ۳ مرحله‌ای نووبی خوش آمدید!</p>
-                <p>این پلتفرم یک زیرساخت ایده پردازی، تحلیل و سرمایه‌گذاری جمعی ۷ روزه است که در سه گام متوالی عمل می‌کند:</p>
-                <ul class="list-disc list-inside space-y-2 pr-2 text-gray-600">
-                    <li><strong class="text-gray-800">گروه اول ($۲):</strong> ثبت کلمات و ایده‌های کلیدی در چالش‌های ۲۴ چرخه‌ای ساعتی با کدهای هش رمزنگاری‌شده.</li>
-                    <li><strong class="text-gray-800">گروه دوم ($۴):</strong> دریافت کلمات برنده روزانه، تحلیل عمیق و ارائه راهکارهای علمی در قالب مقاله.</li>
-                    <li><strong class="text-gray-800">گروه سوم (مناقصه):</strong> ورود سرمایه‌گذاران حامی برای تجاری‌سازی پروژه‌ها و تخصیص سهام خرد (Micro-Equity) به برندگان.</li>
+            <div class="space-y-3 text-xs text-gray-700 leading-relaxed border-y border-gray-200/60 py-3">
+                <p class="font-bold text-gray-900 text-sm">به چرخه تعاملی و ۳ مرحله‌ای نووبی خوش آمدید!</p>
+                <ul class="list-disc list-inside space-y-1.5 pr-1 text-gray-600">
+                    <li><strong class="text-gray-800">گام ۱ ($۲):</strong> ثبت کلمات و ایده‌های کلیدی در چرخه‌های ساعتی.</li>
+                    <li><strong class="text-gray-800">گام ۲ ($۴):</strong> تحلیل کلمات برنده و ارائه مقالات تخصصی.</li>
+                    <li><strong class="text-gray-800">گام ۳ (مناقصه):</strong> ورود سرمایه‌گذاران حامی و تخصیص سهام خرد (Micro-Equity).</li>
                 </ul>
-                <p class="text-xs text-gray-500 bg-gray-100 p-2.5 rounded-lg border border-gray-200">
-                    📍 تمامی مشارکت‌های جهانی به صورت زنده بر روی نقشه GIS پس‌زمینه جانمایی می‌شوند. سوابق هر روز پس از ۷ روز ثبت شده و عملیات برای هفته جدید صفر می‌گردد.
-                </p>
             </div>
 
             <div class="flex justify-center">
-                <button onclick="startGame()" class="interactive-element bg-gray-900 hover:bg-black text-white font-bold py-3.5 px-10 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5">
-                    🚀 شروع بازی و ورود به چالش
+                <button onclick="startGame()" class="interactive-element bg-gray-900 hover:bg-black text-white font-bold py-2.5 px-8 rounded-xl shadow-lg transition-all text-xs">
+                    🚀 شروع و ورود به چالش
                 </button>
             </div>
         </div>
     </div>
 
     <!-- 3. رابط کاربری اصلی روی نقشه (UI Layer) -->
-    <div class="ui-layer h-screen flex flex-col justify-between p-6">
+    <div class="ui-layer h-screen flex flex-col justify-between p-4 md:p-6">
         
         <!-- هدر بالای صفحه -->
         <div class="flex flex-col items-center justify-center">
-            <div class="bg-white/80 backdrop-blur-md px-8 py-2.5 rounded-2xl shadow-sm border border-white/50 text-center">
-                <h2 class="text-2xl font-black text-gray-900 tracking-widest">NOVO-BAY</h2>
-                <p class="text-[10px] text-gray-500 tracking-wider font-semibold">[GLOBAL CENTER FOR IDEA GENERATION, ANALYSIS & INVESTMENT]</p>
+            <div class="bg-white/85 backdrop-blur-md px-6 py-2 rounded-xl shadow-sm border border-white/50 text-center">
+                <h2 class="text-xl font-black text-gray-900 tracking-wider">NOVO-BAY</h2>
+                <p class="text-[9px] text-gray-500 tracking-wider font-semibold">[GLOBAL CENTER FOR IDEA GENERATION, ANALYSIS & INVESTMENT]</p>
             </div>
         </div>
 
-        <!-- 3 پنل اصلی + باکس چهارم -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto max-w-7xl mx-auto w-full px-4">
+        <!-- پنل راهنمای رنگی شرکت‌کنندگان (سمت چپ/پایین هدر) -->
+        <div class="absolute top-20 right-6 hidden lg:flex flex-col bg-white/85 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow-md text-[10px] space-y-1.5 interactive-element">
+            <div class="font-bold text-gray-900 border-b pb-1 mb-0.5">راهنمای مشارکت‌کنندگان:</div>
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> Tier 1 Participants ($2)</div>
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Tier 2 Participants ($4)</div>
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span> Tier 3 Participants</div>
+            <div class="text-[9px] text-gray-400 pt-1 border-t">Word/Solution Frequency (HASH-XXXX)</div>
+        </div>
+
+        <!-- 3 باکس اصلی مراحل (کوچک و جمع‌وجور) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto max-w-5xl mx-auto w-full px-2">
             
             <!-- باکس اول: Step 1 Idea Generation -->
-            <div class="relative bg-white/85 backdrop-blur-md p-5 rounded-2xl border border-white/60 shadow-lg flex flex-col items-center justify-between space-y-4">
-                <!-- دکمه آکاردئونی بسیار کوچک + -->
-                <button onclick="togglePanel('info1')" class="interactive-element absolute -top-3 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow transition">
-                    +
-                </button>
-                
-                <!-- پاپ‌آپ اطلاعاتی مخفی (با زدن +) -->
-                <div id="info1" class="hidden w-full bg-gray-50/95 p-3 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2 mb-2">
-                    <div class="font-bold text-gray-900 border-b pb-1">FINALIZED WORDS (DAILY):</div>
-                    <p class="text-[10px] text-gray-500">SUSTAINABILITY, TECHNOLOGY, PEACE, COMMUNITY, ECONOMIC</p>
-                    <div class="flex items-center space-x-1 space-x-reverse pt-1">
-                        <span class="text-[10px] text-gray-400">WEEK:</span>
-                        <button class="interactive-element bg-green-500 text-white text-[9px] px-1.5 py-0.5 rounded cursor-pointer" title="کلیک برای مشاهده کلمات روز اول">Day 1 🛡️</button>
-                        <span class="text-[9px] text-gray-400">Day 2-7...</span>
-                    </div>
+            <div class="relative bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white/60 shadow-md flex flex-col justify-between space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-black text-gray-700 uppercase">STEP 1: IDEA GENERATION ($2)</span>
+                    <button onclick="togglePanel('info1')" class="interactive-element bg-gray-200 hover:bg-gray-300 text-gray-800 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition">+</button>
                 </div>
 
-                <div class="w-full bg-white border border-gray-300 rounded-lg p-2 flex items-center justify-between">
-                    <span class="text-xs text-gray-400">ورود کلمه/ایده...</span>
-                    <i class="fa-solid fa-coins text-amber-500"></i>
+                <!-- پاپ‌آپ کشویی اطلاعات -->
+                <div id="info1" class="hidden w-full bg-gray-50 p-2.5 rounded-lg border border-gray-200 text-[10px] text-gray-700 space-y-1">
+                    <div class="font-bold text-gray-900">FINALIZED WORDS:</div>
+                    <p class="text-gray-500">SUSTAINABILITY, TECHNOLOGY, PEACE, COMMUNITY, ECONOMIC</p>
                 </div>
 
-                <button class="interactive-element w-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 text-xs font-bold py-2 rounded-lg transition">
+                <div class="w-full bg-white border border-gray-300 rounded-lg px-2.5 py-1.5 flex items-center justify-between">
+                    <span class="text-[11px] text-gray-400">ورود کلمه/ایده...</span>
+                    <i class="fa-solid fa-coins text-amber-500 text-xs"></i>
+                </div>
+
+                <button class="interactive-element w-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 text-[11px] font-bold py-1.5 rounded-lg transition">
                     SUBMIT WORD ($2)
                 </button>
-
-                <div class="text-xs font-black text-gray-700 uppercase">STEP 1: IDEA GENERATION ($2)</div>
             </div>
 
             <!-- باکس دوم: Step 2 Analysis -->
-            <div class="relative bg-white/85 backdrop-blur-md p-5 rounded-2xl border border-white/60 shadow-lg flex flex-col items-center justify-between space-y-4">
-                <!-- دکمه آکاردئونی بسیار کوچک + -->
-                <button onclick="togglePanel('info2')" class="interactive-element absolute -top-3 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow transition">
-                    +
-                </button>
-
-                <!-- پاپ‌آپ اطلاعاتی مخفی -->
-                <div id="info2" class="hidden w-full bg-gray-50/95 p-3 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2 mb-2">
-                    <div class="font-bold text-gray-900 border-b pb-1">FINALIZED ARTICLES:</div>
-                    <p class="text-[10px] text-gray-500">Day 1: Impact of Community Tech 🛡️</p>
-                    <p class="text-[10px] text-gray-500">Day 2: Global Sustainability 🛡️</p>
+            <div class="relative bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white/60 shadow-md flex flex-col justify-between space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-black text-gray-700 uppercase">STEP 2: ANALYSIS ($4)</span>
+                    <button onclick="togglePanel('info2')" class="interactive-element bg-gray-200 hover:bg-gray-300 text-gray-800 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition">+</button>
                 </div>
 
-                <div class="flex items-center space-x-3 space-x-reverse text-gray-600 my-2">
-                    <i class="fa-solid fa-book-open text-2xl text-blue-600"></i>
-                    <i class="fa-solid fa-arrow-left text-xs text-gray-400"></i>
-                    <i class="fa-solid fa-file-signature text-2xl text-green-600"></i>
+                <div id="info2" class="hidden w-full bg-gray-50 p-2.5 rounded-lg border border-gray-200 text-[10px] text-gray-700 space-y-1">
+                    <div class="font-bold text-gray-900">FINALIZED ARTICLES:</div>
+                    <p class="text-gray-500">Day 1: Impact of Community Tech</p>
                 </div>
 
-                <button class="interactive-element w-full bg-green-50/80 hover:bg-green-100 border border-green-300 text-green-800 text-xs font-bold py-2 rounded-lg transition">
+                <div class="flex items-center justify-center space-x-2 space-x-reverse text-gray-600 py-1">
+                    <i class="fa-solid fa-book-open text-base text-blue-600"></i>
+                    <i class="fa-solid fa-arrow-left text-[10px] text-gray-400"></i>
+                    <i class="fa-solid fa-file-signature text-base text-green-600"></i>
+                </div>
+
+                <button class="interactive-element w-full bg-green-50 hover:bg-green-100 border border-green-300 text-green-800 text-[11px] font-bold py-1.5 rounded-lg transition">
                     GET & ANALYZE ARTICLE ($4)
                 </button>
-
-                <div class="text-xs font-black text-gray-700 uppercase">STEP 2: ANALYSIS ($4)</div>
             </div>
 
             <!-- باکس سوم: Step 3 Investment -->
-            <div class="relative bg-white/85 backdrop-blur-md p-5 rounded-2xl border border-white/60 shadow-lg flex flex-col items-center justify-between space-y-4">
-                <!-- دکمه آکاردئونی بسیار کوچک + -->
-                <button onclick="togglePanel('info3')" class="interactive-element absolute -top-3 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow transition">
-                    +
-                </button>
-
-                <!-- پاپ‌آپ اطلاعاتی مخفی -->
-                <div id="info3" class="hidden w-full bg-gray-50/95 p-3 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-2 mb-2">
-                    <div class="font-bold text-gray-900 border-b pb-1">CURRENT INVESTORS:</div>
-                    <p class="text-sm font-bold text-green-600">145 Ready to Support</p>
+            <div class="relative bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white/60 shadow-md flex flex-col justify-between space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-black text-gray-700 uppercase">STEP 3: INVESTMENT (TENDER)</span>
+                    <button onclick="togglePanel('info3')" class="interactive-element bg-gray-200 hover:bg-gray-300 text-gray-800 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition">+</button>
                 </div>
 
-                <div class="flex items-center space-x-4 space-x-reverse text-gray-700 my-2">
-                    <i class="fa-solid fa-handshake text-2xl text-amber-600"></i>
-                    <i class="fa-solid fa-briefcase text-2xl text-gray-700"></i>
+                <div id="info3" class="hidden w-full bg-gray-50 p-2.5 rounded-lg border border-gray-200 text-[10px] text-gray-700 space-y-1">
+                    <div class="font-bold text-gray-900">CURRENT INVESTORS:</div>
+                    <p class="text-xs font-bold text-green-600">145 Ready to Support</p>
                 </div>
 
-                <button class="interactive-element w-full bg-blue-50/80 hover:bg-blue-100 border border-blue-300 text-blue-800 text-xs font-bold py-2 rounded-lg transition">
+                <div class="flex items-center justify-center space-x-3 space-x-reverse text-gray-700 py-1">
+                    <i class="fa-solid fa-handshake text-base text-amber-600"></i>
+                    <i class="fa-solid fa-briefcase text-base text-gray-700"></i>
+                </div>
+
+                <button class="interactive-element w-full bg-blue-50 hover:bg-blue-100 border border-blue-300 text-blue-800 text-[11px] font-bold py-1.5 rounded-lg transition">
                     JOIN TENDER (SPONSOR)
                 </button>
-
-                <div class="text-xs font-black text-gray-700 uppercase">STEP 3: INVESTMENT (TENDER)</div>
             </div>
 
         </div>
 
-        <!-- باکس چهارم (مخزن سهام خرد - پایین و مرکز) -->
-        <div class="max-w-md mx-auto w-full bg-white/80 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow text-center -mt-2">
-            <div class="text-[11px] font-bold text-gray-800 uppercase flex items-center justify-center gap-2">
-                <i class="fa-solid fa-chart-pie text-emerald-600"></i>
+        <!-- باکس چهارم: استخر سهام خرد (مرکز پایین) -->
+        <div class="max-w-sm mx-auto w-full bg-white/85 backdrop-blur-md p-2.5 rounded-xl border border-white/50 shadow text-center">
+            <div class="text-[10px] font-bold text-gray-800 uppercase flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-chart-pie text-emerald-600 text-xs"></i>
                 MICRO-EQUITY / DIVIDENDS POOL (WEEKLY)
             </div>
-            <p class="text-[9px] text-gray-500 mt-0.5">توزیع سود و سهام خرد به برندگان چالش‌های گروه ۱ و گروه ۲</p>
+            <p class="text-[8px] text-gray-500 mt-0.5">توزیع سود و سهام خرد به برندگان چالش‌ها</p>
         </div>
 
         <!-- 4. فوتر: دو دکمه ورودی اصلی در پایین -->
-        <div class="flex items-center justify-center space-x-4 space-x-reverse pt-4">
-            <button onclick="alert('شما در حال حاضر در محیط چالش ۳ مرحله‌ای هستید.')" class="interactive-element bg-white/90 hover:bg-white text-gray-900 font-bold px-6 py-2.5 rounded-xl border border-gray-300 shadow-md text-xs transition">
+        <div class="flex items-center justify-center space-x-3 space-x-reverse pt-2">
+            <button onclick="alert('شما در حال حاضر در محیط چالش ۳ مرحله‌ای هستید.')" class="interactive-element bg-white/90 hover:bg-white text-gray-900 font-bold px-5 py-2 rounded-xl border border-gray-300 shadow-sm text-[11px] transition">
                 🎮 ورود به بازی ۳ مرحله‌ای
             </button>
-            <button onclick="alert('انتقال به مخازن اصلی وب‌سایت نووبی...')" class="interactive-element bg-gray-900/90 hover:bg-black text-white font-bold px-6 py-2.5 rounded-xl border border-gray-800 shadow-md text-xs transition">
+            <a href="https://sasaz405.github.io/novo-bay/" class="interactive-element bg-gray-900/90 hover:bg-black text-white font-bold px-5 py-2 rounded-xl border border-gray-800 shadow-sm text-[11px] transition inline-block text-center">
                 🌐 ورود مستقیم: وب‌سایت اصلی
-            </button>
+            </a>
         </div>
 
-        <!-- 5. دکمه قرمز گرد در گوشه پایین سمت راست (دکمه خروج / برگشت) -->
-        <div class="fixed bottom-6 right-6 z-50">
-            <button onclick="resetToIntro()" class="interactive-element group relative bg-red-600 hover:bg-red-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 border-2 border-white">
-                <i class="fa-solid fa-power-off text-lg"></i>
-                <!-- متن Hover که نمایش داده می‌شود -->
-                <span class="absolute right-14 bg-gray-900 text-white text-[11px] font-bold py-1 px-3 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
+        <!-- 5. دکمه قرمز گرد کوچک در گوشه پایین سمت راست -->
+        <div class="fixed bottom-4 right-4 z-50">
+            <button onclick="resetToIntro()" class="interactive-element group relative bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white">
+                <i class="fa-solid fa-power-off text-sm"></i>
+                <span class="absolute right-12 bg-gray-900 text-white text-[10px] font-bold py-1 px-2.5 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-md">
                     پایان / برگشت
                 </span>
             </button>
@@ -202,7 +191,7 @@
 
     <!-- 6. اسکریپت‌های تعاملی -->
     <script>
-        // ۱. راه‌اندازی نقشه Leaflet GIS
+        // راه‌اندازی نقشه Leaflet GIS
         const map = L.map('map', {
             zoomControl: false
         }).setView([20, 0], 2);
@@ -214,7 +203,7 @@
 
         L.control.zoom({ position: 'topleft' }).addTo(map);
 
-        // ۲. کنترل پاپ‌آپ راهنما (Intro Modal)
+        // کنترل پاپ‌آپ راهنما (Intro Modal)
         function startGame() {
             document.getElementById('introModal').classList.add('opacity-0', 'pointer-events-none');
         }
@@ -223,7 +212,7 @@
             document.getElementById('introModal').classList.remove('opacity-0', 'pointer-events-none');
         }
 
-        // ۳. کنترل دکمه‌های آکاردئونی +
+        // کنترل دکمه‌های آکاردئونی +
         function togglePanel(panelId) {
             const panel = document.getElementById(panelId);
             panel.classList.toggle('hidden');
