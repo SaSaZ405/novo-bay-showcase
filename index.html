@@ -13,18 +13,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #e5e7eb;
+        }
         #map {
-            height: 100vh;
-            width: 100vw;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: 1;
         }
         .ui-layer {
             position: relative;
             z-index: 10;
             pointer-events: none;
+            width: 100vw;
+            height: 100vh;
         }
         .interactive-element {
             pointer-events: auto;
@@ -35,9 +45,9 @@
         }
     </style>
 </head>
-<body class="font-sans antialiased overflow-hidden select-none bg-gray-100 text-gray-800">
+<body class="font-sans antialiased overflow-hidden select-none text-gray-800">
 
-    <!-- 1. نقشه GIS تمام صفحه (نمایش کامل جهان) -->
+    <!-- 1. نقشه GIS تمام صفحه (چسبیده و بدون فضای خالی پس‌زمینه) -->
     <div id="map"></div>
 
     <!-- 2. لایه راهنمای اولیه (Intro Modal) -->
@@ -66,7 +76,7 @@
     </div>
 
     <!-- 3. رابط کاربری اصلی روی نقشه (UI Layer) -->
-    <div class="ui-layer h-screen flex flex-col justify-between p-4 md:p-6">
+    <div class="ui-layer flex flex-col justify-between p-4 md:p-6">
         
         <!-- هدر بالای صفحه -->
         <div class="flex flex-col items-center justify-center relative">
@@ -90,7 +100,7 @@
             </div>
         </div>
 
-        <!-- شماره ۱: راهنمای رنگی شرکت‌کنندگان (دقیقاً در گوشه پایین سمت چپ) -->
+        <!-- شماره ۱: راهنمای رنگی شرکت‌کنندگان (گوشه پایین سمت چپ) -->
         <div class="absolute bottom-6 left-6 hidden lg:flex flex-col bg-white/90 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow-lg text-[10px] space-y-1.5 interactive-element z-20">
             <div class="font-bold text-gray-900 border-b pb-1 mb-0.5" id="legendTitle">راهنمای مشارکت‌کنندگان:</div>
             <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> <span id="tier1Text">Tier 1 Participants ($2)</span></div>
@@ -115,7 +125,7 @@
                     <button onclick="togglePanel('info1')" class="interactive-element bg-gray-200 hover:bg-gray-300 text-gray-800 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition shadow-xs">+</button>
                 </div>
 
-                <!-- شماره ۳: باکس اطلاعاتی پنهان/آکاردئونی بالا -->
+                <!-- باکس اطلاعاتی پنهان/آکاردئونی بالا -->
                 <div id="info1" class="hidden w-full bg-gray-50 p-2.5 rounded-lg border border-gray-200 text-[10px] text-gray-700 space-y-1">
                     <div class="font-bold text-gray-900" id="finalWordsTitle">FINALIZED WORDS:</div>
                     <p class="text-gray-500">SUSTAINABILITY, TECHNOLOGY, PEACE, COMMUNITY, ECONOMIC</p>
@@ -213,7 +223,7 @@
 
     <!-- 6. اسکریپت‌های تعاملی و چندزبانه -->
     <script>
-        // دیکشنری کامل چندزبانه برای تمام عناصر اضافه شده
+        // دیکشنری کامل چندزبانه
         const translations = {
             fa: {
                 introTitle: "به چرخه تعاملی و ۳ مرحله‌ای نووبی خوش آمدید!",
@@ -425,7 +435,6 @@
             }
         };
 
-        // اعمال زبان ذخیره‌شده یا پیش‌فرض به محض بارگذاری
         window.onload = function() {
             const savedLang = localStorage.getItem('novobay_lang') || 'fa';
             document.getElementById('langSelect').value = savedLang;
@@ -451,7 +460,6 @@
                 htmlRoot.setAttribute('lang', lang);
             }
 
-            // به‌روزرسانی متن عناصر صفحه
             document.getElementById('introTitle').innerText = t.introTitle;
             document.getElementById('startBtnText').innerText = t.startBtnText;
             document.getElementById('legendTitle').innerText = t.legendTitle;
@@ -478,19 +486,25 @@
             document.getElementById('backTooltip').innerText = t.backTip;
         }
 
-        // ۱. راه‌اندازی نقشه Leaflet GIS با زوم کامل روی جهان و امکان زوم آزاد
+        // محدود کردن حرکت نقشه فقط به صورت افقی (چپ و راست) و قفل کردن حرکت عمودی
+        const bounds = L.latLngBounds(
+            L.latLng(-25, -180),
+            L.latLng(25, 180)
+        );
+
         const map = L.map('map', {
             zoomControl: true,
-            minZoom: 1,
-            maxZoom: 18
-        }).setView([20, 0], 2); // تنظیم پیش‌فرض روی نمایش کل نقشه کره زمین
+            minZoom: 2,
+            maxZoom: 18,
+            maxBounds: bounds,
+            maxBoundsViscosity: 1.0
+        }).setView([0, 0], 2);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
             attribution: '© OpenStreetMap'
         }).addTo(map);
 
-        // ۲. کنترل پاپ‌آپ راهنما (Intro Modal)
         function startGame() {
             document.getElementById('introModal').classList.add('opacity-0', 'pointer-events-none');
         }
@@ -499,7 +513,6 @@
             document.getElementById('introModal').classList.remove('opacity-0', 'pointer-events-none');
         }
 
-        // ۳. کنترل دکمه‌های آکاردئونی + (باکس‌های بالای استپ‌ها)
         function togglePanel(panelId) {
             const panel = document.getElementById(panelId);
             panel.classList.toggle('hidden');
