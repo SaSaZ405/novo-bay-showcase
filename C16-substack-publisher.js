@@ -1,7 +1,6 @@
-function openHelp() {
-    alert('راهنمای گام‌به‌گام: گروه اول (ثبت کلمه ساعتی) -> گروه دوم (مقاله روزانه) -> گروه سوم (جذب سرمایه و سهام خرد).');
-}
-
-function openContact() {
-    alert('تیم پشتیبانی نووبی آماده پاسخگویی به سوالات شماست. (ایمیل: support@novobay.internal)');
+function generateSubstackPayload() {
+    return {
+        title: "NOVO-BAY Weekly Global Digest",
+        content: "خلاصه هفتگی اسامی، عناوین استخراج‌شده و مقالات برتر جهت تصمیم‌گیری سرمایه‌گذاران."
+    };
 }
