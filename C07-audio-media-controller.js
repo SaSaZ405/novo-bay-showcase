@@ -1,10 +1,10 @@
-function changeLanguage(lang) {
-    const root = document.getElementById('htmlRoot');
-    if (lang === 'fa') {
-        root.setAttribute('lang', 'fa');
-        root.setAttribute('dir', 'rtl');
+let isAudioPlaying = false;
+function toggleAudio() {
+    isAudioPlaying = !isAudioPlaying;
+    const statusText = document.getElementById('audioStatus');
+    if (isAudioPlaying) {
+        statusText.innerText = "موسیقی: در حال پخش";
     } else {
-        root.setAttribute('lang', lang);
-        root.setAttribute('dir', 'ltr');
+        statusText.innerText = "موسیقی: خاموش";
     }
 }
