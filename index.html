@@ -19,7 +19,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #e5e7eb;
+            background-color: #f3f4f6;
         }
         #map {
             position: fixed;
@@ -47,7 +47,7 @@
 </head>
 <body class="font-sans antialiased overflow-hidden select-none text-gray-800">
 
-    <!-- 1. نقشه GIS تمام صفحه (چسبیده و بدون فضای خالی پس‌زمینه) -->
+    <!-- 1. نقشه GIS تمام صفحه -->
     <div id="map"></div>
 
     <!-- 2. لایه راهنمای اولیه (Intro Modal) -->
@@ -100,7 +100,7 @@
             </div>
         </div>
 
-        <!-- شماره ۱: راهنمای رنگی شرکت‌کنندگان (گوشه پایین سمت چپ) -->
+        <!-- راهنمای رنگی شرکت‌کنندگان (گوشه پایین سمت چپ) -->
         <div class="absolute bottom-6 left-6 hidden lg:flex flex-col bg-white/90 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow-lg text-[10px] space-y-1.5 interactive-element z-20">
             <div class="font-bold text-gray-900 border-b pb-1 mb-0.5" id="legendTitle">راهنمای مشارکت‌کنندگان:</div>
             <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> <span id="tier1Text">Tier 1 Participants ($2)</span></div>
@@ -109,13 +109,13 @@
             <div class="text-[9px] text-gray-500 pt-1 border-t font-semibold" id="freqText">Word/Solution Frequency (HASH-XXXX)</div>
         </div>
 
-        <!-- شماره ۲: برچسب‌های جریان داده بین مراحل (روی نقشه) -->
+        <!-- برچسب‌های جریان داده بین مراحل -->
         <div class="hidden md:flex justify-around items-center max-w-4xl mx-auto w-full px-10 text-[10px] font-bold text-gray-600 tracking-wider">
             <span class="bg-white/80 backdrop-blur-sm px-2.5 py-1 rounded-md border border-gray-200 shadow-xs" id="flow1Text">ARTICLE TOPIC (DAILY)</span>
             <span class="bg-white/80 backdrop-blur-sm px-2.5 py-1 rounded-md border border-gray-200 shadow-xs" id="flow2Text">SOLUTIONS & IDEAS (WEEKLY)</span>
         </div>
 
-        <!-- 3 باکس اصلی مراحل (کوچک و جمع‌وجور) -->
+        <!-- 3 باکس اصلی مراحل -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto max-w-5xl mx-auto w-full px-2">
             
             <!-- باکس اول: Step 1 Idea Generation -->
@@ -125,7 +125,6 @@
                     <button onclick="togglePanel('info1')" class="interactive-element bg-gray-200 hover:bg-gray-300 text-gray-800 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition shadow-xs">+</button>
                 </div>
 
-                <!-- باکس اطلاعاتی پنهان/آکاردئونی بالا -->
                 <div id="info1" class="hidden w-full bg-gray-50 p-2.5 rounded-lg border border-gray-200 text-[10px] text-gray-700 space-y-1">
                     <div class="font-bold text-gray-900" id="finalWordsTitle">FINALIZED WORDS:</div>
                     <p class="text-gray-500">SUSTAINABILITY, TECHNOLOGY, PEACE, COMMUNITY, ECONOMIC</p>
@@ -148,7 +147,6 @@
                     <button onclick="togglePanel('info2')" class="interactive-element bg-gray-200 hover:bg-gray-300 text-gray-800 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition shadow-xs">+</button>
                 </div>
 
-                <!-- باکس اطلاعاتی پنهان بالا -->
                 <div id="info2" class="hidden w-full bg-gray-50 p-2.5 rounded-lg border border-gray-200 text-[10px] text-gray-700 space-y-1">
                     <div class="font-bold text-gray-900" id="finalArticlesTitle">FINALIZED ARTICLES:</div>
                     <p class="text-gray-500">Day 1: Impact of Community Tech</p>
@@ -172,7 +170,6 @@
                     <button onclick="togglePanel('info3')" class="interactive-element bg-gray-200 hover:bg-gray-300 text-gray-800 w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold transition shadow-xs">+</button>
                 </div>
 
-                <!-- باکس اطلاعاتی پنهان بالا -->
                 <div id="info3" class="hidden w-full bg-gray-50 p-2.5 rounded-lg border border-gray-200 text-[10px] text-gray-700 space-y-1">
                     <div class="font-bold text-gray-900" id="investorsTitle">CURRENT INVESTORS:</div>
                     <p class="text-xs font-bold text-green-600">145 Ready to Support</p>
@@ -190,7 +187,7 @@
 
         </div>
 
-        <!-- شماره ۴: باکس استخر سهام خرد (کاملاً مستقل در مرکز پایین) -->
+        <!-- باکس استخر سهام خرد -->
         <div class="max-w-sm mx-auto w-full bg-white/90 backdrop-blur-md p-2.5 rounded-xl border border-white/60 shadow-md text-center">
             <div class="text-[10px] font-bold text-gray-800 uppercase flex items-center justify-center gap-1.5" id="equityTitle">
                 <i class="fa-solid fa-chart-pie text-emerald-600 text-xs"></i>
@@ -199,7 +196,7 @@
             <p class="text-[8px] text-gray-500 mt-0.5" id="equityDesc">توزیع سود و سهام خرد به برندگان چالش‌ها</p>
         </div>
 
-        <!-- 4. فوتر: دو دکمه ورودی اصلی در پایین -->
+        <!-- فوتر: دو دکمه ورودی اصلی در پایین -->
         <div class="flex items-center justify-center space-x-3 space-x-reverse pt-2">
             <button onclick="alert('شما در حال حاضر در محیط چالش ۳ مرحله‌ای هستید.')" class="interactive-element bg-white/90 hover:bg-white text-gray-900 font-bold px-5 py-2 rounded-xl border border-gray-300 shadow-sm text-[11px] transition" id="gameBtnText">
                 🎮 ورود به بازی ۳ مرحله‌ای
@@ -209,7 +206,7 @@
             </a>
         </div>
 
-        <!-- 5. دکمه قرمز گرد کوچک در گوشه پایین سمت راست -->
+        <!-- دکمه قرمز گرد کوچک در گوشه پایین سمت راست -->
         <div class="fixed bottom-4 right-4 z-50">
             <button onclick="resetToIntro()" class="interactive-element group relative bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 hover:scale-105 border-2 border-white">
                 <i class="fa-solid fa-power-off text-sm"></i>
@@ -221,9 +218,8 @@
 
     </div>
 
-    <!-- 6. اسکریپت‌های تعاملی و چندزبانه -->
+    <!-- اسکریپت‌های تعاملی و چندزبانه -->
     <script>
-        // دیکشنری کامل چندزبانه
         const translations = {
             fa: {
                 introTitle: "به چرخه تعاملی و ۳ مرحله‌ای نووبی خوش آمدید!",
@@ -475,7 +471,7 @@
             document.getElementById('submitWordBtn').innerText = t.submitWord;
             document.getElementById('step2Title').innerText = t.step2;
             document.getElementById('finalArticlesTitle').innerText = t.finalArticles;
-            document.getElementById('analyzeBtnText').innerText = t.analyze;
+            document.getElementById('analyzeBtnText').innerText.innerText = t.analyze;
             document.getElementById('step3Title').innerText = t.step3;
             document.getElementById('investorsTitle').innerText = t.investors;
             document.getElementById('tenderBtnText').innerText = t.tender;
@@ -486,19 +482,19 @@
             document.getElementById('backTooltip').innerText = t.backTip;
         }
 
-        // محدود کردن حرکت نقشه فقط به صورت افقی (چپ و راست) و قفل کردن حرکت عمودی
+        // تنظیم محدوده جغرافیایی دقیق برای پر کردن ارتفاع صفحه و اجازه حرکت فقط به چپ و راست
         const bounds = L.latLngBounds(
-            L.latLng(-25, -180),
-            L.latLng(25, 180)
+            L.latLng(-50, -180),
+            L.latLng(50, 180)
         );
 
         const map = L.map('map', {
             zoomControl: true,
-            minZoom: 2,
+            minZoom: 3, // افزایش حداقل زوم برای جلوگیری از کوچک شدن نقشه و ایجاد فضای خالی بالا و پایین
             maxZoom: 18,
             maxBounds: bounds,
             maxBoundsViscosity: 1.0
-        }).setView([0, 0], 2);
+        }).setView([0, 0], 3); // تنظیم زوم اولیه روی 3 برای پوشش کامل ارتفاع صفحه
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
