@@ -1,1 +1,37 @@
 
+#map {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #e5e7eb;
+}
+/* فیلتر مونوکروم و مرزهای طلایی نقشه */
+.leaflet-tile-pane {
+    filter: grayscale(85%) contrast(90%) brightness(105%);
+}
+.country-gold-border {
+    stroke: #d4af37;
+    stroke-width: 2px;
+    fill-opacity: 0.1;
+}
+/* چراغ‌های زنده وضعیت روی نقشه */
+.live-beacon {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    animation: pulse-beacon 2s infinite;
+}
+.beacon-subscriber { background-color: #3b82f6; } /* اشتراک‌دار */
+.beacon-active { background-color: #10b981; }     /* در حال چالش */
+.beacon-shareholder { background-color: #f59e0b; }/* سهام‌دار */
+.beacon-idle { background-color: #9ca3af; }       /* آنلاین بدون فعالیت */
+
+@keyframes pulse-beacon {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 15px #10b981; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
