@@ -100,13 +100,14 @@
             </div>
         </div>
 
-        <!-- راهنمای رنگی شرکت‌کنندگان (گوشه پایین سمت چپ) -->
-        <div class="absolute bottom-6 left-6 hidden lg:flex flex-col bg-white/90 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow-lg text-[10px] space-y-1.5 interactive-element z-20">
-            <div class="font-bold text-gray-900 border-b pb-1 mb-0.5" id="legendTitle">راهنمای مشارکت‌کنندگان:</div>
-            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> <span id="tier1Text">Tier 1 Participants ($2)</span></div>
-            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> <span id="tier2Text">Tier 2 Participants ($4)</span></div>
-            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span> <span id="tier3Text">Tier 3 Participants</span></div>
-            <div class="text-[9px] text-gray-500 pt-1 border-t font-semibold" id="freqText">Word/Solution Frequency (HASH-XXXX)</div>
+        <!-- راهنمای نقشه (Legend) دقیقاً مطابق تصویر نمونه در گوشه پایین سمت چپ -->
+        <div class="absolute bottom-6 left-6 flex flex-col bg-white/90 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow-lg text-[10px] space-y-1.5 interactive-element z-20">
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-500 inline-block shadow-xs"></span> <span id="tier1Text">Tier 1 Participants ($2)</span>[cite: 9]</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block shadow-xs"></span> <span id="tier2Text">Tier 2 Participants ($4)</span>[cite: 9]</div>
+            <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-500 inline-block shadow-xs"></span> <span id="tier3Text">Tier 3 Participants</span>[cite: 9]</div>
+            <div class="flex items-center gap-1.5 pt-1 border-t border-gray-200 text-gray-600 font-semibold">
+                <i class="fa-solid fa-chart-column text-xs text-gray-500"></i> <span id="freqText">Word/Solution Frequency (HASH-XXXX)</span>[cite: 9]
+            </div>
         </div>
 
         <!-- برچسب‌های جریان داده بین مراحل -->
@@ -224,7 +225,6 @@
             fa: {
                 introTitle: "به چرخه تعاملی و ۳ مرحله‌ای نووبی خوش آمدید!",
                 startBtnText: "🚀 شروع و ورود به چالش",
-                legendTitle: "راهنمای مشارکت‌کنندگان:",
                 tier1: "Tier 1 Participants ($2)",
                 tier2: "Tier 2 Participants ($4)",
                 tier3: "Tier 3 Participants",
@@ -250,7 +250,6 @@
             en: {
                 introTitle: "Welcome to the NOVO-BAY 3-Step Interactive Cycle!",
                 startBtnText: "🚀 Start & Enter Challenge",
-                legendTitle: "Participants Legend:",
                 tier1: "Tier 1 Participants ($2)",
                 tier2: "Tier 2 Participants ($4)",
                 tier3: "Tier 3 Participants",
@@ -276,7 +275,6 @@
             ar: {
                 introTitle: "مرحباً بكم في دورة نوفي-باي التفاعلية من 3 خطوات!",
                 startBtnText: "🚀 ابدأ الدخول إلى التحدي",
-                legendTitle: "دليل المشاركين:",
                 tier1: "Tier 1 Participants ($2)",
                 tier2: "Tier 2 Participants ($4)",
                 tier3: "Tier 3 Participants",
@@ -302,7 +300,6 @@
             ru: {
                 introTitle: "Добро пожаловать в интерактивный цикл NOVO-BAY!",
                 startBtnText: "🚀 Начать и войти в вызов",
-                legendTitle: "Легенда участников:",
                 tier1: "Tier 1 Participants ($2)",
                 tier2: "Tier 2 Participants ($4)",
                 tier3: "Tier 3 Participants",
@@ -328,7 +325,6 @@
             zh: {
                 introTitle: "欢迎来到 NOVO-BAY 三步互动周期！",
                 startBtnText: "🚀 开始并进入挑战",
-                legendTitle: "参与者图例：",
                 tier1: "Tier 1 Participants ($2)",
                 tier2: "Tier 2 Participants ($4)",
                 tier3: "Tier 3 Participants",
@@ -354,7 +350,6 @@
             fr: {
                 introTitle: "Bienvenue dans le cycle interactif NOVO-BAY !",
                 startBtnText: "🚀 Démarrer et entrer",
-                legendTitle: "Légende des participants :",
                 tier1: "Tier 1 Participants ($2)",
                 tier2: "Tier 2 Participants ($4)",
                 tier3: "Tier 3 Participants",
@@ -380,7 +375,6 @@
             de: {
                 introTitle: "Willkommen beim interaktiven NOVO-BAY Zyklus!",
                 startBtnText: "🚀 Starten & Herausforderung betreten",
-                legendTitle: "Teilnehmer-Legende:",
                 tier1: "Tier 1 Participants ($2)",
                 tier2: "Tier 2 Participants ($4)",
                 tier3: "Tier 3 Participants",
@@ -406,7 +400,6 @@
             it: {
                 introTitle: "Benvenuto nel ciclo interattivo di NOVO-BAY!",
                 startBtnText: "🚀 Inizia e accedi alla sfida",
-                legendTitle: "Legenda partecipanti:",
                 tier1: "Tier 1 Participants ($2)",
                 tier2: "Tier 2 Participants ($4)",
                 tier3: "Tier 3 Participants",
@@ -458,7 +451,6 @@
 
             document.getElementById('introTitle').innerText = t.introTitle;
             document.getElementById('startBtnText').innerText = t.startBtnText;
-            document.getElementById('legendTitle').innerText = t.legendTitle;
             document.getElementById('tier1Text').innerText = t.tier1;
             document.getElementById('tier2Text').innerText = t.tier2;
             document.getElementById('tier3Text').innerText = t.tier3;
@@ -471,7 +463,7 @@
             document.getElementById('submitWordBtn').innerText = t.submitWord;
             document.getElementById('step2Title').innerText = t.step2;
             document.getElementById('finalArticlesTitle').innerText = t.finalArticles;
-            document.getElementById('analyzeBtnText').innerText.innerText = t.analyze;
+            document.getElementById('analyzeBtnText').innerText = t.analyze;
             document.getElementById('step3Title').innerText = t.step3;
             document.getElementById('investorsTitle').innerText = t.investors;
             document.getElementById('tenderBtnText').innerText = t.tender;
@@ -482,7 +474,7 @@
             document.getElementById('backTooltip').innerText = t.backTip;
         }
 
-        // تنظیم محدوده جغرافیایی دقیق برای پر کردن ارتفاع صفحه و اجازه حرکت فقط به چپ و راست
+        // تنظیم محدوده جغرافیایی و رفعتی برای پوشش کامل صفحه و حرکت فقط افقی
         const bounds = L.latLngBounds(
             L.latLng(-50, -180),
             L.latLng(50, 180)
@@ -490,11 +482,11 @@
 
         const map = L.map('map', {
             zoomControl: true,
-            minZoom: 3, // افزایش حداقل زوم برای جلوگیری از کوچک شدن نقشه و ایجاد فضای خالی بالا و پایین
+            minZoom: 3,
             maxZoom: 18,
             maxBounds: bounds,
             maxBoundsViscosity: 1.0
-        }).setView([0, 0], 3); // تنظیم زوم اولیه روی 3 برای پوشش کامل ارتفاع صفحه
+        }).setView([0, 0], 3);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
