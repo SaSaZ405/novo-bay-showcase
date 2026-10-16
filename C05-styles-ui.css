@@ -1,1 +1,7 @@
-
+.backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+#miniMap {
+    background: #f3f4f6;
+}
