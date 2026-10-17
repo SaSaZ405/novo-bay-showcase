@@ -1,10 +1,12 @@
+// راه‌اندازی نقشه با حرکت آزاد افقی و قفل عمودی قطب‌ها
 const map = L.map('map', {
     zoomControl: false,
     minZoom: 2,
     maxZoom: 8,
+    worldCopyJump: true, // پرش نرم هنگام چرخش افقی دور کره زمین
     maxBounds: [
-        [-65, -180], // محدود کردن جنوب
-        [75, 180]    // محدود کردن شمال
+        [-85, -Infinity], // محدودیت انتهای جنوب
+        [85, Infinity]    // محدودیت انتهای شمال (محور افقی بی‌نهایت آزاد است)
     ],
     maxBoundsViscosity: 1.0
 }).setView([25, 15], 2);
@@ -15,6 +17,31 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 L.control.zoom({ position: 'topleft' }).addTo(map);
+
+// شبیه‌سازی رنگ‌بندی و مرزهای ایالتی/کشوری فعال روی نقشه (Polygon / GeoJSON نمایشی)
+const coloredRegions = [
+    {
+        coords: [[38, 44], [38, 63], [25, 63], [25, 44]], // منطقه ایران / خاورمیانه
+        color: '#10b981', name: 'منطقه فعال ایران'
+    },
+    {
+        coords: [[60, 30], [60, 90], [45, 90], [45, 30]], // منطقه اوراسیا / روسیه
+        color: '#3b82f6', name: 'منطقه مشترکین'
+    },
+    {
+        coords: [[50, -125], [50, -70], [25, -70], [25, -125]], // منطقه آمریکا
+        color: '#f59e0b', name: 'منطقه سهام‌داران'
+    }
+];
+
+coloredRegions.forEach(region => {
+    L.polygon(region.coords, {
+        color: region.color,
+        weight: 2,
+        fillColor: region.color,
+        fillOpacity: 0.2
+    }).addTo(map).bindPopup(region.name);
+});
 
 // چراغ‌های زنده روی نقشه
 const liveBeaconsData = [
