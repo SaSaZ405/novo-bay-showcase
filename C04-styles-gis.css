@@ -1,28 +1,24 @@
-
 #map {
     height: 100vh;
     width: 100vw;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
-    background-color: #e5e7eb;
+    background-color: #f3f4f6;
 }
-/* فیلتر مونوکروم و مرزهای طلایی نقشه */
+
+/* فیلتر ملایم و فیت شدن استاندارد نقشه */
 .leaflet-tile-pane {
-    filter: grayscale(85%) contrast(90%) brightness(105%);
+    filter: grayscale(70%) contrast(95%) brightness(105%);
 }
-.country-gold-border {
-    stroke: #d4af37;
-    stroke-width: 2px;
-    fill-opacity: 0.1;
-}
+
 /* چراغ‌های زنده وضعیت روی نقشه */
 .live-beacon {
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
     animation: pulse-beacon 2s infinite;
 }
 .beacon-subscriber { background-color: #3b82f6; } /* اشتراک‌دار */
