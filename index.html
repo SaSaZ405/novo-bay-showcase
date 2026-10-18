@@ -80,19 +80,29 @@
     <!-- رابط کاربری اصلی روی نقشه (UI Layer) -->
     <div class="ui-layer h-screen flex flex-col justify-between p-6">
         
-        <!-- هدر بالای صفحه با ابزارها، دکمه موسیقی، دکمه بازگشت و ارتباط با ما -->
+        <!-- هدر بالای صفحه -->
         <div class="flex items-center justify-between w-full max-w-7xl mx-auto">
             
             <div class="flex items-center space-x-2 space-x-reverse">
-                <!-- دکمه بازگشت به لندینگ اصلی (جایگزین دکمه قرمز قدیمی) -->
+                <!-- دکمه بازگشت به لندینگ اصلی -->
                 <a href="https://sasaz405.github.io/novo-bay/" class="interactive-element bg-white/90 hover:bg-white text-gray-800 p-2.5 rounded-xl shadow border border-white/50 text-xs font-bold flex items-center gap-1.5 transition">
                     <i class="fa-solid fa-arrow-right text-gray-600"></i>
                     <span>بازگشت به لندینگ اصلی</span>
                 </a>
 
-                <button onclick="toggleAudio()" id="audioBtn" class="interactive-element bg-white/90 hover:bg-white p-2.5 rounded-xl shadow border border-white/50 text-xs font-bold flex items-center gap-1">
-                    <i class="fa-solid fa-music text-amber-600"></i> <span id="audioStatus">موسیقی: خاموش</span>
-                </button>
+                <!-- ویجت پخش‌کننده موسیقی -->
+                <div class="flex items-center bg-white/90 backdrop-blur-md p-1.5 rounded-xl shadow border border-white/50 space-x-2 space-x-reverse">
+                    <button onclick="toggleAudio()" id="audioBtn" class="interactive-element bg-amber-50 hover:bg-amber-100 p-2 rounded-lg text-xs font-bold flex items-center gap-1.5 text-amber-800 transition">
+                        <i id="playIcon" class="fa-solid fa-play text-amber-600"></i>
+                        <span id="audioStatus">پخش موزیک</span>
+                    </button>
+                    <select onchange="changeTrack(this.value)" class="text-[11px] font-bold bg-transparent outline-none text-gray-700 cursor-pointer max-w-[130px] truncate">
+                        <option value="0">🎵 روز برفی (مجید انتظامی)</option>
+                        <option value="1">🎵 شب‌های زاینده‌رود</option>
+                        <option value="2">🎼 Experience (Einaudi)</option>
+                        <option value="3">🎼 Nostalgia (Yanni)</option>
+                    </select>
+                </div>
             </div>
 
             <div class="bg-white/90 backdrop-blur-md px-6 py-2 rounded-2xl shadow-sm border border-white/50 text-center">
