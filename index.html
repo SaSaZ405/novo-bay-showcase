@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVO-BAY | Interactive Showcase</title>
+    <title>NOVO-BAY | Interactive Challenge Showcase</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,9 +36,15 @@
         <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span> سهام‌دار خرد (Shareholder)</div>
     </div>
 
-    <!-- مودال خوش‌آمدگویی و شرایط اولیه -->
+    <!-- مودال خوش‌آمدگویی و شرایط اولیه (با دکمه بستن/بازگشت) -->
     <div id="introModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 transition-opacity duration-300">
-        <div class="bg-white/90 backdrop-blur-md rounded-2xl max-w-2xl w-full p-8 shadow-2xl border border-white/20 text-right space-y-6">
+        <div class="relative bg-white/95 backdrop-blur-md rounded-2xl max-w-2xl w-full p-8 shadow-2xl border border-white/20 text-right space-y-6">
+            
+            <!-- دکمه بستن/بازگشت در بالای مودال -->
+            <button onclick="closeIntroModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-700 transition p-2 rounded-lg text-sm flex items-center gap-1 font-bold">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
             <div class="text-center">
                 <h1 class="text-3xl font-black tracking-widest text-gray-900">NOVO-BAY</h1>
                 <p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">[GLOBAL CENTER FOR IDEA GENERATION, ANALYSIS & INVESTMENT]</p>
@@ -46,25 +52,25 @@
             
             <div class="space-y-4 text-sm text-gray-700 leading-relaxed border-y border-gray-200/60 py-4">
                 <p class="font-bold text-gray-900 text-base">به چرخه تعاملی و ۳ مرحله‌ای نووبی خوش آمدید!</p>
-                <p>لطفاً پیش از ورود به چالش ۷ روزه، شرایط زیر را مطالعه و تایید فرمایید:</p>
+                <p>لطفاً پیش از ورود به چالش ۱۰ روزه، شرایط زیر را مطالعه و تایید فرمایید:</p>
                 <ul class="list-disc list-inside space-y-2 pr-2 text-gray-600">
-                    <li><strong class="text-gray-800">گروه اول (ساعتی):</strong> ثبت کلمات در چالش‌های ساعتی (محدودیت ۱ بار در ساعت، بدون قابلیت ویرایش).</li>
-                    <li><strong class="text-gray-800">گروه دوم (روزانه):</strong> تحلیل کلمات روز قبل و نگارش مقالات تخصصی.</li>
-                    <li><strong class="text-gray-800">گروه سوم (مناقصه):</strong> جذب سرمایه‌گذار و تخصیص سهام خرد (Micro-Equity).</li>
+                    <li><strong class="text-gray-800">گروه اول (کلمات):</strong> ثبت کلمات در چالش‌های ساعتی (۲ دلار برای هر تلاش).</li>
+                    <li><strong class="text-gray-800">گروه دوم (عناوین):</strong> پیشنهاد و تحلیل عناوین روزانه (۴ دلار برای هر عنوان).</li>
+                    <li><strong class="text-gray-800">گروه سوم (مناقصه):</strong> جذب سرمایه‌گذاران و تخصیص سهام خرد (Micro-Equity).</li>
                 </ul>
                 <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs text-amber-800 space-y-2">
                     <p class="font-bold">فرم اولیه احراز هویت:</p>
-                    <input type="text" id="userNameInput" placeholder="نام و نام خانوادگی..." class="w-full p-2 bg-white border border-amber-300 rounded-lg text-xs mb-1">
-                    <input type="email" id="userEmailInput" placeholder="آدرس ایمیل (برای ثبت در مخزن دیتا)..." class="w-full p-2 bg-white border border-amber-300 rounded-lg text-xs">
+                    <input type="text" id="userNameInput" placeholder="نام و نام خانوادگی..." class="w-full p-2 bg-white border border-amber-300 rounded-lg text-xs mb-1 outline-none">
+                    <input type="email" id="userEmailInput" placeholder="آدرس ایمیل (برای ثبت در مخزن دیتا)..." class="w-full p-2 bg-white border border-amber-300 rounded-lg text-xs outline-none">
                 </div>
             </div>
 
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2 space-x-reverse">
                     <input type="checkbox" id="termsCheck" class="w-4 h-4 text-gray-900 rounded border-gray-300">
-                    <label for="termsCheck" class="text-xs text-gray-600">شرایط و قوانین چالش ۷ روزه را می‌پذیرم.</label>
+                    <label for="termsCheck" class="text-xs text-gray-600">شرایط و قوانین چالش ۱۰ روزه را می‌پذیرم.</label>
                 </div>
-                <button onclick="handleInitialEntry()" class="bg-gray-900 hover:bg-black text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all">
+                <button onclick="handleInitialEntry()" class="bg-gray-900 hover:bg-black text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-xs">
                     🚀 تایید و ورود به چالش
                 </button>
             </div>
@@ -74,17 +80,19 @@
     <!-- رابط کاربری اصلی روی نقشه (UI Layer) -->
     <div class="ui-layer h-screen flex flex-col justify-between p-6">
         
-        <!-- هدر بالای صفحه با ابزارها، دکمه موسیقی و ارتباط با ما -->
+        <!-- هدر بالای صفحه با ابزارها، دکمه موسیقی، دکمه بازگشت و ارتباط با ما -->
         <div class="flex items-center justify-between w-full max-w-7xl mx-auto">
+            
             <div class="flex items-center space-x-2 space-x-reverse">
+                <!-- دکمه بازگشت به لندینگ اصلی (جایگزین دکمه قرمز قدیمی) -->
+                <a href="https://sasaz405.github.io/novo-bay/" class="interactive-element bg-white/90 hover:bg-white text-gray-800 p-2.5 rounded-xl shadow border border-white/50 text-xs font-bold flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-arrow-right text-gray-600"></i>
+                    <span>بازگشت به لندینگ اصلی</span>
+                </a>
+
                 <button onclick="toggleAudio()" id="audioBtn" class="interactive-element bg-white/90 hover:bg-white p-2.5 rounded-xl shadow border border-white/50 text-xs font-bold flex items-center gap-1">
                     <i class="fa-solid fa-music text-amber-600"></i> <span id="audioStatus">موسیقی: خاموش</span>
                 </button>
-                <select id="langSelector" onchange="changeLanguage(this.value)" class="interactive-element bg-white/90 hover:bg-white p-2 rounded-xl shadow border border-white/50 text-xs font-bold outline-none">
-                    <option value="fa">فارسی (FA)</option>
-                    <option value="en">English (EN)</option>
-                    <option value="zh">中文 (ZH)</option>
-                </select>
             </div>
 
             <div class="bg-white/90 backdrop-blur-md px-6 py-2 rounded-2xl shadow-sm border border-white/50 text-center">
@@ -92,6 +100,11 @@
             </div>
 
             <div class="flex items-center space-x-2 space-x-reverse">
+                <select id="langSelector" onchange="changeLanguage(this.value)" class="interactive-element bg-white/90 hover:bg-white p-2.5 rounded-xl shadow border border-white/50 text-xs font-bold outline-none">
+                    <option value="fa">فارسی (FA)</option>
+                    <option value="en">English (EN)</option>
+                    <option value="zh">中文 (ZH)</option>
+                </select>
                 <button onclick="openHelp()" class="interactive-element bg-blue-50 hover:bg-blue-100 text-blue-800 p-2.5 rounded-xl shadow border border-blue-200 text-xs font-bold flex items-center gap-1">
                     <i class="fa-solid fa-circle-question"></i> راهنما
                 </button>
@@ -101,59 +114,52 @@
             </div>
         </div>
 
-        <!-- ۳ پنل اصلی چالش -->
+        <!-- ۳ پنل اصلی چالش (طراحی خلوت و مینیمال) -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto max-w-7xl mx-auto w-full px-4">
             
-            <!-- باکس اول: گروه ۱ (کلمات ساعتی) -->
-            <div class="relative bg-white/85 backdrop-blur-md p-5 rounded-2xl border border-white/60 shadow-lg flex flex-col justify-between space-y-4">
-                <button onclick="togglePanel('info1')" class="interactive-element absolute -top-3 right-4 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow">+</button>
-                <div id="info1" class="hidden w-full bg-gray-50/95 p-3 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-1">
-                    <div class="font-bold text-gray-900">کلمات نهایی روزانه:</div>
-                    <p class="text-[10px] text-gray-500">SUSTAINABILITY, INNOVATION, PEACE</p>
+            <!-- باکس ۱: گروه اول (کلمات) -->
+            <div class="bg-white/85 backdrop-blur-md p-6 rounded-2xl border border-white/60 shadow-lg flex flex-col justify-between items-center space-y-4 text-center">
+                <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 text-xl font-bold">
+                    <i class="fa-solid fa-key"></i>
                 </div>
-                <div class="w-full bg-white border border-gray-300 rounded-lg p-2 flex items-center justify-between">
-                    <input type="text" id="hourlyWordInput" placeholder="ثبت کلمه جدید..." class="w-full text-xs bg-transparent outline-none">
-                    <i class="fa-solid fa-coins text-amber-500"></i>
+                <div>
+                    <h3 class="text-sm font-black text-gray-900 uppercase">گروه اول: ایده‌پردازی کلمات</h3>
+                    <p class="text-[11px] text-gray-500 mt-1">ثبت کلمات ساعتی و استخراج ۵ کلیدواژه طلایی</p>
                 </div>
-                <button onclick="submitHourlyWord()" class="interactive-element w-full bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 text-xs font-bold py-2 rounded-lg transition">
-                    SUBMIT WORD ($2) - هر ۱ ساعت
+                <button onclick="openGroup1Modal()" class="interactive-element w-full bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
+                    <span>ورود به چالش کلمات ($2)</span>
+                    <i class="fa-solid fa-arrow-left"></i>
                 </button>
-                <div class="text-xs font-black text-gray-700 uppercase text-center">گروه اول: ایده‌پردازی ساعتی</div>
             </div>
 
-            <!-- باکس دوم: گروه ۲ (عناوین و مقالات) -->
-            <div class="relative bg-white/85 backdrop-blur-md p-5 rounded-2xl border border-white/60 shadow-lg flex flex-col justify-between space-y-4">
-                <button onclick="togglePanel('info2')" class="interactive-element absolute -top-3 right-4 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow">+</button>
-                <div id="info2" class="hidden w-full bg-gray-50/95 p-3 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-1">
-                    <div class="font-bold text-gray-900">عناوین استخراج شده ساعت ۲۴:</div>
-                    <p class="text-[10px] text-gray-500">Day 1 Titles Ready for Analysis</p>
+            <!-- باکس ۲: گروه دوم (عناوین) -->
+            <div class="bg-white/85 backdrop-blur-md p-6 rounded-2xl border border-white/60 shadow-lg flex flex-col justify-between items-center space-y-4 text-center">
+                <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 text-xl font-bold">
+                    <i class="fa-solid fa-heading"></i>
                 </div>
-                <div class="flex justify-center items-center gap-3 py-2 text-gray-600">
-                    <i class="fa-solid fa-book-open text-2xl text-blue-600"></i>
-                    <i class="fa-solid fa-arrow-left text-xs text-gray-400"></i>
-                    <i class="fa-solid fa-file-signature text-2xl text-green-600"></i>
+                <div>
+                    <h3 class="text-sm font-black text-gray-900 uppercase">گروه دوم: تحلیل و تعیین عنوان</h3>
+                    <p class="text-[11px] text-gray-500 mt-1">پیشنهاد و تحلیل عناوین روزانه بر اساس کلمات</p>
                 </div>
-                <button onclick="openAnalysisModule()" class="interactive-element w-full bg-green-50 hover:bg-green-100 border border-green-300 text-green-800 text-xs font-bold py-2 rounded-lg transition">
-                    تحلیل و نگارش مقاله ($4)
+                <button onclick="openGroup2Modal()" class="interactive-element w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
+                    <span>ثبت و تحلیل عنوان ($4)</span>
+                    <i class="fa-solid fa-arrow-left"></i>
                 </button>
-                <div class="text-xs font-black text-gray-700 uppercase text-center">گروه دوم: تهیه عنوان و مقاله</div>
             </div>
 
-            <!-- باکس سوم: گروه ۳ (سرمایه‌گذاری و سهام خرد) -->
-            <div class="relative bg-white/85 backdrop-blur-md p-5 rounded-2xl border border-white/60 shadow-lg flex flex-col justify-between space-y-4">
-                <button onclick="togglePanel('info3')" class="interactive-element absolute -top-3 right-4 bg-gray-200 hover:bg-gray-300 border border-gray-400 text-gray-800 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold shadow">+</button>
-                <div id="info3" class="hidden w-full bg-gray-50/95 p-3 rounded-xl border border-gray-200 text-xs text-gray-700 space-y-1">
-                    <div class="font-bold text-gray-900">حامیان آماده سرمایه‌گذاری:</div>
-                    <p class="text-sm font-bold text-green-600">145 سرمایه‌گذار فعال</p>
+            <!-- باکس ۳: گروه سوم (مناقصه و سرمایه‌گذاری) -->
+            <div class="bg-white/85 backdrop-blur-md p-6 rounded-2xl border border-white/60 shadow-lg flex flex-col justify-between items-center space-y-4 text-center">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-600 text-xl font-bold">
+                    <i class="fa-solid fa-handshake"></i>
                 </div>
-                <div class="flex justify-center items-center gap-4 py-2 text-gray-700">
-                    <i class="fa-solid fa-handshake text-2xl text-amber-600"></i>
-                    <i class="fa-solid fa-briefcase text-2xl text-gray-700"></i>
+                <div>
+                    <h3 class="text-sm font-black text-gray-900 uppercase">گروه سوم: مناقصه و سهام خرد</h3>
+                    <p class="text-[11px] text-gray-500 mt-1">بررسی پروپوزال‌های نهایی و جذب سرمایه‌گذار</p>
                 </div>
-                <button onclick="joinTender()" class="interactive-element w-full bg-blue-50 hover:bg-blue-100 border border-blue-300 text-blue-800 text-xs font-bold py-2 rounded-lg transition">
-                    پیوستن به مناقصه (سرمایه‌گذار)
+                <button onclick="openGroup3Modal()" class="interactive-element w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
+                    <span>ورود سرمایه‌گذاران</span>
+                    <i class="fa-solid fa-arrow-left"></i>
                 </button>
-                <div class="text-xs font-black text-gray-700 uppercase text-center">گروه سوم: مناقصه و سهام خرد</div>
             </div>
 
         </div>
@@ -162,29 +168,9 @@
         <div class="max-w-md mx-auto w-full bg-white/80 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow text-center">
             <div class="text-[11px] font-bold text-gray-800 uppercase flex items-center justify-center gap-2">
                 <i class="fa-solid fa-chart-pie text-emerald-600"></i>
-                MICRO-EQUITY / DIVIDENDS POOL (WEEKLY)
+                MICRO-EQUITY / DIVIDENDS POOL (10-DAY CYCLE)
             </div>
-            <p class="text-[9px] text-gray-500 mt-0.5">توزیع خودکار سود و سهام خرد به ذینفعان مؤثر</p>
-        </div>
-
-        <!-- دکمه‌های هدایت بین وب‌سایت اصلی و چالش -->
-        <div class="flex items-center justify-center space-x-4 space-x-reverse pt-2">
-            <a href="https://sasaz405.github.io/novo-bay-showcase/" class="interactive-element bg-white/90 hover:bg-white text-gray-900 font-bold px-6 py-2.5 rounded-xl border border-gray-300 shadow-md text-xs transition inline-block">
-                🎮 بازی ۳ مرحله‌ای
-            </a>
-            <a href="https://sasaz405.github.io/novo-bay/" target="_blank" class="interactive-element bg-gray-900/90 hover:bg-black text-white font-bold px-6 py-2.5 rounded-xl border border-gray-800 shadow-md text-xs transition inline-block">
-                🌐 وب‌سایت اصلی نووبی
-            </a>
-        </div>
-
-        <!-- دکمه خروج / بازگشت شناور -->
-        <div class="fixed bottom-6 right-6 z-50">
-            <button onclick="resetToIntro()" class="interactive-element group relative bg-red-600 hover:bg-red-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 border-2 border-white">
-                <i class="fa-solid fa-power-off text-lg"></i>
-                <span class="absolute right-14 bg-gray-900 text-white text-[11px] font-bold py-1 px-3 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">
-                    پایان / برگشت
-                </span>
-            </button>
+            <p class="text-[9px] text-gray-500 mt-0.5">توزیع خودکار سود و سهام خرد در پایان دوره ۱۰ روزه</p>
         </div>
 
     </div>
@@ -207,5 +193,11 @@
     <script src="C18-navigation-controls.js"></script>
     <script src="C19-live-socket-sync.js"></script>
     <script src="C20-security-anti-cheat.js"></script>
+
+    <script>
+        function closeIntroModal() {
+            document.getElementById('introModal').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>
