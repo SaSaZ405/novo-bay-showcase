@@ -14,7 +14,6 @@ audioPlayer.loop = true;
 
 // تابع پخش و توقف
 function toggleAudio() {
-    const audioBtn = document.getElementById('audioBtn');
     const audioStatus = document.getElementById('audioStatus');
     const playIcon = document.getElementById('playIcon');
 
@@ -25,7 +24,7 @@ function toggleAudio() {
         }).catch(err => console.log("خطای پخش موسیقی:", err));
     } else {
         audioPlayer.pause();
-        if (audioStatus) audioStatus.innerText = "متوقف شد";
+        if (audioStatus) audioStatus.innerText = "پخش موزیک";
         if (playIcon) playIcon.className = "fa-solid fa-play text-amber-600";
     }
 }
@@ -39,10 +38,5 @@ function changeTrack(index) {
     
     if (wasPlaying) {
         audioPlayer.play();
-    }
-    
-    const currentTrackName = document.getElementById('currentTrackName');
-    if (currentTrackName) {
-        currentTrackName.innerText = playlist[currentTrackIndex].title;
     }
 }
