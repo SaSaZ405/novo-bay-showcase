@@ -1,16 +1,30 @@
-html, body {
+/* ==========================================
+   C03-styles-core.css | اتمسفر و پس‌زمینه کهکشانی
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
+    background-color: #050811;
     font-family: system-ui, -apple-system, sans-serif;
+    direction: rtl;
 }
-.ui-layer {
-    position: relative;
-    z-index: 10;
-    pointer-events: none;
-}
-.interactive-element {
-    pointer-events: auto;
+
+/* پس‌زمینه عمیق کهکشانی با نور بسیار نرم و نازک خورشید در گوشه بالا سمت راست */
+.bg-cosmic {
+    background: 
+        /* نور خورشید بسیار نرم و نازک در گوشه بالا راست */
+        radial-gradient(circle at 95% 5%, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.02) 30%, transparent 60%),
+        /* عمق کهکشانی و سحابی‌های تیره */
+        radial-gradient(circle at 20% 80%, rgba(15, 23, 42, 0.9) 0%, rgba(5, 8, 17, 1) 70%),
+        #050811;
+    background-attachment: fixed;
+    color: #e2e8f0;
 }
