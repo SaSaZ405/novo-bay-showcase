@@ -1,5 +1,5 @@
 /* ==========================================
-   C03-styles-core.css | اتمسفر و پس‌زمینه کهکشانی
+   C03-styles-core.css | اتمسفر کهکشانی و ستاره‌باران
    ========================================== */
 
 * {
@@ -17,14 +17,17 @@ body, html {
     direction: rtl;
 }
 
-/* پس‌زمینه عمیق کهکشانی با نور بسیار نرم و نازک خورشید در گوشه بالا سمت راست */
+/* پس‌زمینه عمیق کهکشانی به همراه ستاره‌های ریز و نور نرم خورشید */
 .bg-cosmic {
     background: 
         /* نور خورشید بسیار نرم و نازک در گوشه بالا راست */
-        radial-gradient(circle at 95% 5%, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.02) 30%, transparent 60%),
-        /* عمق کهکشانی و سحابی‌های تیره */
-        radial-gradient(circle at 20% 80%, rgba(15, 23, 42, 0.9) 0%, rgba(5, 8, 17, 1) 70%),
-        #050811;
+        radial-gradient(circle at 95% 5%, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.03) 25%, transparent 55%),
+        /* پترن ستاره‌ای و کهکشانی */
+        radial-gradient(white 1px, transparent 0) 0 0 / 40px 40px,
+        radial-gradient(rgba(212, 175, 55, 0.5) 1px, transparent 0) 20px 20px / 40px 40px,
+        /* عمق سحابی تیره */
+        radial-gradient(circle at 50% 50%, rgba(10, 20, 35, 0.95) 0%, rgba(3, 5, 10, 1) 80%),
+        #03050a;
     background-attachment: fixed;
     color: #e2e8f0;
 }
