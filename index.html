@@ -5,37 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVO-BAY | Challenge Command Center</title>
     
-    <!-- لینک فایل‌های استایل کهکشانی و رابط کاربری -->
     <link rel="stylesheet" href="C03-styles-core.css">
     <link rel="stylesheet" href="C05-styles-ui.css">
 </head>
 <body class="bg-cosmic">
 
-    <!-- TOP HEADER BAR | نوار هدر بالای صفحه -->
+    <!-- TOP HEADER BAR | هدر بالا با چینش دقیق مورد نظر -->
     <header class="top-header-bar">
         
-        <!-- بخش سمت چپ: دکمه زبان و پلیر موزیک کوچک -->
-        <div class="header-left">
-            <button class="btn-icon-xs" title="تغییر زبان">🌐 FA</button>
-            <div class="mini-player">
-                <button class="btn-icon-xs" title="قبلی">⏮</button>
-                <button class="btn-icon-xs" title="پخش / توقف">▶</button>
-                <button class="btn-icon-xs" title="بعدی">⏭</button>
+        <!-- انتهای سمت چپ: پلیر موزیک بدون کادر و آیکون کره زمین بدون حروف اضافی -->
+        <div class="header-left-group">
+            <div class="mini-player-clean">
+                <button class="btn-clean" title="قبلی">⏮</button>
+                <button class="btn-clean" title="پخش">▶</button>
+                <button class="btn-clean" title="بعدی">⏭</button>
             </div>
+            <button class="btn-clean globe-icon-btn" title="تغییر زبان">🌐</button>
         </div>
 
-        <!-- بخش وسط: نوار روان و متحرک اخبار مهم -->
-        <div class="header-center">
+        <!-- بخش وسط: نوار اخبار متحرک -->
+        <div class="header-center-group">
             <span class="news-label">اخبار:</span>
             <marquee behavior="scroll" direction="right" scrollamount="3" class="news-ticker-text">
                 به پلتفرم NOVO-BAY خوش آمدید... چالش جدید کلمات و عناوین نوآورانه فعال شد...
             </marquee>
         </div>
 
-        <!-- بخش سمت راست: لوگوی چرخشی NB و منوی همبرگری -->
-        <div class="header-right">
+        <!-- انتهای سمت راست: لوگوی چرخشی NB و منوی همبرگری -->
+        <div class="header-right-group">
             <div class="rotating-nb-logo">NB</div>
-            <button class="btn-icon-xs hamburger-btn" title="منو">☰</button>
+            <button class="btn-clean hamburger-btn" title="منو">☰</button>
         </div>
 
     </header>
