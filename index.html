@@ -4,12 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVO-BAY | Challenge Command Center</title>
-    <!-- لود فایل استایل کهکشانی پایه -->
+    
+    <!-- لینک فایل‌های استایل کهکشانی و رابط کاربری -->
     <link rel="stylesheet" href="C03-styles-core.css">
+    <link rel="stylesheet" href="C05-styles-ui.css">
 </head>
 <body class="bg-cosmic">
 
-    <!-- این صفحه فعلاً خالی است و در گام بعدی هدر و ستون‌ها را اضافه می‌کنیم -->
+    <!-- TOP HEADER BAR | نوار هدر بالای صفحه -->
+    <header class="top-header-bar">
+        
+        <!-- بخش سمت چپ: دکمه زبان و پلیر موزیک کوچک -->
+        <div class="header-left">
+            <button class="btn-icon-xs" title="تغییر زبان">🌐 FA</button>
+            <div class="mini-player">
+                <button class="btn-icon-xs" title="قبلی">⏮</button>
+                <button class="btn-icon-xs" title="پخش / توقف">▶</button>
+                <button class="btn-icon-xs" title="بعدی">⏭</button>
+            </div>
+        </div>
+
+        <!-- بخش وسط: نوار روان و متحرک اخبار مهم -->
+        <div class="header-center">
+            <span class="news-label">اخبار:</span>
+            <marquee behavior="scroll" direction="right" scrollamount="3" class="news-ticker-text">
+                به پلتفرم NOVO-BAY خوش آمدید... چالش جدید کلمات و عناوین نوآورانه فعال شد...
+            </marquee>
+        </div>
+
+        <!-- بخش سمت راست: لوگوی چرخشی NB و منوی همبرگری -->
+        <div class="header-right">
+            <div class="rotating-nb-logo">NB</div>
+            <button class="btn-icon-xs hamburger-btn" title="منو">☰</button>
+        </div>
+
+    </header>
 
 </body>
 </html>
