@@ -6,38 +6,29 @@
     <title>NOVO-BAY | Challenge Command Center</title>
     
     <link rel="stylesheet" href="C03-styles-core.css">
-    <link rel="stylesheet" href="C05-styles-ui.css">
+    <style>
+        body {
+            margin: 0;
+            background-color: #03060c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        /* جایگاه کره زمین در صفحه */
+        #gis-globe-root {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
 </head>
 <body class="bg-cosmic">
 
-    <!-- TOP HEADER BAR | هدر بالا با چینش دقیق درخواستی -->
-    <header class="top-header-bar">
-        
-        <!-- انتهای سمت چپ: پلیر موزیک (بدون کادر) و آیکون کره زمین (بدون حروف اضافه) -->
-        <div class="header-left-group">
-            <div class="mini-player-clean">
-                <button class="btn-clean" title="قبلی">⏮</button>
-                <button class="btn-clean" title="پخش">▶</button>
-                <button class="btn-clean" title="بعدی">⏭</button>
-            </div>
-            <button class="btn-clean" title="زبان / منطقه">🌐</button>
-        </div>
+    <!-- کادری که کره زمین سه‌بعدی درون آن رندر می‌شود -->
+    <div id="gis-globe-root"></div>
 
-        <!-- بخش وسط: نوار اخبار متحرک -->
-        <div class="header-center-group">
-            <span class="news-label">اخبار:</span>
-            <marquee behavior="scroll" direction="right" scrollamount="3" class="news-ticker-text">
-                به پلتفرم NOVO-BAY خوش آمدید... چالش جدید کلمات و عناوین نوآورانه فعال شد...
-            </marquee>
-        </div>
-
-        <!-- انتهای سمت راست: لوگوی چرخشی NB و منوی همبرگری -->
-        <div class="header-right-group">
-            <div class="rotating-nb-logo">NB</div>
-            <button class="btn-clean" title="منو">☰</button>
-        </div>
-
-    </header>
-
+    <!-- اسکریپت کره زمین -->
+    <script src="C10-gis-main-map.js"></script>
 </body>
 </html>
