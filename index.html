@@ -1,213 +1,175 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" id="htmlRoot">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVO-BAY | Interactive Challenge Showcase</title>
+    <title>NOVO-BAY | Challenge Command Center</title>
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Leaflet GIS Map CSS & FontAwesome -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- ماژول‌های استایل (C03, C04, C05) -->
+    <!-- CSS Modules -->
     <link rel="stylesheet" href="C03-styles-core.css">
     <link rel="stylesheet" href="C04-styles-gis.css">
     <link rel="stylesheet" href="C05-styles-ui.css">
 </head>
-<body class="font-sans antialiased overflow-hidden select-none bg-gray-100 text-gray-800">
+<body class="bg-cosmic">
 
-    <!-- پس‌زمینه نقشه GIS (C10) -->
-    <div id="map"></div>
+    <!-- 1. TOP HEADER BAR -->
+    <header class="top-header-bar">
+        <!-- Vintage Audio Player (Left) -->
+        <div class="header-audio-player" id="audio-player-root">
+            <button class="btn-icon-sm" id="btn-play-pause">▶</button>
+            <button class="btn-icon-sm" id="btn-prev">⏮</button>
+            <button class="btn-icon-sm" id="btn-next">⏭</button>
+            <span class="track-info">Classical Track 01</span>
+        </div>
 
-    <!-- مینی‌مپ گوشه تصویر (C11) -->
-    <div id="miniMapContainer" class="fixed top-20 left-6 z-40 w-48 h-32 rounded-xl overflow-hidden shadow-2xl border-2 border-white/80 bg-white/50 backdrop-blur-md hidden md:block">
-        <div id="miniMap" class="w-full h-full"></div>
-        <div class="absolute bottom-1 right-1 bg-black/70 text-white text-[8px] px-1.5 py-0.5 rounded font-mono">GLOBAL RADAR</div>
-    </div>
-
-    <!-- راهنمای رنگ‌های نقشه (لژند - Legend) -->
-    <div class="fixed bottom-6 left-6 z-40 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-lg border border-white/60 text-[10px] space-y-1.5 hidden md:block">
-        <div class="font-bold text-gray-800 border-b pb-1">راهنمای نقشه (Legend):</div>
-        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> در حال چالش (Active)</div>
-        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> مشترک فعال (Subscriber)</div>
-        <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span> سهام‌دار خرد (Shareholder)</div>
-    </div>
-
-    <!-- مودال خوش‌آمدگویی و شرایط اولیه (با دکمه بستن/بازگشت) -->
-    <div id="introModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4 transition-opacity duration-300">
-        <div class="relative bg-white/95 backdrop-blur-md rounded-2xl max-w-2xl w-full p-8 shadow-2xl border border-white/20 text-right space-y-6">
-            
-            <!-- دکمه بستن/بازگشت در بالای مودال -->
-            <button onclick="closeIntroModal()" class="absolute top-4 left-4 text-gray-400 hover:text-gray-700 transition p-2 rounded-lg text-sm flex items-center gap-1 font-bold">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-
-            <div class="text-center">
-                <h1 class="text-3xl font-black tracking-widest text-gray-900">NOVO-BAY</h1>
-                <p class="text-xs text-gray-500 mt-1 uppercase tracking-wider">[GLOBAL CENTER FOR IDEA GENERATION, ANALYSIS & INVESTMENT]</p>
-            </div>
-            
-            <div class="space-y-4 text-sm text-gray-700 leading-relaxed border-y border-gray-200/60 py-4">
-                <p class="font-bold text-gray-900 text-base">به چرخه تعاملی و ۳ مرحله‌ای نووبی خوش آمدید!</p>
-                <p>لطفاً پیش از ورود به چالش ۱۰ روزه، شرایط زیر را مطالعه و تایید فرمایید:</p>
-                <ul class="list-disc list-inside space-y-2 pr-2 text-gray-600">
-                    <li><strong class="text-gray-800">گروه اول (کلمات):</strong> ثبت کلمات در چالش‌های ساعتی (۲ دلار برای هر تلاش).</li>
-                    <li><strong class="text-gray-800">گروه دوم (عناوین):</strong> پیشنهاد و تحلیل عناوین روزانه (۴ دلار برای هر عنوان).</li>
-                    <li><strong class="text-gray-800">گروه سوم (مناقصه):</strong> جذب سرمایه‌گذاران و تخصیص سهام خرد (Micro-Equity).</li>
-                </ul>
-                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl text-xs text-amber-800 space-y-2">
-                    <p class="font-bold">فرم اولیه احراز هویت:</p>
-                    <input type="text" id="userNameInput" placeholder="نام و نام خانوادگی..." class="w-full p-2 bg-white border border-amber-300 rounded-lg text-xs mb-1 outline-none">
-                    <input type="email" id="userEmailInput" placeholder="آدرس ایمیل (برای ثبت در مخزن دیتا)..." class="w-full p-2 bg-white border border-amber-300 rounded-lg text-xs outline-none">
-                </div>
-            </div>
-
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2 space-x-reverse">
-                    <input type="checkbox" id="termsCheck" class="w-4 h-4 text-gray-900 rounded border-gray-300">
-                    <label for="termsCheck" class="text-xs text-gray-600">شرایط و قوانین چالش ۱۰ روزه را می‌پذیرم.</label>
-                </div>
-                <button onclick="handleInitialEntry()" class="bg-gray-900 hover:bg-black text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all text-xs">
-                    🚀 تایید و ورود به چالش
-                </button>
+        <!-- Language Switcher & Ticker (Center) -->
+        <div class="header-center-zone">
+            <button class="btn-translate-sm" id="btn-lang-switcher">🌐 FA / EN</button>
+            <div class="top-news-ticker">
+                <span class="ticker-label">NEWS:</span>
+                <marquee behavior="scroll" direction="right" scrollamount="4">
+                    آخرین اخبار مهم پلتفرم نوو-بی... ثبت‌نام چالش دوره جدید آغاز شد...
+                </marquee>
             </div>
         </div>
-    </div>
 
-    <!-- رابط کاربری اصلی روی نقشه (UI Layer) -->
-    <div class="ui-layer h-screen flex flex-col justify-between p-6">
+        <!-- Brand & Menu (Right) -->
+        <div class="header-brand-zone">
+            <div class="rotating-nb-logo">NB</div>
+            <button class="hamburger-menu-btn" id="btn-hamburger">☰</button>
+        </div>
+    </header>
+
+    <!-- 2. MAIN 3-COLUMN COMMAND CENTER -->
+    <main class="command-center-layout">
         
-        <!-- هدر بالای صفحه -->
-        <div class="flex items-center justify-between w-full max-w-7xl mx-auto">
-            
-            <div class="flex items-center space-x-2 space-x-reverse">
-                <!-- دکمه بازگشت به لندینگ اصلی -->
-                <a href="https://sasaz405.github.io/novo-bay/" class="interactive-element bg-white/90 hover:bg-white text-gray-800 p-2.5 rounded-xl shadow border border-white/50 text-xs font-bold flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-arrow-right text-gray-600"></i>
-                    <span>بازگشت به لندینگ اصلی</span>
-                </a>
+        <!-- LEFT COLUMN: 4 Tiered Challenge Boxes -->
+        <aside class="col-left-tiered">
+            <!-- Box 1: Word Generation ($2) -->
+            <div class="glass-card-sm" id="box-tier1">
+                <div class="card-header-sm">
+                    <span class="badge-gold">01</span>
+                    <h3>تعیین کلمات ($2)</h3>
+                </div>
+                <div class="keyword-pills">
+                    <span>کلمه ۱</span><span>کلمه ۲</span><span>کلمه ۳</span>
+                </div>
+                <div class="timer-display-sm" id="timer-60min">59:59</div>
+                <button class="btn-action-gold-sm" onclick="openModal('modal-group1')">ورود به عملیات</button>
+            </div>
 
-                <!-- ویجت پخش‌کننده موسیقی -->
-                <div class="flex items-center bg-white/90 backdrop-blur-md p-1.5 rounded-xl shadow border border-white/50 space-x-2 space-x-reverse">
-                    <button onclick="toggleAudio()" id="audioBtn" class="interactive-element bg-amber-50 hover:bg-amber-100 p-2 rounded-lg text-xs font-bold flex items-center gap-1.5 text-amber-800 transition">
-                        <i id="playIcon" class="fa-solid fa-play text-amber-600"></i>
-                        <span id="audioStatus">پخش موزیک</span>
-                    </button>
-                    <select onchange="changeTrack(this.value)" class="text-[11px] font-bold bg-transparent outline-none text-gray-700 cursor-pointer max-w-[130px] truncate">
-                        <option value="0">🎵 روز برفی (مجید انتظامی)</option>
-                        <option value="1">🎵 شب‌های زاینده‌رود</option>
-                        <option value="2">🎼 Experience (Einaudi)</option>
-                        <option value="3">🎼 Nostalgia (Yanni)</option>
-                    </select>
+            <!-- Box 2: Title Generation ($4) -->
+            <div class="glass-card-sm" id="box-tier2">
+                <div class="card-header-sm">
+                    <span class="badge-gold">02</span>
+                    <h3>عناوین نوآورانه ($4)</h3>
+                </div>
+                <button class="btn-action-gold-sm" onclick="openModal('modal-group2')">ثبت عنوان</button>
+            </div>
+
+            <!-- Box 3: AI Novelty Engine -->
+            <div class="glass-card-sm" id="box-tier3">
+                <div class="card-header-sm">
+                    <span class="badge-gold">03</span>
+                    <h3>هوش مصنوعی AI</h3>
+                </div>
+                <p class="text-xs">سنجش بکربودن ایده‌ها</p>
+            </div>
+
+            <!-- Box 4: Rewards Showcase -->
+            <div class="glass-card-sm" id="box-tier4">
+                <div class="card-header-sm">
+                    <span class="badge-gold">04</span>
+                    <h3>ویترین جوایز ۶‌گانه</h3>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CENTER COLUMN: Interactive GIS Globe & Team Setup -->
+        <section class="col-center-globe">
+            <!-- Globe Container -->
+            <div class="gis-globe-container" id="gis-globe-root">
+                <!-- Canvas loaded via C10-gis-main-map.js -->
+            </div>
+
+            <!-- Team & Target Setup Box -->
+            <div class="glass-card-sm team-setup-card">
+                <h4>تشکیل تیم و تعیین مخاطب هدف</h4>
+                <div class="team-grid-4">
+                    <div class="team-slot">عنوان ۱</div>
+                    <div class="team-slot">عنوان ۲</div>
+                    <div class="team-slot">عنوان ۳</div>
+                    <div class="team-slot">عنوان ۴</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: Webinar, Clock, Live Chat -->
+        <aside class="col-right-widgets">
+            <!-- Webinar Box -->
+            <div class="glass-card-sm" id="box-webinar">
+                <div class="card-header-sm">
+                    <h3>استیج وبینار</h3>
+                    <span class="badge-live">10 Days</span>
+                </div>
+                <button class="btn-action-gold-sm" onclick="openModal('modal-webinar')">ورود به استیج</button>
+            </div>
+
+            <!-- Multi-Timezone Clock & Calendar -->
+            <div class="glass-card-sm" id="box-global-clock">
+                <h4>ساعت و تقویم بین‌المللی</h4>
+                <div class="timezone-list-sm">
+                    <div><span>ایران:</span> <span id="clock-tehran">12:30</span></div>
+                    <div><span>چین:</span> <span id="clock-beijing">17:00</span></div>
+                    <div><span>امارات:</span> <span id="clock-dubai">13:00</span></div>
                 </div>
             </div>
 
-            <div class="bg-white/90 backdrop-blur-md px-6 py-2 rounded-2xl shadow-sm border border-white/50 text-center">
-                <h2 class="text-xl font-black text-gray-900 tracking-wider">NOVO-BAY</h2>
+            <!-- Live Chatroom -->
+            <div class="glass-card-sm" id="box-live-chat">
+                <div class="chat-header-sm">
+                    <h4>چت‌روم زنده</h4>
+                    <div class="admin-toggles">
+                        <button class="btn-toggle-xs" title="قفل چت عمومی">🔒</button>
+                    </div>
+                </div>
+                <div class="chat-messages-container" id="chat-stream">
+                    <!-- Live Messages -->
+                </div>
+                <div class="chat-input-row">
+                    <input type="text" placeholder="تایپ پیام..." class="input-chat-sm">
+                    <button class="btn-send-xs">➔</button>
+                </div>
             </div>
+        </aside>
+    </main>
 
-            <div class="flex items-center space-x-2 space-x-reverse">
-                <select id="langSelector" onchange="changeLanguage(this.value)" class="interactive-element bg-white/90 hover:bg-white p-2.5 rounded-xl shadow border border-white/50 text-xs font-bold outline-none">
-                    <option value="fa">فارسی (FA)</option>
-                    <option value="en">English (EN)</option>
-                    <option value="zh">中文 (ZH)</option>
-                </select>
-                <button onclick="openHelp()" class="interactive-element bg-blue-50 hover:bg-blue-100 text-blue-800 p-2.5 rounded-xl shadow border border-blue-200 text-xs font-bold flex items-center gap-1">
-                    <i class="fa-solid fa-circle-question"></i> راهنما
-                </button>
-                <button onclick="openContact()" class="interactive-element bg-gray-900 hover:bg-black text-white p-2.5 rounded-xl shadow text-xs font-bold">
-                    ارتباط با ما
-                </button>
+    <!-- 3. EXPANDABLE MODAL OVERLAY (3/4 Screen Glass Effect) -->
+    <div class="modal-overlay-34" id="modal-workspace">
+        <div class="modal-glass-content">
+            <button class="modal-close-btn" onclick="closeModal()">✕</button>
+            <div id="modal-dynamic-body">
+                <!-- Dynamically populated by C12, C13, or C14 -->
             </div>
         </div>
-
-        <!-- ۳ پنل اصلی چالش (طراحی خلوت و مینیمال) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto max-w-7xl mx-auto w-full px-4">
-            
-            <!-- باکس ۱: گروه اول (کلمات) -->
-            <div class="bg-white/85 backdrop-blur-md p-6 rounded-2xl border border-white/60 shadow-lg flex flex-col justify-between items-center space-y-4 text-center">
-                <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 text-xl font-bold">
-                    <i class="fa-solid fa-key"></i>
-                </div>
-                <div>
-                    <h3 class="text-sm font-black text-gray-900 uppercase">گروه اول: ایده‌پردازی کلمات</h3>
-                    <p class="text-[11px] text-gray-500 mt-1">ثبت کلمات ساعتی و استخراج ۵ کلیدواژه طلایی</p>
-                </div>
-                <button onclick="openGroup1Modal()" class="interactive-element w-full bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
-                    <span>ورود به چالش کلمات ($2)</span>
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-            </div>
-
-            <!-- باکس ۲: گروه دوم (عناوین) -->
-            <div class="bg-white/85 backdrop-blur-md p-6 rounded-2xl border border-white/60 shadow-lg flex flex-col justify-between items-center space-y-4 text-center">
-                <div class="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 text-xl font-bold">
-                    <i class="fa-solid fa-heading"></i>
-                </div>
-                <div>
-                    <h3 class="text-sm font-black text-gray-900 uppercase">گروه دوم: تحلیل و تعیین عنوان</h3>
-                    <p class="text-[11px] text-gray-500 mt-1">پیشنهاد و تحلیل عناوین روزانه بر اساس کلمات</p>
-                </div>
-                <button onclick="openGroup2Modal()" class="interactive-element w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
-                    <span>ثبت و تحلیل عنوان ($4)</span>
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-            </div>
-
-            <!-- باکس ۳: گروه سوم (مناقصه و سرمایه‌گذاری) -->
-            <div class="bg-white/85 backdrop-blur-md p-6 rounded-2xl border border-white/60 shadow-lg flex flex-col justify-between items-center space-y-4 text-center">
-                <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-600 text-xl font-bold">
-                    <i class="fa-solid fa-handshake"></i>
-                </div>
-                <div>
-                    <h3 class="text-sm font-black text-gray-900 uppercase">گروه سوم: مناقصه و سهام خرد</h3>
-                    <p class="text-[11px] text-gray-500 mt-1">بررسی پروپوزال‌های نهایی و جذب سرمایه‌گذار</p>
-                </div>
-                <button onclick="openGroup3Modal()" class="interactive-element w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-3 rounded-xl shadow transition flex items-center justify-center gap-2">
-                    <span>ورود سرمایه‌گذاران</span>
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-            </div>
-
-        </div>
-
-        <!-- باکس چهارم: مخزن سهام خرد (Micro-Equity Pool) -->
-        <div class="max-w-md mx-auto w-full bg-white/80 backdrop-blur-md p-3 rounded-xl border border-white/50 shadow text-center">
-            <div class="text-[11px] font-bold text-gray-800 uppercase flex items-center justify-center gap-2">
-                <i class="fa-solid fa-chart-pie text-emerald-600"></i>
-                MICRO-EQUITY / DIVIDENDS POOL (10-DAY CYCLE)
-            </div>
-            <p class="text-[9px] text-gray-500 mt-0.5">توزیع خودکار سود و سهام خرد در پایان دوره ۱۰ روزه</p>
-        </div>
-
     </div>
 
-    <!-- بارگذاری اسکریپت‌های ماژولار (C02 تا C20) -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- 4. BOTTOM FOOTER TICKER -->
+    <footer class="bottom-live-ticker">
+        <div class="ticker-content-horizontal">
+            <span class="status-indicator green">● IRAN: Active (85%)</span>
+            <span class="status-indicator yellow">● ITALY: Low (20%)</span>
+            <span class="status-indicator red">● GERMANY: Warning</span>
+        </div>
+    </footer>
+
+    <!-- JS Modules -->
     <script src="C02-config.js"></script>
-    <script src="C06-landing-gateway.js"></script>
-    <script src="C07-audio-media-controller.js"></script>
-    <script src="C08-auth-form-collector.js"></script>
-    <script src="C09-user-session-manager.js"></script>
+    <script src="C03-styles-core.css"></script> <!-- Ensure logic script linking -->
+    <script src="C07-audio.js"></script>
     <script src="C10-gis-main-map.js"></script>
-    <script src="C11-gis-minimap-legend.js"></script>
-    <script src="C12-challenge-group1-words.js"></script>
-    <script src="C13-challenge-group2-titles.js"></script>
-    <script src="C14-challenge-group3-tender.js"></script>
-    <script src="C15-micro-equity-engine.js"></script>
-    <script src="C16-substack-publisher.js"></script>
-    <script src="C17-help-support-system.js"></script>
+    <script src="C12-challenge-group1-w.js"></script>
     <script src="C18-navigation-controls.js"></script>
     <script src="C19-live-socket-sync.js"></script>
-    <script src="C20-security-anti-cheat.js"></script>
-
-    <script>
-        function closeIntroModal() {
-            document.getElementById('introModal').classList.add('hidden');
-        }
-    </script>
 </body>
 </html>
