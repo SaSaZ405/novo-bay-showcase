@@ -6,29 +6,56 @@
     <title>NOVO-BAY | Challenge Command Center</title>
     
     <link rel="stylesheet" href="C03-styles-core.css">
+    <link rel="stylesheet" href="C05-styles-ui.css">
+    
     <style>
-        body {
-            margin: 0;
-            background-color: #03060c;
+        /* تنظیم کانتینر اصلی اتاق فرمان با نسبت 9:16 */
+        .command-viewport {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            background: #03060c;
         }
-        /* جایگاه کره زمین در صفحه */
+
+        /* لایه ۱: ویدیوی کهکشانی پس‌زمینه با قابلیت تکرار (Loop) */
+        .galaxy-loop-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* لایه ۲: جایگاه کره زمین سه‌بعدی دقیقا منطبق بر کره داخل ویدیو */
         #gis-globe-root {
-            width: 400px;
-            height: 400px;
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            z-index: 2;
+            pointer-events: auto;
         }
     </style>
 </head>
 <body class="bg-cosmic">
 
-    <!-- کادری که کره زمین سه‌بعدی درون آن رندر می‌شود -->
-    <div id="gis-globe-root"></div>
+    <div class="command-viewport">
+        <!-- ویدیوی پایه با قابلیت لوپ مداوم -->
+        <video autoplay muted loop playsinline class="galaxy-loop-video">
+            <source src="146580-789534202.mp4" type="video/mp4">
+            مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+        </video>
 
-    <!-- اسکریپت کره زمین -->
+        <!-- کره زمین سه‌بعدی و مشبک که روی ویدیو می‌نشیند -->
+        <div id="gis-globe-root"></div>
+    </div>
+
+    <!-- اسکریپت هماهنگ‌سازی کره زمین و نقاط فعال -->
     <script src="C10-gis-main-map.js"></script>
 </body>
 </html>
