@@ -9,7 +9,16 @@
     <link rel="stylesheet" href="C05-styles-ui.css">
     
     <style>
-        /* تنظیم کانتینر اصلی اتاق فرمان با نسبت 9:16 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #03060c;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
         .command-viewport {
             position: relative;
             width: 100vw;
@@ -18,10 +27,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #03060c;
         }
 
-        /* لایه ۱: ویدیوی کهکشانی پس‌زمینه با قابلیت تکرار (Loop) */
+        /* لایه ۱: ویدیوی کهکشانی پس‌زمینه با لوپ مداوم */
         .galaxy-loop-video {
             position: absolute;
             top: 0;
@@ -32,7 +40,7 @@
             z-index: 1;
         }
 
-        /* لایه ۲: جایگاه کره زمین سه‌بعدی دقیقا منطبق بر کره داخل ویدیو */
+        /* لایه ۲: جایگاه کره زمین سه‌بعدی روی ویدیو */
         #gis-globe-root {
             position: absolute;
             width: 420px;
@@ -40,22 +48,123 @@
             z-index: 2;
             pointer-events: auto;
         }
+
+        /* هدر بالای صفحه با چینش دقیق */
+        .top-header-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 44px;
+            padding: 0 16px;
+            background: rgba(5, 10, 18, 0.75);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .header-left-group, .header-right-group, .header-center-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-center-group {
+            flex: 1;
+            max-width: 45%;
+            background: rgba(3, 6, 12, 0.5);
+            padding: 2px 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .btn-clean {
+            background: transparent;
+            border: none;
+            color: #d4af37;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 2px 4px;
+        }
+
+        .mini-player-clean {
+            display: flex;
+            gap: 2px;
+        }
+
+        .news-label {
+            color: #d4af37;
+            font-size: 10px;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .news-ticker-text {
+            color: #cbd5e1;
+            font-size: 11px;
+        }
+
+        .rotating-nb-logo {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #d4af37;
+            font-weight: bold;
+            animation: spinSlow 20s linear infinite;
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
-<body class="bg-cosmic">
+<body>
 
     <div class="command-viewport">
-        <!-- ویدیوی پایه با قابلیت لوپ مداوم -->
+        <!-- نوار هدر بالا -->
+        <header class="top-header-bar">
+            <div class="header-left-group">
+                <div class="mini-player-clean">
+                    <button class="btn-clean" title="قبلی">⏮</button>
+                    <button class="btn-clean" title="پخش">▶</button>
+                    <button class="btn-clean" title="بعدی">⏭</button>
+                </div>
+                <button class="btn-clean" title="زبان">🌐</button>
+            </div>
+
+            <div class="header-center-group">
+                <span class="news-label">اخبار:</span>
+                <marquee behavior="scroll" direction="right" scrollamount="3" class="news-ticker-text">
+                    به پلتفرم NOVO-BAY خوش آمدید... چالش جدید کلمات و عناوین نوآورانه فعال شد...
+                </marquee>
+            </div>
+
+            <div class="header-right-group">
+                <div class="rotating-nb-logo">NB</div>
+                <button class="btn-clean" title="منو">☰</button>
+            </div>
+        </header>
+
+        <!-- ویدیوی کهکشانی پس‌زمینه -->
         <video autoplay muted loop playsinline class="galaxy-loop-video">
             <source src="146580-789534202.mp4" type="video/mp4">
             مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
         </video>
 
-        <!-- کره زمین سه‌بعدی و مشبک که روی ویدیو می‌نشیند -->
+        <!-- کره زمین سه‌بعدی و مشبک روی ویدیو -->
         <div id="gis-globe-root"></div>
     </div>
 
-    <!-- اسکریپت هماهنگ‌سازی کره زمین و نقاط فعال -->
+    <!-- اسکریپت کره زمین -->
     <script src="C10-gis-main-map.js"></script>
 </body>
 </html>
