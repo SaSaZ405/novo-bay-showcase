@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVO-BAY | Command Center - گام سوم</title>
+    <title>NOVO-BAY | Command Center - گام چهارم</title>
     
     <link rel="stylesheet" href="C03-styles-core.css">
     <link rel="stylesheet" href="C05-styles-ui.css">
@@ -30,7 +30,7 @@
             align-items: center;
         }
 
-        /* قاب مرکزی 9:16 برای حفظ ابعاد ویدیو و کره */
+        /* قاب مرکزی 9:16 */
         .globe-stage-wrapper {
             position: relative;
             width: 380px;
@@ -65,7 +65,7 @@
             pointer-events: auto;
         }
 
-        /* هدر بالا با پشتیبانی از ۸ زبان */
+        /* هدر بالا با منوی ۸ زبانه */
         .top-header-bar {
             position: absolute;
             top: 0;
@@ -126,7 +126,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* مودال‌ها با قابلیت اسکرول و تنظیم ارتفاع برای موبایل */
+        /* مودال منشور اصالت */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -187,7 +187,7 @@
             transform: scale(1.02);
         }
 
-        /* پنل گام‌ها در پایین قاب با قابلیت اسکرول داخلی */
+        /* پنل گام‌های گیمیفیکیشن */
         .steps-container {
             position: absolute;
             bottom: 10px;
@@ -195,11 +195,11 @@
             transform: translateX(-50%);
             width: 92%;
             max-width: 360px;
-            max-height: 450px;
+            max-height: 420px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             z-index: 20;
             padding: 4px;
         }
@@ -214,10 +214,10 @@
         }
 
         .box-title {
-            font-size: 10px;
+            font-size: 11px;
             color: #d4af37;
             font-weight: bold;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             display: flex;
             justify-content: space-between;
         }
@@ -227,29 +227,29 @@
             background: rgba(3, 6, 12, 0.9);
             border: 1px solid rgba(212, 175, 55, 0.3);
             color: #fff;
-            padding: 5px 6px;
+            padding: 6px 8px;
             border-radius: 5px;
             font-size: 11px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- مودال گام صفر: آستانه جادو و پذیرش منشور اصالت پینوکیو -->
+    <!-- مودال گام صفر: آستانه جادو -->
     <div id="pinocchio-modal" class="modal-overlay">
         <div class="modal-card">
             <h2 id="txt-modal-title" class="modal-title">آستانه جادو | منشور اصالت پینوکیو</h2>
             <p id="txt-modal-desc" class="modal-desc">
-                کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8].
+                کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8, 11].
             </p>
             <button onclick="acceptCharter()" id="txt-modal-btn" class="btn-gold">پذیرش و ورود آگاهانه</button>
         </div>
     </div>
 
     <div class="command-viewport">
-        <!-- هدر بالا با منوی ۸ زبانه -->
+        <!-- هدر بالا -->
         <header class="top-header-bar">
             <div class="header-left">
                 <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
@@ -284,36 +284,45 @@
 
             <div id="gis-globe-root"></div>
 
-            <!-- پنل گام‌های صفر تا سوم در پایین قاب -->
+            <!-- پنل اسکرولی گام‌ها -->
             <div class="steps-container">
-                <!-- گام اول: مارپیچ کلمات -->
+                <!-- گام اول -->
                 <div class="step-box">
                     <div class="box-title">
-                        <span>گام ۱: مارپیچ کلمات و تاس ($2)[cite: 9, 10]</span>
-                        <span>[روز ۱-۷][cite: 9, 10]</span>
+                        <span>گام ۱: مارپیچ کلمات و تاس ($2)</span>
+                        <span>[روز ۱ تا ۷]</span>
                     </div>
                     <input type="text" id="user-word-input" class="input-custom" placeholder="کلمه روزانه...">
-                    <button onclick="checkWordSubmission()" class="btn-gold" style="width: 100%; padding: 4px; font-size: 10px;">ثبت و بررسی (۵ ثانیه)</button>
+                    <button onclick="checkWordSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 10px;">ثبت و بررسی (۵ ثانیه)</button>
                 </div>
 
-                <!-- گام دوم: تالار عناوین و نوآوری -->
+                <!-- گام دوم -->
                 <div class="step-box">
                     <div class="box-title">
-                        <span>گام ۲: تالار عناوین ($4)[cite: 9, 10]</span>
-                        <span>[روز ۱-۸][cite: 9, 10]</span>
+                        <span>گام ۲: تالار عناوین و نوآوری ($4)</span>
+                        <span>[روز ۱ تا ۸]</span>
                     </div>
                     <input type="text" id="user-title-input" class="input-custom" placeholder="عنوان نوآورانه...">
-                    <button onclick="checkTitleSubmission()" class="btn-gold" style="width: 100%; padding: 4px; font-size: 10px;">پرداخت ۴$ و تست پینوکیو</button>
+                    <button onclick="checkTitleSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 10px;">پرداخت ۴$ و تست پینوکیو</button>
                 </div>
 
-                <!-- گام سوم: پروپوزال و بیزینس پلن -->
+                <!-- گام سوم -->
                 <div class="step-box">
                     <div class="box-title">
-                        <span>گام ۳: پروپوزال و بیزینس پلن[cite: 9, 10]</span>
-                        <span>[روز ۸-۹][cite: 9, 10]</span>
+                        <span>گام ۳: پروپوزال و بیزینس پلن</span>
+                        <span>[روز ۸ و ۹]</span>
                     </div>
                     <input type="text" id="user-proposal-input" class="input-custom" placeholder="لینک یا متن موجز بیزینس پلن...">
-                    <button onclick="checkProposalSubmission()" class="btn-gold" style="width: 100%; padding: 4px; font-size: 10px;">ارسال پروپوزال به کمیته ارزیابی[cite: 9, 10]</button>
+                    <button onclick="checkProposalSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 10px;">ارسال پروپوزال به کمیته ارزیابی</button>
+                </div>
+
+                <!-- گام چهارم -->
+                <div class="step-box">
+                    <div class="box-title">
+                        <span>گام ۴: استیج وبینار و دفاع زنده</span>
+                        <span>[روز ۱۰]</span>
+                    </div>
+                    <button onclick="joinStageWebinar()" class="btn-gold" style="width: 100%; padding: 6px; font-size: 10px;">خرید بلیت و ورود به وبینار ۱۰۰ نفره</button>
                 </div>
             </div>
         </div>
@@ -323,49 +332,49 @@
         const translations = {
             fa: {
                 title: "آستانه جادو | منشور اصالت پینوکیو",
-                desc: "کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8].",
+                desc: "کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8, 11].",
                 btn: "پذیرش و ورود آگاهانه",
                 banner: "خوش‌آمدید به نوو-بی"
             },
             en: {
                 title: "Magic Threshold | Pinocchio Charter",
-                desc: "Welcome to NOVO-BAY[cite: 8]. By entering, you commit to data authenticity, 5-second timer discipline, and platform rules[cite: 8, 9]. Confirm to activate your user node on the GIS map[cite: 8].",
+                desc: "Welcome to NOVO-BAY[cite: 8]. By entering, you commit to data authenticity, 5-second timer discipline, and platform rules[cite: 8, 9]. Confirm to activate your user node on the GIS map[cite: 8, 11].",
                 btn: "Accept & Enter",
                 banner: "Welcome to NOVO-BAY"
             },
             ru: {
                 title: "Магический порог | Устав Пиноккио",
-                desc: "Добро пожаловать в NOVO-BAY[cite: 8]. Подтвердите соблюдение правил и подлинность данных для активации узла на GIS[cite: 8, 9].",
+                desc: "Добро пожаловать в NOVO-BAY[cite: 8]. Подтвердите соблюдение правил и подлинность данных для активации узла на GIS[cite: 8, 9, 11].",
                 btn: "Принять и войти",
                 banner: "Добро пожаловать"
             },
             zh: {
                 title: "魔法门槛 | 匹ノ曹宪章",
-                desc: "欢迎来到 NOVO-BAY[cite: 8]。确认遵守平台规则以激活您的GIS节点[cite: 8, 9]。",
+                desc: "欢迎来到 NOVO-BAY[cite: 8]。确认遵守平台规则以激活您的GIS节点[cite: 8, 9, 11]。",
                 btn: "接受并进入",
                 banner: "欢迎来到 NOVO-BAY"
             },
             ar: {
                 title: "عتبة السحر | ميثاق الاصالة",
-                desc: "مرحباً بك في منصة NOVO-BAY[cite: 8]. بالتأكيد، أنت تلتزم بقواعد الأصالة والشفافية لتفعيل عقدتك على خريطة GIS[cite: 8, 9].",
+                desc: "مرحباً بك في منصة NOVO-BAY[cite: 8]. بالتأكيد، أنت تلتزم بقواعد الأصالة والشفافية لتفعيل عقدتك على خريطة GIS[cite: 8, 9, 11].",
                 btn: "قبول والدخول",
                 banner: "مرحباً بك في نوو-بی"
             },
             fr: {
                 title: "Seuil Magique | Charte de Pinocchio",
-                desc: "Bienvenue sur NOVO-BAY[cite: 8]. Confirmez pour activer votre nœud utilisateur sur la carte GIS[cite: 8, 9].",
+                desc: "Bienvenue sur NOVO-BAY[cite: 8]. Confirmez pour activer votre nœud utilisateur sur la carte GIS[cite: 8, 9, 11].",
                 btn: "Accepter & Entrer",
                 banner: "Bienvenue sur NOVO-BAY"
             },
             de: {
                 title: "Magische Schwelle | Pinocchio-Charta",
-                desc: "Willkommen bei NOVO-BAY[cite: 8]. Bestätigen Sie die Regeln zur Aktivierung Ihres GIS-Knotens[cite: 8, 9].",
+                desc: "Willkommen bei NOVO-BAY[cite: 8]. Bestätigen Sie die Regeln zur Aktivierung Ihres GIS-Knotens[cite: 8, 9, 11].",
                 btn: "Akzeptieren & Starten",
                 banner: "Willkommen bei NOVO-BAY"
             },
             it: {
                 title: "Soglia Magica | Carta di Pinocchio",
-                desc: "Benvenuto su NOVO-BAY[cite: 8]. Conferma per attivare il tuo nodo utente sulla mappa GIS[cite: 8, 9].",
+                desc: "Benvenuto su NOVO-BAY[cite: 8]. Conferma per attivare il tuo nodo utente sulla mappa GIS[cite: 8, 9, 11].",
                 btn: "Accetta ed Entra",
                 banner: "Benvenuto in NOVO-BAY"
             }
@@ -401,7 +410,7 @@
         function checkWordSubmission() {
             const word = document.getElementById('user-word-input').value;
             if(!word) { alert("لطفاً کلمه را وارد کنید."); return; }
-            alert(`گام اول: بررسی ۵ ثانیه‌ای کلمه «${word}» انجام شد.`);
+            alert(`گام اول: بررسی ۵ ثانیه‌ای کلمه «${word}» انجام شد[cite: 9, 10].`);
         }
 
         function checkTitleSubmission() {
@@ -413,7 +422,11 @@
         function checkProposalSubmission() {
             const proposal = document.getElementById('user-proposal-input').value;
             if(!proposal) { alert("لطفاً پروپوزال یا بیزینس پلن خود را وارد کنید."); return; }
-            alert(`گام سوم: بیزینس پلن با موفقیت بارگذاری شد و برای کمیته ارزیابی و سرمایه‌گذاران ارسال گردید[cite: 9, 10]!`);
+            alert(`گام سوم: بیزینس پلن برای کمیته ارزیابی ارسال شد[cite: 9, 10].`);
+        }
+
+        function joinStageWebinar() {
+            alert(`گام چهارم: بلیت وبینار انحصاری ۱۰۰ نفره صادر شد[cite: 9, 10]. ورود به اتاق دفاع زنده انجام گردید؛ امتیاز سهام خرد (Micro-Equity) و مجوز چاپ مقاله در ژورنال علمی دانشگاهی ثبت شد[cite: 9, 10]!`);
         }
     </script>
 
