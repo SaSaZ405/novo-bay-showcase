@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVO-BAY | Command Center - گام چهارم</title>
+    <title>NOVO-BAY | Command Center - تکمیل زیرساخت</title>
     
     <link rel="stylesheet" href="C03-styles-core.css">
     <link rel="stylesheet" href="C05-styles-ui.css">
@@ -187,7 +187,7 @@
             transform: scale(1.02);
         }
 
-        /* پنل گام‌های گیمیفیکیشن */
+        /* پنل اسکرولی گام‌ها */
         .steps-container {
             position: absolute;
             bottom: 10px;
@@ -284,7 +284,7 @@
 
             <div id="gis-globe-root"></div>
 
-            <!-- پنل اسکرولی گام‌ها -->
+            <!-- پنل اسکرولی تمام گام‌ها (تا گام ۵) -->
             <div class="steps-container">
                 <!-- گام اول -->
                 <div class="step-box">
@@ -323,6 +323,15 @@
                         <span>[روز ۱۰]</span>
                     </div>
                     <button onclick="joinStageWebinar()" class="btn-gold" style="width: 100%; padding: 6px; font-size: 10px;">خرید بلیت و ورود به وبینار ۱۰۰ نفره</button>
+                </div>
+
+                <!-- گام پنجم -->
+                <div class="step-box" style="border-color: #ffd700;">
+                    <div class="box-title" style="color: #ffd700;">
+                        <span>گام ۵: معبد سرمایه‌گذاری و پاداش‌ها[cite: 7]</span>
+                        <span>[پس از روز ۱۰][cite: 7]</span>
+                    </div>
+                    <button onclick="finalizeTemple()" class="btn-gold" style="width: 100%; padding: 6px; font-size: 10px;">نهایی‌سازی قرارداد و دریافت جوایز کلان[cite: 7]</button>
                 </div>
             </div>
         </div>
@@ -426,7 +435,11 @@
         }
 
         function joinStageWebinar() {
-            alert(`گام چهارم: بلیت وبینار انحصاری ۱۰۰ نفره صادر شد[cite: 9, 10]. ورود به اتاق دفاع زنده انجام گردید؛ امتیاز سهام خرد (Micro-Equity) و مجوز چاپ مقاله در ژورنال علمی دانشگاهی ثبت شد[cite: 9, 10]!`);
+            alert(`گام چهارم: بلیت وبینار انحصاری ۱۰۰ نفره صادر شد[cite: 9, 10]. ورود به اتاق دفاع زنده انجام گردید؛ امتیاز سهام خرد (Micro-Equity) و مجوز چاپ مقاله ثبت شد[cite: 9, 10]!`);
+        }
+
+        function finalizeTemple() {
+            alert(`گام پنجم: تبریک! قرارداد سرمایه‌گذاری رسمی امضا شد، مقاله علمی در ژورنال معتبر منتشر گردید و کلیدهای طلایی پاداش نقشه GIS به حساب شما واریز شد[cite: 7]. چرخه کامل پلتفرم NOVO-BAY با موفقیت تکمیل گردید!`);
         }
     </script>
 
