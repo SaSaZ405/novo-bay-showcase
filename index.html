@@ -126,7 +126,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* مودال‌ها و پنل‌ها */
+        /* مودال‌ها با قابلیت اسکرول و تنظیم ارتفاع برای موبایل */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -139,31 +139,34 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 15px;
         }
 
         .modal-card {
             background: rgba(10, 17, 40, 0.95);
             border: 1px solid #d4af37;
-            padding: 24px;
+            padding: 20px;
             border-radius: 16px;
-            width: 90%;
-            max-width: 420px;
+            width: 100%;
+            max-width: 380px;
+            max-height: 85vh;
+            overflow-y: auto;
             text-align: center;
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
         }
 
         .modal-title {
             color: #d4af37;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .modal-desc {
             color: #cbd5e1;
-            font-size: 13px;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 16px;
             text-align: justify;
         }
 
@@ -171,11 +174,11 @@
             background: linear-gradient(135deg, #d4af37, #aa7c11);
             color: #03060c;
             border: none;
-            padding: 10px 24px;
+            padding: 8px 20px;
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.3s;
         }
 
@@ -184,7 +187,7 @@
             transform: scale(1.02);
         }
 
-        /* پنل‌های گام‌ها در پایین قاب با قابلیت اسکرول داخلی منظم */
+        /* پنل گام‌ها در پایین قاب با قابلیت اسکرول داخلی */
         .steps-container {
             position: absolute;
             bottom: 10px;
@@ -234,12 +237,12 @@
 </head>
 <body>
 
-    <!-- مودال گام صفر: آستانه جادو و منشور اصالت پینوکیو -->
+    <!-- مودال گام صفر: آستانه جادو و پذیرش منشور اصالت پینوکیو -->
     <div id="pinocchio-modal" class="modal-overlay">
         <div class="modal-card">
             <h2 id="txt-modal-title" class="modal-title">آستانه جادو | منشور اصالت پینوکیو</h2>
             <p id="txt-modal-desc" class="modal-desc">
-                کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8, 11].
+                کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8].
             </p>
             <button onclick="acceptCharter()" id="txt-modal-btn" class="btn-gold">پذیرش و ورود آگاهانه</button>
         </div>
@@ -320,49 +323,49 @@
         const translations = {
             fa: {
                 title: "آستانه جادو | منشور اصالت پینوکیو",
-                desc: "کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8, 11].",
+                desc: "کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8].",
                 btn: "پذیرش و ورود آگاهانه",
                 banner: "خوش‌آمدید به نوو-بی"
             },
             en: {
                 title: "Magic Threshold | Pinocchio Charter",
-                desc: "Welcome to NOVO-BAY[cite: 8]. By entering, you commit to data authenticity, 5-second timer discipline, and platform rules[cite: 8, 9]. Confirm to activate your user node on the GIS map[cite: 8, 11].",
+                desc: "Welcome to NOVO-BAY[cite: 8]. By entering, you commit to data authenticity, 5-second timer discipline, and platform rules[cite: 8, 9]. Confirm to activate your user node on the GIS map[cite: 8].",
                 btn: "Accept & Enter",
                 banner: "Welcome to NOVO-BAY"
             },
             ru: {
                 title: "Магический порог | Устав Пиноккио",
-                desc: "Добро пожаловать в NOVO-BAY[cite: 8]. Подтвердите соблюдение правил и подлинность данных для активации узла на GIS[cite: 8, 9, 11].",
+                desc: "Добро пожаловать в NOVO-BAY[cite: 8]. Подтвердите соблюдение правил и подлинность данных для активации узла на GIS[cite: 8, 9].",
                 btn: "Принять и войти",
                 banner: "Добро пожаловать"
             },
             zh: {
                 title: "魔法门槛 | 匹ノ曹宪章",
-                desc: "欢迎来到 NOVO-BAY[cite: 8]。确认遵守平台规则以激活您的GIS节点[cite: 8, 9, 11]。",
+                desc: "欢迎来到 NOVO-BAY[cite: 8]。确认遵守平台规则以激活您的GIS节点[cite: 8, 9]。",
                 btn: "接受并进入",
                 banner: "欢迎来到 NOVO-BAY"
             },
             ar: {
                 title: "عتبة السحر | ميثاق الاصالة",
-                desc: "مرحباً بك في منصة NOVO-BAY[cite: 8]. بالتأكيد، أنت تلتزم بقواعد الأصالة والشفافية لتفعيل عقدتك على خريطة GIS[cite: 8, 9, 11].",
+                desc: "مرحباً بك في منصة NOVO-BAY[cite: 8]. بالتأكيد، أنت تلتزم بقواعد الأصالة والشفافية لتفعيل عقدتك على خريطة GIS[cite: 8, 9].",
                 btn: "قبول والدخول",
                 banner: "مرحباً بك في نوو-بی"
             },
             fr: {
                 title: "Seuil Magique | Charte de Pinocchio",
-                desc: "Bienvenue sur NOVO-BAY[cite: 8]. Confirmez pour activer votre nœud utilisateur sur la carte GIS[cite: 8, 9, 11].",
+                desc: "Bienvenue sur NOVO-BAY[cite: 8]. Confirmez pour activer votre nœud utilisateur sur la carte GIS[cite: 8, 9].",
                 btn: "Accepter & Entrer",
                 banner: "Bienvenue sur NOVO-BAY"
             },
             de: {
                 title: "Magische Schwelle | Pinocchio-Charta",
-                desc: "Willkommen bei NOVO-BAY[cite: 8]. Bestätigen Sie die Regeln zur Aktivierung Ihres GIS-Knotens[cite: 8, 9, 11].",
+                desc: "Willkommen bei NOVO-BAY[cite: 8]. Bestätigen Sie die Regeln zur Aktivierung Ihres GIS-Knotens[cite: 8, 9].",
                 btn: "Akzeptieren & Starten",
                 banner: "Willkommen bei NOVO-BAY"
             },
             it: {
                 title: "Soglia Magica | Carta di Pinocchio",
-                desc: "Benvenuto su NOVO-BAY[cite: 8]. Conferma per attivare il tuo nodo utente sulla mappa GIS[cite: 8, 9, 11].",
+                desc: "Benvenuto su NOVO-BAY[cite: 8]. Conferma per attivare il tuo nodo utente sulla mappa GIS[cite: 8, 9].",
                 btn: "Accetta ed Entra",
                 banner: "Benvenuto in NOVO-BAY"
             }
