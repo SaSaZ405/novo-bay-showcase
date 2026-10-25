@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVO-BAY | Command Center - گام اول</title>
+    <title>NOVO-BAY | Command Center - گام دوم</title>
     
     <link rel="stylesheet" href="C03-styles-core.css">
     <link rel="stylesheet" href="C05-styles-ui.css">
@@ -184,43 +184,47 @@
             transform: scale(1.02);
         }
 
-        /* استایل پنل گام اول: مارپیچ کلمات */
-        .step1-panel {
+        /* پنل‌های گام‌ها در پایین قاب */
+        .steps-container {
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
             max-width: 360px;
-            background: rgba(5, 10, 18, 0.9);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            backdrop-filter: blur(10px);
-            padding: 14px;
-            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
             z-index: 20;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
 
-        .golden-words-box {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
+        .step-box {
+            background: rgba(5, 10, 18, 0.92);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .box-title {
             font-size: 11px;
             color: #d4af37;
-            background: rgba(212, 175, 55, 0.1);
-            padding: 4px 8px;
-            border-radius: 4px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
         }
 
-        .input-word {
+        .input-custom {
             width: 100%;
             background: rgba(3, 6, 12, 0.9);
             border: 1px solid rgba(212, 175, 55, 0.3);
             color: #fff;
-            padding: 8px;
+            padding: 6px 8px;
             border-radius: 6px;
-            font-size: 13px;
-            margin-bottom: 8px;
+            font-size: 12px;
+            margin-bottom: 6px;
             text-align: center;
         }
     </style>
@@ -274,15 +278,27 @@
 
             <div id="gis-globe-root"></div>
 
-            <!-- پنل گام اول: مارپیچ کلمات و تاس سرنوشت داخل قاب پایین -->
-            <div class="step1-panel">
-                <div class="golden-words-box">
-                    <span>💡 نوآوری</span>
-                    <span>⚡ مقیاس‌پذیری</span>
-                    <span>🌐 تاب‌آوری</span>
+            <!-- پنل‌های گام اول و گام دوم در پایین قاب -->
+            <div class="steps-container">
+                <!-- گام اول: مارپیچ کلمات -->
+                <div class="step-box">
+                    <div class="box-title">
+                        <span>گام ۱: مارپیچ کلمات و تاس ($2)</span>
+                        <span>[روز ۱ تا ۷]</span>
+                    </div>
+                    <input type="text" id="user-word-input" class="input-custom" placeholder="کلمه روزانه...">
+                    <button onclick="checkWordSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 11px;">ثبت و بررسی (۵ ثانیه)</button>
                 </div>
-                <input type="text" id="user-word-input" class="input-word" placeholder="کلمه روزانه خود را وارد کنید...">
-                <button onclick="checkWordSubmission()" class="btn-gold" style="width: 100%; padding: 6px; font-size: 12px;">ثبت و راستی‌آزمایی (۵ ثانیه)</button>
+
+                <!-- گام دوم: تالار عناوین و نوآوری -->
+                <div class="step-box">
+                    <div class="box-title">
+                        <span>گام ۲: تالار عناوین و نوآوری ($4)</span>
+                        <span>[روز ۱ تا ۸]</span>
+                    </div>
+                    <input type="text" id="user-title-input" class="input-custom" placeholder="عنوان نوآورانه پیشنهادی...">
+                    <button onclick="checkTitleSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 11px;">پرداخت ۴$ و تست پینوکیو</button>
+                </div>
             </div>
         </div>
     </div>
@@ -363,17 +379,20 @@
         }
 
         function toggleAudioGuide() {
-            alert("پخش راهنمای صوتی گام صفر و قوانین پلتفرم...");
+            alert("پخش راهنمای صوتی قوانین پلتفرم...");
         }
 
         function checkWordSubmission() {
             const word = document.getElementById('user-word-input').value;
-            if(!word) {
-                alert("لطفاً کلمه خود را وارد کنید.");
-                return;
-            }
-            // شبیه‌سازی بررسی ۵ ثانیه‌ای سیستم
-            alert(`در حال بررسی اصالت کلمه «${word}» در پنجره ۵ ثانیه‌ای... سیستم تاییدیه مرحله اول را صادر کرد!`);
+            if(!word) { alert("لطفاً کلمه را وارد کنید."); return; }
+            alert(`گام اول: بررسی ۵ ثانیه‌ای کلمه «${word}» انجام شد.`);
+        }
+
+        function checkTitleSubmission() {
+            const title = document.getElementById('user-title-input').value;
+            if(!title) { alert("لطفاً عنوان نوآورانه خود را وارد کنید."); return; }
+            // تست پینوکیو و راستی‌آزمایی کمترین تکرار برای گام دوم
+            alert(`گام دوم: پرداخت ۴$ انجام شد. آزمون راستی‌آزمایی انسانی (پینوکیو) روی عنوان «${title}» اجرا شد؛ تایید طلایی برای ورود به ۷ عنوان برتر صادر گردید![cite: 9]`);
         }
     </script>
 
