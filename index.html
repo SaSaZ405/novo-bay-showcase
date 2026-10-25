@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVO-BAY | Command Center - گام دوم</title>
+    <title>NOVO-BAY | Command Center - گام سوم</title>
     
     <link rel="stylesheet" href="C03-styles-core.css">
     <link rel="stylesheet" href="C05-styles-ui.css">
@@ -30,7 +30,6 @@
             align-items: center;
         }
 
-        /* قاب مرکزی 9:16 برای حفظ ابعاد ویدیو و کره */
         .globe-stage-wrapper {
             position: relative;
             width: 380px;
@@ -65,7 +64,6 @@
             pointer-events: auto;
         }
 
-        /* هدر بالا با پشتیبانی از ۸ زبان */
         .top-header-bar {
             position: absolute;
             top: 0;
@@ -126,7 +124,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* مودال‌ها و پنل‌ها */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -184,34 +181,35 @@
             transform: scale(1.02);
         }
 
-        /* پنل‌های گام‌ها در پایین قاب */
         .steps-container {
             position: absolute;
-            bottom: 15px;
+            bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
+            width: 92%;
             max-width: 360px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             z-index: 20;
+            max-height: 280px;
+            overflow-y: auto;
         }
 
         .step-box {
             background: rgba(5, 10, 18, 0.92);
             border: 1px solid rgba(212, 175, 55, 0.35);
             backdrop-filter: blur(10px);
-            padding: 10px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            padding: 8px 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
 
         .box-title {
-            font-size: 11px;
+            font-size: 10px;
             color: #d4af37;
             font-weight: bold;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             display: flex;
             justify-content: space-between;
         }
@@ -221,181 +219,18 @@
             background: rgba(3, 6, 12, 0.9);
             border: 1px solid rgba(212, 175, 55, 0.3);
             color: #fff;
-            padding: 6px 8px;
+            padding: 5px 8px;
             border-radius: 6px;
-            font-size: 12px;
-            margin-bottom: 6px;
+            font-size: 11px;
+            margin-bottom: 4px;
             text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- مودال گام صفر: آستانه جادو و پذیرش منشور اصالت پینوکیو -->
     <div id="pinocchio-modal" class="modal-overlay">
         <div class="modal-card">
             <h2 id="txt-modal-title" class="modal-title">آستانه جادو | منشور اصالت پینوکیو</h2>
             <p id="txt-modal-desc" class="modal-desc">
-                کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8, 12]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8, 11, 12].
-            </p>
-            <button onclick="acceptCharter()" id="txt-modal-btn" class="btn-gold">پذیرش و ورود آگاهانه</button>
-        </div>
-    </div>
-
-    <div class="command-viewport">
-        <!-- هدر بالا با منوی ۸ زبانه -->
-        <header class="top-header-bar">
-            <div class="header-left">
-                <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
-                    <option value="fa">فارسی (FA)</option>
-                    <option value="en">English (EN)</option>
-                    <option value="ru">Русский (RU)</option>
-                    <option value="zh">中文 (ZH)</option>
-                    <option value="ar">العربية (AR)</option>
-                    <option value="fr">Français (FR)</option>
-                    <option value="de">Deutsch (DE)</option>
-                    <option value="it">Italiano (IT)</option>
-                </select>
-            </div>
-
-            <div class="header-center">
-                <button class="btn-clean" onclick="toggleAudioGuide()" title="راهنمای صوتی">🔊</button>
-                <span id="txt-welcome-banner" style="font-size: 11px; color: #d4af37;">خوش‌آمدید به نوو-بی</span>
-            </div>
-
-            <div class="header-right">
-                <div class="rotating-nb-logo">NB</div>
-                <button class="btn-clean" title="منو">☰</button>
-            </div>
-        </header>
-
-        <!-- قاب مرکزی 9:16 -->
-        <div class="globe-stage-wrapper">
-            <video autoplay muted loop playsinline class="galaxy-loop-video">
-                <source src="InShot_20261023_090807149.mp4" type="video/mp4">
-                مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-            </video>
-
-            <div id="gis-globe-root"></div>
-
-            <!-- پنل‌های گام اول و گام دوم در پایین قاب -->
-            <div class="steps-container">
-                <!-- گام اول: مارپیچ کلمات -->
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۱: مارپیچ کلمات و تاس ($2)</span>
-                        <span>[روز ۱ تا ۷]</span>
-                    </div>
-                    <input type="text" id="user-word-input" class="input-custom" placeholder="کلمه روزانه...">
-                    <button onclick="checkWordSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 11px;">ثبت و بررسی (۵ ثانیه)</button>
-                </div>
-
-                <!-- گام دوم: تالار عناوین و نوآوری -->
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۲: تالار عناوین و نوآوری ($4)</span>
-                        <span>[روز ۱ تا ۸]</span>
-                    </div>
-                    <input type="text" id="user-title-input" class="input-custom" placeholder="عنوان نوآورانه پیشنهادی...">
-                    <button onclick="checkTitleSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 11px;">پرداخت ۴$ و تست پینوکیو</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const translations = {
-            fa: {
-                title: "آستانه جادو | منشور اصالت پینوکیو",
-                desc: "کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8, 12]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8, 11, 12].",
-                btn: "پذیرش و ورود آگاهانه",
-                banner: "خوش‌آمدید به نوو-بی"
-            },
-            en: {
-                title: "Magic Threshold | Pinocchio Charter",
-                desc: "Welcome to NOVO-BAY[cite: 8, 12]. By entering, you commit to data authenticity, 5-second timer discipline, and platform rules[cite: 8, 9]. Confirm to activate your user node on the GIS map[cite: 8, 11, 12].",
-                btn: "Accept & Enter",
-                banner: "Welcome to NOVO-BAY"
-            },
-            ru: {
-                title: "Магический порог | Устав Пиноккио",
-                desc: "Добро пожаловать в NOVO-BAY[cite: 8, 12]. Подтвердите соблюдение правил и подлинность данных для активации узла на GIS[cite: 8, 9, 11, 12].",
-                btn: "Принять и войти",
-                banner: "Добро пожаловать"
-            },
-            zh: {
-                title: "魔法门槛 | 匹ノ曹宪章",
-                desc: "欢迎来到 NOVO-BAY[cite: 8, 12]。确认遵守平台规则以激活您的GIS节点[cite: 8, 9, 11, 12]。",
-                btn: "接受并进入",
-                banner: "欢迎来到 NOVO-BAY"
-            },
-            ar: {
-                title: "عتبة السحر | ميثاق الاصالة",
-                desc: "مرحباً بك في منصة NOVO-BAY[cite: 8, 12]. بالتأكيد، أنت تلتزم بقواعد الأصالة والشفافية لتفعيل عقدتك على خريطة GIS[cite: 8, 9, 11, 12].",
-                btn: "قبول والدخول",
-                banner: "مرحباً بك في نوو-بی"
-            },
-            fr: {
-                title: "Seuil Magique | Charte de Pinocchio",
-                desc: "Bienvenue sur NOVO-BAY[cite: 8, 12]. Confirmez pour activer votre nœud utilisateur sur la carte GIS[cite: 8, 9, 11, 12].",
-                btn: "Accepter & Entrer",
-                banner: "Bienvenue sur NOVO-BAY"
-            },
-            de: {
-                title: "Magische Schwelle | Pinocchio-Charta",
-                desc: "Willkommen bei NOVO-BAY[cite: 8, 12]. Bestätigen Sie die Regeln zur Aktivierung Ihres GIS-Knotens[cite: 8, 9, 11, 12].",
-                btn: "Akzeptieren & Starten",
-                banner: "Willkommen bei NOVO-BAY"
-            },
-            it: {
-                title: "Soglia Magica | Carta di Pinocchio",
-                desc: "Benvenuto su NOVO-BAY[cite: 8, 12]. Conferma per attivare il tuo nodo utente sulla mappa GIS[cite: 8, 9, 11, 12].",
-                btn: "Accetta ed Entra",
-                banner: "Benvenuto in NOVO-BAY"
-            }
-        };
-
-        function changeLanguage(lang) {
-            const htmlRoot = document.getElementById('html-root');
-            if (lang === 'fa' || lang === 'ar') {
-                htmlRoot.setAttribute('dir', 'rtl');
-            } else {
-                htmlRoot.setAttribute('dir', 'ltr');
-            }
-            htmlRoot.setAttribute('lang', lang);
-
-            if (translations[lang]) {
-                document.getElementById('txt-modal-title').innerText = translations[lang].title;
-                document.getElementById('txt-modal-desc').innerText = translations[lang].desc;
-                document.getElementById('txt-modal-btn').innerText = translations[lang].btn;
-                document.getElementById('txt-welcome-banner').innerText = translations[lang].banner;
-            }
-        }
-
-        function acceptCharter() {
-            const modal = document.getElementById('pinocchio-modal');
-            modal.style.opacity = '0';
-            setTimeout(() => { modal.style.display = 'none'; }, 400);
-        }
-
-        function toggleAudioGuide() {
-            alert("پخش راهنمای صوتی قوانین پلتفرم...");
-        }
-
-        function checkWordSubmission() {
-            const word = document.getElementById('user-word-input').value;
-            if(!word) { alert("لطفاً کلمه را وارد کنید."); return; }
-            alert(`گام اول: بررسی ۵ ثانیه‌ای کلمه «${word}» انجام شد.`);
-        }
-
-        function checkTitleSubmission() {
-            const title = document.getElementById('user-title-input').value;
-            if(!title) { alert("لطفاً عنوان نوآورانه خود را وارد کنید."); return; }
-            // تست پینوکیو و راستی‌آزمایی کمترین تکرار برای گام دوم
-            alert(`گام دوم: پرداخت ۴$ انجام شد. آزمون راستی‌آزمایی انسانی (پینوکیو) روی عنوان «${title}» اجرا شد؛ تایید طلایی برای ورود به ۷ عنوان برتر صادر گردید![cite: 9]`);
-        }
-    </script>
-
-    <script src="C10-gis-main-map.js"></script>
-</body>
-</html>
+                کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8]. با ورود به این چر
