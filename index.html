@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVO-BAY | Challenge Command Center</title>
+    <title>NOVO-BAY | Command Center - گام صفر</title>
     
     <link rel="stylesheet" href="C03-styles-core.css">
     <link rel="stylesheet" href="C05-styles-ui.css">
@@ -15,7 +15,8 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            background-color: #03060c;
+            background-color: #010308;
+            background-image: radial-gradient(circle at center, #0a1128 0%, #010308 100%);
             font-family: system-ui, -apple-system, sans-serif;
         }
 
@@ -29,7 +30,23 @@
             align-items: center;
         }
 
-        /* لایه ۱: ویدیوی کهکشانی پس‌زمینه با لوپ مداوم */
+        /* قاب مرکزی 9:16 برای حفظ ابعاد ویدیو و کره */
+        .globe-stage-wrapper {
+            position: relative;
+            width: 380px;
+            height: 675px;
+            max-width: 90vw;
+            max-height: 78vh;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 210, 255, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+        }
+
         .galaxy-loop-video {
             position: absolute;
             top: 0;
@@ -40,16 +57,15 @@
             z-index: 1;
         }
 
-        /* لایه ۲: جایگاه کره زمین سه‌بعدی روی ویدیو */
         #gis-globe-root {
             position: absolute;
-            width: 420px;
-            height: 420px;
+            width: 320px;
+            height: 320px;
             z-index: 2;
             pointer-events: auto;
         }
 
-        /* هدر بالای صفحه با چینش دقیق */
+        /* هدر بالا با قابلیت پشتیبانی از ۸ زبان */
         .top-header-bar {
             position: absolute;
             top: 0;
@@ -59,63 +75,47 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 44px;
+            height: 48px;
             padding: 0 16px;
-            background: rgba(5, 10, 18, 0.75);
+            background: rgba(5, 10, 18, 0.85);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
         }
 
-        .header-left-group, .header-right-group, .header-center-group {
+        .header-left, .header-right, .header-center {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .header-center-group {
-            flex: 1;
-            max-width: 45%;
-            background: rgba(3, 6, 12, 0.5);
-            padding: 2px 10px;
-            border-radius: 4px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
+        .lang-select {
+            background: rgba(3, 6, 12, 0.8);
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
         }
 
         .btn-clean {
             background: transparent;
             border: none;
             color: #d4af37;
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
-            padding: 2px 4px;
-        }
-
-        .mini-player-clean {
-            display: flex;
-            gap: 2px;
-        }
-
-        .news-label {
-            color: #d4af37;
-            font-size: 10px;
-            font-weight: bold;
-            margin-left: 8px;
-        }
-
-        .news-ticker-text {
-            color: #cbd5e1;
-            font-size: 11px;
+            padding: 4px;
         }
 
         .rotating-nb-logo {
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border: 1px solid #d4af37;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 11px;
             color: #d4af37;
             font-weight: bold;
             animation: spinSlow 20s linear infinite;
@@ -125,46 +125,206 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        /* مودال منشور اصالت پینوکیو (گام صفر) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(1, 3, 8, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-card {
+            background: rgba(10, 17, 40, 0.95);
+            border: 1px solid #d4af37;
+            padding: 24px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .modal-title {
+            color: #d4af37;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .modal-desc {
+            color: #cbd5e1;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            color: #03060c;
+            border: none;
+            padding: 10px 24px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn-gold:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
 
+    <!-- مودال گام صفر: آستانه جادو و پذیرش منشور اصالت پینوکیو -->
+    <div id="pinocchio-modal" class="modal-overlay">
+        <div class="modal-card">
+            <h2 id="txt-modal-title" class="modal-title">آستانه جادو | منشور اصالت پینوکیو</h2>
+            <p id="txt-modal-desc" class="modal-desc">
+                کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8, 12]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8, 11, 12].
+            </p>
+            <button onclick="acceptCharter()" id="txt-modal-btn" class="btn-gold">پذیرش و ورود آگاهانه</button>
+        </div>
+    </div>
+
     <div class="command-viewport">
-        <!-- نوار هدر بالا -->
+        <!-- هدر بالای صفحه با منوی ۸ زبانه -->
         <header class="top-header-bar">
-            <div class="header-left-group">
-                <div class="mini-player-clean">
-                    <button class="btn-clean" title="قبلی">⏮</button>
-                    <button class="btn-clean" title="پخش">▶</button>
-                    <button class="btn-clean" title="بعدی">⏭</button>
-                </div>
-                <button class="btn-clean" title="زبان">🌐</button>
+            <div class="header-left">
+                <!-- انتخاب‌گر ۸ زبانه استاندارد -->
+                <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
+                    <option value="fa">فارسی (FA)</option>
+                    <option value="en">English (EN)</option>
+                    <option value="ru">Русский (RU)</option>
+                    <option value="zh">中文 (ZH)</option>
+                    <option value="ar">العربية (AR)</option>
+                    <option value="fr">Français (FR)</option>
+                    <option value="de">Deutsch (DE)</option>
+                    <option value="it">Italiano (IT)</option>
+                </select>
             </div>
 
-            <div class="header-center-group">
-                <span class="news-label">اخبار:</span>
-                <marquee behavior="scroll" direction="right" scrollamount="3" class="news-ticker-text">
-                    به پلتفرم NOVO-BAY خوش آمدید... چالش جدید کلمات و عناوین نوآورانه فعال شد...
-                </marquee>
+            <div class="header-center">
+                <button class="btn-clean" onclick="toggleAudioGuide()" title="راهنمای صوتی">🔊</button>
+                <span id="txt-welcome-banner" style="font-size: 11px; color: #d4af37;">خوش‌آمدید به نوو-بی</span>
             </div>
 
-            <div class="header-right-group">
+            <div class="header-right">
                 <div class="rotating-nb-logo">NB</div>
                 <button class="btn-clean" title="منو">☰</button>
             </div>
         </header>
 
-        <!-- ویدیوی کهکشانی پس‌زمینه -->
-        <video autoplay muted loop playsinline class="galaxy-loop-video">
-            <source src="146580-789534202.mp4" type="video/mp4">
-            مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-        </video>
+        <!-- قاب مرکزی 9:16 -->
+        <div class="globe-stage-wrapper">
+            <!-- ویدیوی کهکشانی پس‌زمینه -->
+            <video autoplay muted loop playsinline class="galaxy-loop-video">
+                <source src="InShot_20261023_090807149.mp4" type="video/mp4">
+                مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+            </video>
 
-        <!-- کره زمین سه‌بعدی و مشبک روی ویدیو -->
-        <div id="gis-globe-root"></div>
+            <!-- کره زمین سه‌بعدی و مشبک GIS -->
+            <div id="gis-globe-root"></div>
+        </div>
     </div>
 
-    <!-- اسکریپت کره زمین -->
+    <!-- اسکریپت‌های مدیریت زبان و کره زمین سه‌بعدی -->
+    <script>
+        // دیکشنری چندزبانه برای گام صفر
+        const translations = {
+            fa: {
+                title: "آستانه جادو | منشور اصالت پینوکیو",
+                desc: "کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید[cite: 8, 12]. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید[cite: 8, 9]. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود[cite: 8, 11, 12].",
+                btn: "پذیرش و ورود آگاهانه",
+                banner: "خوش‌آمدید به نوو-بی"
+            },
+            en: {
+                title: "Magic Threshold | Pinocchio Charter",
+                desc: "Welcome to NOVO-BAY[cite: 8, 12]. By entering, you commit to data authenticity, 5-second timer discipline, and platform rules[cite: 8, 9]. Confirm to activate your user node on the GIS map[cite: 8, 11, 12].",
+                btn: "Accept & Enter",
+                banner: "Welcome to NOVO-BAY"
+            },
+            ru: {
+                title: "Магический порог | Устав Пиноккио",
+                desc: "Добро пожаловать в NOVO-BAY[cite: 8, 12]. Подтвердите соблюдение правил и подлинность данных для активации узла на GIS[cite: 8, 9, 11, 12].",
+                btn: "Принять и войти",
+                banner: "Добро пожаловать"
+            },
+            zh: {
+                title: "魔法门槛 | 匹ノ曹宪章",
+                desc: "欢迎来到 NOVO-BAY[cite: 8, 12]。确认遵守平台规则以激活您的GIS节点[cite: 8, 9, 11, 12]。",
+                btn: "接受并进入",
+                banner: "欢迎来到 NOVO-BAY"
+            },
+            ar: {
+                title: "عتبة السحر | ميثاق الاصالة",
+                desc: "مرحباً بك في منصة NOVO-BAY[cite: 8, 12]. بالتأكيد، أنت تلتزم بقواعد الأصالة والشفافية لتفعيل عقدتك على خريطة GIS[cite: 8, 9, 11, 12].",
+                btn: "قبول والدخول",
+                banner: "مرحباً بك في نوو-بي"
+            },
+            fr: {
+                title: "Seuil Magique | Charte de Pinocchio",
+                desc: "Bienvenue sur NOVO-BAY[cite: 8, 12]. Confirmez pour activer votre nœud utilisateur sur la carte GIS[cite: 8, 9, 11, 12].",
+                btn: "Accepter & Entrer",
+                banner: "Bienvenue sur NOVO-BAY"
+            },
+            de: {
+                title: "Magische Schwelle | Pinocchio-Charta",
+                desc: "Willkommen bei NOVO-BAY[cite: 8, 12]. Bestätigen Sie die Regeln zur Aktivierung Ihres GIS-Knotens[cite: 8, 9, 11, 12].",
+                btn: "Akzeptieren & Starten",
+                banner: "Willkommen bei NOVO-BAY"
+            },
+            it: {
+                title: "Soglia Magica | Carta di Pinocchio",
+                desc: "Benvenuto su NOVO-BAY[cite: 8, 12]. Conferma per attivare il tuo nodo utente sulla mappa GIS[cite: 8, 9, 11, 12].",
+                btn: "Accetta ed Entra",
+                banner: "Benvenuto in NOVO-BAY"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const htmlRoot = document.getElementById('html-root');
+            if (lang === 'fa' || lang === 'ar') {
+                htmlRoot.setAttribute('dir', 'rtl');
+            } else {
+                htmlRoot.setAttribute('dir', 'ltr');
+            }
+            htmlRoot.setAttribute('lang', lang);
+
+            // آپدیت متن‌های مودال
+            if (translations[lang]) {
+                document.getElementById('txt-modal-title').innerText = translations[lang].title;
+                document.getElementById('txt-modal-desc').innerText = translations[lang].desc;
+                document.getElementById('txt-modal-btn').innerText = translations[lang].btn;
+                document.getElementById('txt-welcome-banner').innerText = translations[lang].banner;
+            }
+        }
+
+        function acceptCharter() {
+            const modal = document.getElementById('pinocchio-modal');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 400);
+        }
+
+        function toggleAudioGuide() {
+            alert("پخش راهنمای صوتی خوش‌آمدگویی و قوانین گام صفر...");
+        }
+    </script>
+
+    <!-- اسکریپت اصلی کره سه‌بعدی GIS (فایل C10) -->
     <script src="C10-gis-main-map.js"></script>
 </body>
 </html>
