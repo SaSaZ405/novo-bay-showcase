@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVO-BAY | Command Center - گام صفر</title>
+    <title>NOVO-BAY | Command Center - گام اول</title>
     
     <link rel="stylesheet" href="C03-styles-core.css">
     <link rel="stylesheet" href="C05-styles-ui.css">
@@ -65,7 +65,7 @@
             pointer-events: auto;
         }
 
-        /* هدر بالا با قابلیت پشتیبانی از ۸ زبان */
+        /* هدر بالا با پشتیبانی از ۸ زبان */
         .top-header-bar {
             position: absolute;
             top: 0;
@@ -126,7 +126,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* مودال منشور اصالت پینوکیو (گام صفر) */
+        /* مودال‌ها و پنل‌ها */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -183,6 +183,46 @@
             opacity: 0.9;
             transform: scale(1.02);
         }
+
+        /* استایل پنل گام اول: مارپیچ کلمات */
+        .step1-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 360px;
+            background: rgba(5, 10, 18, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 14px;
+            border-radius: 14px;
+            z-index: 20;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .golden-words-box {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 11px;
+            color: #d4af37;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .input-word {
+            width: 100%;
+            background: rgba(3, 6, 12, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #fff;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -199,10 +239,9 @@
     </div>
 
     <div class="command-viewport">
-        <!-- هدر بالای صفحه با منوی ۸ زبانه -->
+        <!-- هدر بالا با منوی ۸ زبانه -->
         <header class="top-header-bar">
             <div class="header-left">
-                <!-- انتخاب‌گر ۸ زبانه استاندارد -->
                 <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
                     <option value="fa">فارسی (FA)</option>
                     <option value="en">English (EN)</option>
@@ -228,20 +267,27 @@
 
         <!-- قاب مرکزی 9:16 -->
         <div class="globe-stage-wrapper">
-            <!-- ویدیوی کهکشانی پس‌زمینه -->
             <video autoplay muted loop playsinline class="galaxy-loop-video">
                 <source src="InShot_20261023_090807149.mp4" type="video/mp4">
                 مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
             </video>
 
-            <!-- کره زمین سه‌بعدی و مشبک GIS -->
             <div id="gis-globe-root"></div>
+
+            <!-- پنل گام اول: مارپیچ کلمات و تاس سرنوشت داخل قاب پایین -->
+            <div class="step1-panel">
+                <div class="golden-words-box">
+                    <span>💡 نوآوری</span>
+                    <span>⚡ مقیاس‌پذیری</span>
+                    <span>🌐 تاب‌آوری</span>
+                </div>
+                <input type="text" id="user-word-input" class="input-word" placeholder="کلمه روزانه خود را وارد کنید...">
+                <button onclick="checkWordSubmission()" class="btn-gold" style="width: 100%; padding: 6px; font-size: 12px;">ثبت و راستی‌آزمایی (۵ ثانیه)</button>
+            </div>
         </div>
     </div>
 
-    <!-- اسکریپت‌های مدیریت زبان و کره زمین سه‌بعدی -->
     <script>
-        // دیکشنری چندزبانه برای گام صفر
         const translations = {
             fa: {
                 title: "آستانه جادو | منشور اصالت پینوکیو",
@@ -271,7 +317,7 @@
                 title: "عتبة السحر | ميثاق الاصالة",
                 desc: "مرحباً بك في منصة NOVO-BAY[cite: 8, 12]. بالتأكيد، أنت تلتزم بقواعد الأصالة والشفافية لتفعيل عقدتك على خريطة GIS[cite: 8, 9, 11, 12].",
                 btn: "قبول والدخول",
-                banner: "مرحباً بك في نوو-بي"
+                banner: "مرحباً بك في نوو-بی"
             },
             fr: {
                 title: "Seuil Magique | Charte de Pinocchio",
@@ -302,7 +348,6 @@
             }
             htmlRoot.setAttribute('lang', lang);
 
-            // آپدیت متن‌های مودال
             if (translations[lang]) {
                 document.getElementById('txt-modal-title').innerText = translations[lang].title;
                 document.getElementById('txt-modal-desc').innerText = translations[lang].desc;
@@ -314,17 +359,24 @@
         function acceptCharter() {
             const modal = document.getElementById('pinocchio-modal');
             modal.style.opacity = '0';
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 400);
+            setTimeout(() => { modal.style.display = 'none'; }, 400);
         }
 
         function toggleAudioGuide() {
-            alert("پخش راهنمای صوتی خوش‌آمدگویی و قوانین گام صفر...");
+            alert("پخش راهنمای صوتی گام صفر و قوانین پلتفرم...");
+        }
+
+        function checkWordSubmission() {
+            const word = document.getElementById('user-word-input').value;
+            if(!word) {
+                alert("لطفاً کلمه خود را وارد کنید.");
+                return;
+            }
+            // شبیه‌سازی بررسی ۵ ثانیه‌ای سیستم
+            alert(`در حال بررسی اصالت کلمه «${word}» در پنجره ۵ ثانیه‌ای... سیستم تاییدیه مرحله اول را صادر کرد!`);
         }
     </script>
 
-    <!-- اسکریپت اصلی کره سه‌بعدی GIS (فایل C10) -->
     <script src="C10-gis-main-map.js"></script>
 </body>
 </html>
