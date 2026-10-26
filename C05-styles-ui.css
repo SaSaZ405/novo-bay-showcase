@@ -1,4 +1,6 @@
-/* C05-styles-ui.css - v2.0 - فیکس قطعی کارت‌ها در پایین صفحه */
+/* C05-styles-ui.css - v2.2
+   داشبورد مینیمال سفید یخچالی و نوار گام‌های ۵گانه از چپ به راست
+*/
 
 body, html {
     margin: 0;
@@ -21,6 +23,8 @@ body, html {
     justify-content: space-between;
     background: #aad3df;
     overflow: hidden;
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 /* هدر بالای صفحه */
@@ -81,7 +85,7 @@ body, html {
     background: #f0f9ff;
 }
 
-/* استیج نقشه */
+/* استیج نقشه GIS */
 .globe-stage-wrapper {
     position: absolute;
     top: 48px;
@@ -102,40 +106,55 @@ body, html {
     z-index: 2;
 }
 
-/* نوار افقی کارت‌های گام‌ها - فیکس‌شده دقیق بالای نوار پایین موبایل */
+/* نوار افقی کارت‌های گام‌ها (ترتیب چپ به راست: گام ۱ تا ۵) */
 .steps-container {
     position: absolute;
-    bottom: 25px !important; /* فاصله مناسب از لبه پایین */
+    bottom: 20px !important;
     left: 50%;
     transform: translateX(-50%);
     width: 96%;
     max-width: 1400px;
     display: flex;
     flex-direction: row;
-    direction: rtl;
-    gap: 8px;
-    z-index: 999; /* بالاترین لایه جهت عدم تداخل */
+    direction: ltr !important; /* چینش کارت‌ها از چپ به راست */
+    gap: 10px;
+    z-index: 999;
     overflow-x: auto;
-    padding: 4px;
+    padding: 6px;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.steps-container::-webkit-scrollbar {
+    height: 4px;
+}
+
+.steps-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
 }
 
 .step-box {
-    flex: 0 0 200px; /* کاهش عرض کارت‌ها جهت فیت شدن بهتر */
+    flex: 0 0 220px;
     background: rgba(255, 255, 255, 0.96);
     border: 1px solid #cbd5e1;
     backdrop-filter: blur(8px);
-    padding: 8px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
+    direction: rtl !important; /* متون داخل کارت‌ها راست‌چین و فارسی */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .box-title {
-    font-size: 10px;
+    font-size: 11px;
     color: #0369a1;
     font-weight: bold;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     display: flex;
     justify-content: space-between;
 }
@@ -145,22 +164,76 @@ body, html {
     background: #f8fafc;
     border: 1px solid #cbd5e1;
     color: #0f172a;
-    padding: 4px 6px;
+    padding: 5px 6px;
     border-radius: 5px;
-    font-size: 10px;
-    margin-bottom: 4px;
+    font-size: 11px;
+    margin-bottom: 6px;
     text-align: center;
     box-sizing: border-box;
+}
+
+.input-custom:focus {
+    outline: none;
+    border-color: #0284c7;
+    background: #ffffff;
 }
 
 .btn-gold {
     background: linear-gradient(135deg, #0284c7, #0369a1);
     color: #ffffff;
     border: none;
-    padding: 5px 8px;
+    padding: 6px 10px;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
     font-size: 10px;
     width: 100%;
+    transition: 0.2s;
+}
+
+.btn-gold:hover {
+    background: linear-gradient(135deg, #0369a1, #075985);
+}
+
+/* استایل مودال‌ها */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    direction: rtl;
+}
+
+.modal-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 24px;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+    color: #0f172a;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.modal-desc {
+    color: #334155;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    text-align: justify;
 }
