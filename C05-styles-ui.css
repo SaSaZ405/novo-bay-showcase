@@ -1,4 +1,4 @@
-/* C05-styles-ui.css - داشبورد فرماندهی نوو-بی با چیدمان چپ به راست گام‌ها و فیکس صفحه */
+/* C05-styles-ui.css - استایل داشبورد و کارت‌های گام‌ها */
 
 body, html {
     margin: 0;
@@ -21,6 +21,8 @@ body, html {
     justify-content: space-between;
     background: #aad3df;
     overflow: hidden;
+    opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 /* هدر بالایی */
@@ -81,7 +83,7 @@ body, html {
     background: #f0f9ff;
 }
 
-/* قاب سراسری نقشه که کل صفحه را پر می‌کند */
+/* قاب نقشه جهانی */
 .globe-stage-wrapper {
     position: absolute;
     top: 52px;
@@ -102,21 +104,21 @@ body, html {
     z-index: 2;
 }
 
-/* نوار افقی کارت‌های گام‌ها در پایین صفحه (ترتیب از چپ به راست: گام ۱ تا ۵) */
+/* نوار افقی کارت‌های گام‌ها در پایین صفحه (نمایش قطعی) */
 .steps-container {
     position: absolute;
-    bottom: 16px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 98%;
     max-width: 1400px;
     display: flex;
     flex-direction: row;
-    direction: rtl; /* متن داخل کارت‌ها فارسی */
+    direction: rtl; /* متن داخل کارت‌ها به فارسی */
     gap: 12px;
-    z-index: 30; /* بالاتر از نقشه برای دسترسی کامل */
+    z-index: 99; /* قرارگیری بالای نقشه */
     overflow-x: auto;
-    padding: 6px 4px;
+    padding: 8px 6px;
     box-sizing: border-box;
 }
 
@@ -163,47 +165,4 @@ body, html {
     cursor: pointer;
     font-size: 11px;
     width: 100%;
-}
-
-/* مودال‌ها */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(6px);
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    direction: rtl;
-}
-
-.modal-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    padding: 28px;
-    border-radius: 16px;
-    width: 100%;
-    max-width: 460px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
-
-.modal-title {
-    color: #0f172a;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-
-.modal-desc {
-    color: #334155;
-    font-size: 13px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    text-align: justify;
 }
