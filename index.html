@@ -1,18 +1,18 @@
-<!DOCTYPE<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVO-BAY | Global Command Center</title>
     
-    <!-- لینک به استایل‌های تفکیک‌شده -->
-    <link rel="stylesheet" href="C03-styles-core.css">
-    <link rel="stylesheet" href="C04-styles-gis.css">
-    <link rel="stylesheet" href="C05-styles-ui.css">
+    <!-- استایل‌های تفکیک‌شده به همراه شکستن کش مرورگر -->
+    <link rel="stylesheet" href="C03-styles-core.css?v=2.1">
+    <link rel="stylesheet" href="C04-styles-gis.css?v=2.1">
+    <link rel="stylesheet" href="C05-styles-ui.css?v=2.1">
 </head>
 <body>
 
-    <!-- داشبورد اصلی فرماندهی -->
+    <!-- مرکز فرماندهی و داشبورد اصلی -->
     <div class="command-viewport" id="mainDashboard">
         
         <!-- هدر بالایی -->
@@ -46,7 +46,7 @@
             <div id="gis-globe-root"></div>
         </div>
 
-        <!-- نوار افقی کارت‌های گام‌های ۵گانه در پایین صفحه -->
+        <!-- نوار افقی کارت‌های ۵ گام (ترتیب دقیق و محکم در کادر) -->
         <div class="steps-container">
             <div class="step-box">
                 <div class="box-title">
@@ -63,7 +63,7 @@
                     <span>[روز ۱-۸]</span>
                 </div>
                 <input type="text" id="user-title-input" class="input-custom" placeholder="عنوان نوآورانه...">
-                <button onclick="checkTitleSubmission()" class="btn-gold">پرداخت ۴$ و تست پینوکیو</button>
+                <button onclick="checkTitleSubmission()" class="btn-gold">پرداخت ۴$ و آزمون</button>
             </div>
 
             <div class="step-box">
@@ -72,7 +72,7 @@
                     <span>[روز ۸-۹]</span>
                 </div>
                 <input type="text" id="user-proposal-input" class="input-custom" placeholder="لینک بیزینس پلن...">
-                <button onclick="checkProposalSubmission()" class="btn-gold">ارسال پروپوزال به کمیته</button>
+                <button onclick="checkProposalSubmission()" class="btn-gold">ارسال به کمیته ارزیابی</button>
             </div>
 
             <div class="step-box">
@@ -80,7 +80,7 @@
                     <span>گام ۴: استیج وبینار زنده</span>
                     <span>[روز ۱۰]</span>
                 </div>
-                <button onclick="joinStageWebinar()" class="btn-gold" style="margin-top: 24px;">خرید بلیت و ورود به وبینار</button>
+                <button onclick="joinStageWebinar()" class="btn-gold" style="margin-top: 20px;">خرید بلیت و ورود به وبینار</button>
             </div>
 
             <div class="step-box">
@@ -88,134 +88,13 @@
                     <span>گام ۵: معبد سرمایه‌گذاری</span>
                     <span>[پس از روز ۱۰]</span>
                 </div>
-                <button onclick="finalizeTemple()" class="btn-gold" style="margin-top: 24px;">نهایی‌سازی قرارداد و جوایز</button>
+                <button onclick="finalizeTemple()" class="btn-gold" style="margin-top: 20px;">نهایی‌سازی قرارداد و جوایز</button>
             </div>
         </div>
     </div>
 
-    <!-- فراخوانی اسکریپت‌های تفکیک‌شده -->
+    <!-- اسکریپت‌های تفکیک‌شده -->
     <script src="C02-config.js"></script>
-    <script src="C06-landing-gateway.js"></script>
-    <script src="C10-gis-main-map.js"></script>
-    <script src="C12-challenge-group1-word-spiral.js"></script>
-    <script src="C13-challenge-group2-title-hall.js"></script>
-    <script src="C14-challenge-group3-proposal.js"></script>
-    <script src="C15-micro-equity-engine.js"></script>
-</body>
-</html> html>
-<html lang="fa" dir="rtl" id="html-root">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVO-BAY | Command Center</title>
-    
-    <!-- لینک به استایل‌های تفکیک‌شده -->
-    <link rel="stylesheet" href="C03-styles-core.css">
-    <link rel="stylesheet" href="C05-styles-ui.css">
-</head>
-<body>
-
-    <!-- مودال گام صفر: آستانه جادو -->
-    <div id="pinocchio-modal" class="modal-overlay">
-        <div class="modal-card">
-            <h2 id="txt-modal-title" class="modal-title">آستانه جادو | منشور اصالت پینوکیو</h2>
-            <p id="txt-modal-desc" class="modal-desc">
-                کاربر گرامی، به پلتفرم هوشمند NOVO-BAY خوش آمدید. با ورود به این چرخه، متعهد به رعایت اصالت داده‌ها، انضباط زمانی تایمرهای ۵ ثانیه‌ای و قوانین شفاف پلتفرم می‌شوید. لطفاً زبان خود را انتخاب کرده و منشور را تأیید کنید تا نود کاربری شما روی نقشه GIS فعال شود.
-            </p>
-            <button onclick="acceptCharter()" id="txt-modal-btn" class="btn-gold">پذیرش و ورود آگاهانه</button>
-        </div>
-    </div>
-
-    <div class="command-viewport">
-        <!-- هدر بالا -->
-        <header class="top-header-bar">
-            <div class="header-left">
-                <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
-                    <option value="fa">فارسی (FA)</option>
-                    <option value="en">English (EN)</option>
-                    <option value="ru">Русский (RU)</option>
-                    <option value="zh">中文 (ZH)</option>
-                    <option value="ar">العربية (AR)</option>
-                    <option value="fr">Français (FR)</option>
-                    <option value="de">Deutsch (DE)</option>
-                    <option value="it">Italiano (IT)</option>
-                </select>
-            </div>
-
-            <div class="header-center">
-                <button class="btn-clean" onclick="toggleAudioGuide()" title="راهنمای صوتی">🔊</button>
-                <span id="txt-welcome-banner" style="font-size: 11px; color: #d4af37;">خوش‌آمدید به نوو-بی</span>
-            </div>
-
-            <div class="header-right">
-                <div class="rotating-nb-logo">NB</div>
-                <button class="btn-clean" title="منو">☰</button>
-            </div>
-        </header>
-
-        <!-- قاب مرکزی 9:16 -->
-        <div class="globe-stage-wrapper">
-            <video autoplay muted loop playsinline class="galaxy-loop-video">
-                <source src="InShot_20261023_090807149.mp4" type="video/mp4">
-                مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-            </video>
-
-            <div id="gis-globe-root"></div>
-
-            <!-- پنل اسکرولی تمام گام‌ها -->
-            <div class="steps-container">
-                <!-- گام اول -->
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۱: مارپیچ کلمات و تاس ($2)</span>
-                        <span>[روز ۱ تا ۷]</span>
-                    </div>
-                    <input type="text" id="user-word-input" class="input-custom" placeholder="کلمه روزانه...">
-                    <button onclick="checkWordSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 10px;">ثبت و بررسی (۵ ثانیه)</button>
-                </div>
-
-                <!-- گام دوم -->
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۲: تالار عناوین و نوآوری ($4)</span>
-                        <span>[روز ۱ تا ۸]</span>
-                    </div>
-                    <input type="text" id="user-title-input" class="input-custom" placeholder="عنوان نوآورانه...">
-                    <button onclick="checkTitleSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 10px;">پرداخت ۴$ و تست پینوکیو</button>
-                </div>
-
-                <!-- گام سوم -->
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۳: پروپوزال و بیزینس پلن</span>
-                        <span>[روز ۸ و ۹]</span>
-                    </div>
-                    <input type="text" id="user-proposal-input" class="input-custom" placeholder="لینک یا متن موجز بیزینس پلن...">
-                    <button onclick="checkProposalSubmission()" class="btn-gold" style="width: 100%; padding: 5px; font-size: 10px;">ارسال پروپوزال به کمیته ارزیابی</button>
-                </div>
-
-                <!-- گام چهارم -->
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۴: استیج وبینار و دفاع زنده</span>
-                        <span>[روز ۱۰]</span>
-                    </div>
-                    <button onclick="joinStageWebinar()" class="btn-gold" style="width: 100%; padding: 6px; font-size: 10px;">خرید بلیت و ورود به وبینار ۱۰۰ نفره</button>
-                </div>
-
-                <!-- گام پنجم -->
-                <div class="step-box" style="border-color: #ffd700;">
-                    <div class="box-title" style="color: #ffd700;">
-                        <span>گام ۵: معبد سرمایه‌گذاری و پاداش‌ها</span>
-                        <span>[پس از روز ۱۰]</span>
-                    </div>
-                    <button onclick="finalizeTemple()" class="btn-gold" style="width: 100%; padding: 6px; font-size: 10px;">نهایی‌سازی قرارداد و دریافت جوایز کلان</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- فراخوانی اسکریپت‌های تفکیک‌شده -->
     <script src="C06-landing-gateway.js"></script>
     <script src="C10-gis-main-map.js"></script>
     <script src="C12-challenge-group1-words.js"></script>
