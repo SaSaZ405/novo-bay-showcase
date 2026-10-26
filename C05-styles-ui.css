@@ -1,4 +1,4 @@
-/* C05-styles-ui.css - نسخه فشرده و مینی‌مال کارت‌های گام‌ها (یک‌سوم سایز قبل) */
+/* C05-styles-ui.css - نسخه مینی‌مال فوق‌العاده کوچک (۶ باکس در پایین صفحه) */
 
 body, html {
     margin: 0;
@@ -31,12 +31,12 @@ body, html {
     top: 0;
     left: 0;
     right: 0;
-    height: 44px;
+    height: 40px;
     z-index: 50;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 12px;
+    padding: 0 10px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid #cbd5e1;
@@ -46,16 +46,16 @@ body, html {
 .header-left, .header-right, .header-center {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .lang-select {
     background: #f1f5f9;
     border: 1px solid #cbd5e1;
     color: #0f172a;
-    padding: 3px 6px;
-    border-radius: 5px;
-    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 9px;
     cursor: pointer;
     font-weight: 600;
 }
@@ -64,20 +64,20 @@ body, html {
     background: transparent;
     border: none;
     color: #475569;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
     padding: 2px;
 }
 
 .rotating-nb-logo {
-    width: 26px;
-    height: 26px;
+    width: 24px;
+    height: 24px;
     border: 2px solid #0284c7;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 9px;
+    font-size: 8px;
     color: #0284c7;
     font-weight: bold;
     background: #f0f9ff;
@@ -86,10 +86,10 @@ body, html {
 /* استیج نقشه GIS */
 .globe-stage-wrapper {
     position: absolute;
-    top: 44px;
+    top: 40px;
     left: 0;
     width: 100vw;
-    height: calc(100vh - 44px);
+    height: calc(100vh - 40px);
     background-color: #aad3df;
     overflow: hidden;
     z-index: 1;
@@ -104,45 +104,45 @@ body, html {
     z-index: 2;
 }
 
-/* نوار افقی کارت‌های گام‌ها (کاملاً فشرده، کوچک‌شده و مرکز‌شده در پایین صفحه) */
+/* نوار افقی ۶ باکس فوق‌العاده کوچک و مرکز‌شده در پایین صفحه */
 .steps-container {
     position: fixed;
-    bottom: 12px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     width: 98%;
-    max-width: 1300px;
+    max-width: 1350px;
     display: flex;
     flex-direction: row;
-    direction: ltr !important; /* چینش از چپ به راست: گام ۱ تا ۵ */
-    gap: 6px;
+    direction: ltr !important; /* چینش از چپ به راست: گام ۱ تا ۶ */
+    gap: 5px;
     z-index: 9999;
     overflow-x: auto;
-    padding: 4px;
+    padding: 3px;
     box-sizing: border-box;
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
 }
 
 .steps-container::-webkit-scrollbar {
-    height: 4px;
+    height: 3px;
 }
 
 .steps-container::-webkit-scrollbar-thumb {
     background: #cbd5e1;
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
 .step-box {
-    flex: 0 0 135px; /* کوچک‌شده به اندازه حدود یک‌سوم مدل قبلی */
-    min-width: 125px;
-    max-width: 145px;
+    flex: 0 0 102px; /* ابعاد بسیار کوچک (یک‌سوم سایز قبلی) */
+    min-width: 92px;
+    max-width: 112px;
     background: rgba(255, 255, 255, 0.96);
     border: 1px solid #cbd5e1;
     backdrop-filter: blur(8px);
-    padding: 6px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 5px;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
     direction: rtl !important; /* متن داخل کارت‌ها راست‌چین و فارسی */
     display: flex;
@@ -151,13 +151,13 @@ body, html {
 }
 
 .box-title {
-    font-size: 9px;
+    font-size: 8px;
     color: #0369a1;
     font-weight: bold;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     display: flex;
     justify-content: space-between;
-    gap: 2px;
+    gap: 1px;
 }
 
 .input-custom {
@@ -165,10 +165,10 @@ body, html {
     background: #f8fafc;
     border: 1px solid #cbd5e1;
     color: #0f172a;
-    padding: 3px 4px;
-    border-radius: 4px;
-    font-size: 9px;
-    margin-bottom: 4px;
+    padding: 2px 3px;
+    border-radius: 3px;
+    font-size: 8px;
+    margin-bottom: 3px;
     text-align: center;
     box-sizing: border-box;
 }
@@ -183,11 +183,11 @@ body, html {
     background: linear-gradient(135deg, #0284c7, #0369a1);
     color: #ffffff;
     border: none;
-    padding: 4px 6px;
+    padding: 3px 4px;
     font-weight: bold;
-    border-radius: 4px;
+    border-radius: 3px;
     cursor: pointer;
-    font-size: 8.5px;
+    font-size: 7.5px;
     width: 100%;
     transition: 0.2s;
     text-align: center;
