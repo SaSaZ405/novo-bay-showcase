@@ -1,33 +1,41 @@
-#map {
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
+/* C04-styles-gis.css - v5.0 - استایل قفل کامل بوم نقشه */
+
+#gis-globe-root {
+    width: 100%;
+    height: 100%;
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
-    background-color: #f3f4f6;
+    z-index: 2;
+    touch-action: none !important; /* جلوگیری کامل از هرگونه حرکت لمسی در موبایل */
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
 }
 
-/* فیلتر ملایم و فیت شدن استاندارد نقشه */
-.leaflet-tile-pane {
-    filter: grayscale(70%) contrast(95%) brightness(105%);
+#live-map-canvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none !important;
 }
 
-/* چراغ‌های زنده وضعیت روی نقشه */
-.live-beacon {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    animation: pulse-beacon 2s infinite;
+.leaflet-container {
+    background: #aad3df !important;
+    touch-action: none !important;
 }
-.beacon-subscriber { background-color: #3b82f6; } /* اشتراک‌دار */
-.beacon-active { background-color: #10b981; }     /* در حال چالش */
-.beacon-shareholder { background-color: #f59e0b; }/* سهام‌دار */
-.beacon-idle { background-color: #9ca3af; }       /* آنلاین بدون فعالیت */
 
-@keyframes pulse-beacon {
-    0% { transform: scale(0.95); opacity: 0.8; }
-    50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 15px #10b981; }
-    100% { transform: scale(0.95); opacity: 0.8; }
+/* استایل دکمه‌های زوم */
+.leaflet-control-zoom {
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    border-radius: 8px !important;
+    overflow: hidden;
+    touch-action: auto !important; /* دکمه‌های زوم همچنان قابل لمس و کلیک باشند */
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+    background: #ffffff !important;
+    color: #0284c7 !important;
+    font-weight: bold !important;
+    border: none !important;
 }
