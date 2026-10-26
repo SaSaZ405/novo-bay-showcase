@@ -1,4 +1,4 @@
-/* C04-styles-gis.css - v5.0 - استایل قفل کامل بوم نقشه */
+/* C04-styles-gis.css - استایل بوم نقشه */
 
 #gis-globe-root {
     width: 100%;
@@ -7,21 +7,16 @@
     top: 0;
     left: 0;
     z-index: 2;
-    touch-action: none !important; /* جلوگیری کامل از هرگونه حرکت لمسی در موبایل */
-    user-select: none;
-    -webkit-user-select: none;
     overflow: hidden;
 }
 
 #live-map-canvas {
     width: 100%;
     height: 100%;
-    touch-action: none !important;
 }
 
 .leaflet-container {
     background: #aad3df !important;
-    touch-action: none !important;
 }
 
 /* استایل دکمه‌های زوم */
@@ -30,7 +25,6 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
     border-radius: 8px !important;
     overflow: hidden;
-    touch-action: auto !important; /* دکمه‌های زوم همچنان قابل لمس و کلیک باشند */
 }
 
 .leaflet-control-zoom-in, .leaflet-control-zoom-out {
