@@ -1,4 +1,4 @@
-/* C10-gis-main-map.js - v3.0 - قفل قطعی و غیرفعال‌سازی کامل پنینگ */
+/* C10-gis-main-map.js - v4.0 - قفل کامل عمودی و چرخش آزاد افقی (شرق/غرب) */
 
 (function loadLeafletAndInitMap() {
     if (!document.getElementById('leaflet-css')) {
@@ -25,37 +25,35 @@ function initLiveWorldMap() {
 
     mapContainer.innerHTML = '<div id="live-map-canvas" style="width:100%; height:100%; position:absolute; top:0; left:0; z-index:1; background:#aad3df;"></div>';
 
-    // ایجاد نقشه با تنظیمات بسته
+    // تعیین مرز سخت عمودی (قفل کامل حرکت شمال-جنوب)
+    const strictVerticalBounds = L.latLngBounds(
+        L.latLng(-55, -200), // جنوب
+        L.latLng(75, 200)    // شمال
+    );
+
+    // ساخت نقشه با قفل عمودی و آزادی حرکت افقی
     const map = L.map('live-map-canvas', {
-        center: [25, 12],
+        center: [20, 10],
         zoom: 2,
-        minZoom: 1,
-        maxZoom: 8,
+        minZoom: 2,
+        maxZoom: 7,
         zoomControl: true,
-        dragging: false,
-        touchZoom: false,
-        scrollWheelZoom: true,
-        doubleClickZoom: true,
-        boxZoom: false,
-        keyboard: false,
-        tap: false,
+        maxBounds: strictVerticalBounds,
+        maxBoundsViscosity: 1.0, // چسبندگی ۱۰۰٪ برای عدم حرکت به بالا و پایین
+        worldCopyJump: true,    // تکرار نرم نقشه در جهت افقی (شرق/غرب)
+        bounceAtZoomLimits: false,
         attributionControl: false
     });
 
-    // غیرفعال‌سازی دستوری تمام لایه‌های حرکتی (برای موبایل و دسکتاپ)
-    if (map.dragging) map.dragging.disable();
-    if (map.touchZoom) map.touchZoom.disable();
-    if (map.doubleClickZoom) map.doubleClickZoom.disable();
-    if (map.scrollWheelZoom) map.scrollWheelZoom.enable(); // فقط زوم با اسکرول یا دکمه‌ها فعال بماند
-
-    // لایه زنده نقشه با رزولوشن بالا
+    // لایه زنده OpenStreetMap با تکرار افقی کامل
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         subdomains: ['a', 'b', 'c'],
+        noWrap: false, // اجازه چرخش افقی بی‌نهایت
         detectRetina: true
     }).addTo(map);
 
-    // نودهای فعال شرکت‌کنندگان روی نقشه
+    // نودهای زنده جهانی شرکت‌کنندگان
     const liveParticipants = [
         { lat: 35.6892, lng: 51.3890, city: "تهران" },
         { lat: 51.5074, lng: -0.1278, city: "لندن" },
@@ -79,6 +77,7 @@ function initLiveWorldMap() {
         marker.bindPopup(`<b>نود فعال:</b> ${p.city}`);
     });
 
+    // تنظیم مجدد سایز نقشه جهت پر کردن کامل صفحه
     setTimeout(() => {
         map.invalidateSize();
     }, 300);
