@@ -291,3 +291,77 @@ body, html {
 .rolling-anim {
     animation: diceSpin3D 0.7s ease-in-out infinite;
 }
+
+/* استایل باکس شناور گوشه پایین سمت چپ */
+.floating-left-box {
+    position: fixed;
+    left: 12px;
+    bottom: 85px;
+    z-index: 9999;
+    width: 105px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #cbd5e1;
+    backdrop-filter: blur(8px);
+    padding: 5px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    direction: rtl;
+    box-sizing: border-box;
+}
+
+/* خوشه شناور سمت راست (تاس و باکس بالای آن) */
+.right-floating-cluster {
+    position: fixed;
+    right: 12px;
+    bottom: 85px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#floating-polyhedral-dice {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+    margin-top: 4px;
+}
+
+#floating-polyhedral-dice:hover {
+    transform: scale(1.1);
+}
+
+.dice-icon-wrapper {
+    width: 52px;
+    height: 52px;
+}
+
+.d20-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.dice-label-badge {
+    background: rgba(6, 78, 59, 0.9);
+    border: 1px solid #fbbf24;
+    color: #fef3c7;
+    font-size: 8px;
+    font-weight: bold;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-top: -2px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+@keyframes diceSpin3D {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.25); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.rolling-anim {
+    animation: diceSpin3D 0.7s ease-in-out infinite;
+}
