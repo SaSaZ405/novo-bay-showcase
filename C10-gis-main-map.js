@@ -1,4 +1,4 @@
-/* C10-gis-main-map.js - نقشه زنده قفل‌شده (فقط قابلیت زوم/بزرگ‌نمایی) */
+/* C10-gis-main-map.js - v3.0 - قفل قطعی و غیرفعال‌سازی کامل پنینگ */
 
 (function loadLeafletAndInitMap() {
     if (!document.getElementById('leaflet-css')) {
@@ -25,23 +25,30 @@ function initLiveWorldMap() {
 
     mapContainer.innerHTML = '<div id="live-map-canvas" style="width:100%; height:100%; position:absolute; top:0; left:0; z-index:1; background:#aad3df;"></div>';
 
-    // تنظیم نقشه ثابت و مرکزگذاری‌شده (بدون جابه‌جایی دستی، فقط زوم)
+    // ایجاد نقشه با تنظیمات بسته
     const map = L.map('live-map-canvas', {
         center: [25, 12],
         zoom: 2,
         minZoom: 1,
         maxZoom: 8,
-        zoomControl: true,       // امکان بزرگ‌نمایی/کوچک‌نمایی با دکمه‌ها
-        dragging: false,         // قفل کردن جابه‌جایی نقشه (پنینگ غیرفعال)
-        doubleClickZoom: true,   // زوم با دو بار کلیک
-        scrollWheelZoom: true,  // زوم با اسکرول ماوس
+        zoomControl: true,
+        dragging: false,
+        touchZoom: false,
+        scrollWheelZoom: true,
+        doubleClickZoom: true,
         boxZoom: false,
         keyboard: false,
-        bounceAtZoomLimits: false,
+        tap: false,
         attributionControl: false
     });
 
-    // لایه زنده با رزولوشن بالا
+    // غیرفعال‌سازی دستوری تمام لایه‌های حرکتی (برای موبایل و دسکتاپ)
+    if (map.dragging) map.dragging.disable();
+    if (map.touchZoom) map.touchZoom.disable();
+    if (map.doubleClickZoom) map.doubleClickZoom.disable();
+    if (map.scrollWheelZoom) map.scrollWheelZoom.enable(); // فقط زوم با اسکرول یا دکمه‌ها فعال بماند
+
+    // لایه زنده نقشه با رزولوشن بالا
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         subdomains: ['a', 'b', 'c'],
