@@ -1,17 +1,5 @@
-/* C05-styles-ui.css - تم داشبورد مدرن، افقی و فرماندهی نوو-بی */
+/* C05-styles-ui.css - UI سفید یخچالی و داشبورد افقی نوو-بی */
 
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #030712;
-    font-family: system-ui, -apple-system, sans-serif;
-    direction: rtl;
-}
-
-/* بوم اصلی داشبورد به صورت تمام‌صفحه و افقی */
 .command-viewport {
     position: relative;
     width: 100vw;
@@ -19,136 +7,121 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: radial-gradient(circle at center, #0f172a 0%, #030712 100%);
+    background: #f4f6f9;
     overflow: hidden;
 }
 
-/* حذف قاب عمودی قبلی و تبدیل به استیج سراسری نقشه */
-.globe-stage-wrapper {
-    position: absolute;
-    top: 50px; /* فضای هدر بالا */
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 50px);
-    background: #000;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.galaxy-loop-video {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.4;
-    z-index: 1;
-}
-
-#gis-globe-root {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-}
-
-/* هدر بالای صفحه - افقی و کامل سراسری */
+/* هدر بالایی با تم روشن و شیک */
 .top-header-bar {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 50px;
+    height: 52px;
     z-index: 50;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 24px;
-    background: rgba(3, 7, 18, 0.9);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 0 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #cbd5e1;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }
 
 .header-left, .header-right, .header-center {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
 }
 
 .lang-select {
-    background: rgba(15, 23, 42, 0.9);
-    border: 1px solid #d4af37;
-    color: #d4af37;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 13px;
+    background: #ffffff;
+    border: 1px solid #94a3b8;
+    color: #0f172a;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
     cursor: pointer;
+    font-weight: 600;
 }
 
 .btn-clean {
     background: transparent;
     border: none;
-    color: #d4af37;
+    color: #334155;
     font-size: 16px;
     cursor: pointer;
-    padding: 6px;
+    padding: 4px;
 }
 
 .rotating-nb-logo {
     width: 34px;
     height: 34px;
-    border: 1px solid #d4af37;
+    border: 2px solid #0284c7;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-    color: #d4af37;
+    font-size: 11px;
+    color: #0284c7;
     font-weight: bold;
-    animation: spinSlow 20s linear infinite;
+    background: #f0f9ff;
 }
 
-@keyframes spinSlow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+/* بوم نقشه ۲بعدی تخت جهانی */
+.globe-stage-wrapper {
+    position: absolute;
+    top: 52px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 52px);
+    background: #f8fafc;
+    overflow: hidden;
 }
 
-/* پنل پایین صفحه برای کارت‌های گام‌ها (به صورت نوار افقی و ماتریسی) */
+#map-2d-root {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* نوار افقی کارت‌های گام‌ها در پایین صفحه (تم روشن) */
 .steps-container {
     position: absolute;
-    bottom: 20px;
+    bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
     width: 96%;
-    max-width: 1200px;
+    max-width: 1300px;
     display: flex;
     gap: 12px;
     z-index: 20;
     overflow-x: auto;
-    padding: 10px;
+    padding: 8px 4px;
 }
 
 .step-box {
     flex: 1;
-    min-width: 200px;
-    background: rgba(10, 15, 30, 0.85);
-    border: 1px solid rgba(212, 175, 55, 0.4);
+    min-width: 220px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #cbd5e1;
     backdrop-filter: blur(12px);
-    padding: 14px;
+    padding: 12px;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
 }
 
 .step-box:hover {
-    border-color: #ffd700;
-    transform: translateY(-3px);
+    border-color: #0284c7;
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.15);
+    transform: translateY(-2px);
 }
 
 .box-title {
     font-size: 12px;
-    color: #d4af37;
+    color: #0369a1;
     font-weight: bold;
     margin-bottom: 8px;
     display: flex;
@@ -157,44 +130,49 @@ body, html {
 
 .input-custom {
     width: 100%;
-    background: rgba(3, 7, 18, 0.9);
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    color: #fff;
-    padding: 8px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    padding: 7px;
     border-radius: 6px;
     font-size: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     text-align: center;
     box-sizing: border-box;
 }
 
+.input-custom:focus {
+    outline: none;
+    border-color: #0284c7;
+    background: #ffffff;
+}
+
 .btn-gold {
-    background: linear-gradient(135deg, #d4af37, #aa7c11);
-    color: #030712;
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+    color: #ffffff;
     border: none;
     padding: 8px 12px;
     font-weight: bold;
     border-radius: 6px;
     cursor: pointer;
     font-size: 11px;
-    transition: 0.3s;
+    transition: 0.2s;
     width: 100%;
 }
 
 .btn-gold:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
+    background: linear-gradient(135deg, #0369a1, #075985);
 }
 
-/* مودال‌ها */
+/* مودال منشور پینوکیو به سبک روشن */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(3, 7, 18, 0.85);
-    backdrop-filter: blur(10px);
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -203,25 +181,25 @@ body, html {
 }
 
 .modal-card {
-    background: rgba(10, 15, 30, 0.95);
-    border: 1px solid #d4af37;
-    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 28px;
     border-radius: 16px;
     width: 100%;
-    max-width: 480px;
+    max-width: 460px;
     text-align: center;
-    box-shadow: 0 0 40px rgba(212, 175, 55, 0.25);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .modal-title {
-    color: #d4af37;
-    font-size: 20px;
+    color: #0f172a;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 12px;
 }
 
 .modal-desc {
-    color: #cbd5e1;
+    color: #334155;
     font-size: 13px;
     line-height: 1.6;
     margin-bottom: 20px;
