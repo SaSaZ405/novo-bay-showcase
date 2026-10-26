@@ -1,4 +1,108 @@
-<!DOCTYPE html>
+<!DOCTYPE<!DOCTYPE html>
+<html lang="fa" dir="rtl" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVO-BAY | Global Command Center</title>
+    
+    <!-- لینک به استایل‌های تفکیک‌شده -->
+    <link rel="stylesheet" href="C03-styles-core.css">
+    <link rel="stylesheet" href="C04-styles-gis.css">
+    <link rel="stylesheet" href="C05-styles-ui.css">
+</head>
+<body>
+
+    <!-- داشبورد اصلی فرماندهی -->
+    <div class="command-viewport" id="mainDashboard">
+        
+        <!-- هدر بالایی -->
+        <header class="top-header-bar">
+            <div class="header-left">
+                <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
+                    <option value="fa">فارسی (FA)</option>
+                    <option value="en">English (EN)</option>
+                    <option value="ru">Русский (RU)</option>
+                    <option value="zh">中文 (ZH)</option>
+                    <option value="ar">العربية (AR)</option>
+                    <option value="fr">Français (FR)</option>
+                    <option value="de">Deutsch (DE)</option>
+                    <option value="it">Italiano (IT)</option>
+                </select>
+            </div>
+
+            <div class="header-center">
+                <button class="btn-clean" onclick="toggleAudioGuide()" title="صدا">🔊</button>
+                <span id="txt-welcome-banner" style="font-size: 12px; color: #0284c7; font-weight: bold;">خوش‌آمدید به نوو-بی</span>
+            </div>
+
+            <div class="header-right">
+                <div class="rotating-nb-logo">NB</div>
+                <button class="btn-clean" title="منو">☰</button>
+            </div>
+        </header>
+
+        <!-- استیج نقشه زنده جهانی -->
+        <div class="globe-stage-wrapper">
+            <div id="gis-globe-root"></div>
+        </div>
+
+        <!-- نوار افقی کارت‌های گام‌های ۵گانه در پایین صفحه -->
+        <div class="steps-container">
+            <div class="step-box">
+                <div class="box-title">
+                    <span>گام ۱: مارپیچ کلمات ($2)</span>
+                    <span>[روز ۱-۷]</span>
+                </div>
+                <input type="text" id="user-word-input" class="input-custom" placeholder="کلمه روزانه...">
+                <button onclick="checkWordSubmission()" class="btn-gold">ثبت و بررسی (۵ ثانیه)</button>
+            </div>
+
+            <div class="step-box">
+                <div class="box-title">
+                    <span>گام ۲: تالار عناوین ($4)</span>
+                    <span>[روز ۱-۸]</span>
+                </div>
+                <input type="text" id="user-title-input" class="input-custom" placeholder="عنوان نوآورانه...">
+                <button onclick="checkTitleSubmission()" class="btn-gold">پرداخت ۴$ و تست پینوکیو</button>
+            </div>
+
+            <div class="step-box">
+                <div class="box-title">
+                    <span>گام ۳: پروپوزال و بیزینس پلن</span>
+                    <span>[روز ۸-۹]</span>
+                </div>
+                <input type="text" id="user-proposal-input" class="input-custom" placeholder="لینک بیزینس پلن...">
+                <button onclick="checkProposalSubmission()" class="btn-gold">ارسال پروپوزال به کمیته</button>
+            </div>
+
+            <div class="step-box">
+                <div class="box-title">
+                    <span>گام ۴: استیج وبینار زنده</span>
+                    <span>[روز ۱۰]</span>
+                </div>
+                <button onclick="joinStageWebinar()" class="btn-gold" style="margin-top: 24px;">خرید بلیت و ورود به وبینار</button>
+            </div>
+
+            <div class="step-box">
+                <div class="box-title">
+                    <span>گام ۵: معبد سرمایه‌گذاری</span>
+                    <span>[پس از روز ۱۰]</span>
+                </div>
+                <button onclick="finalizeTemple()" class="btn-gold" style="margin-top: 24px;">نهایی‌سازی قرارداد و جوایز</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- فراخوانی اسکریپت‌های تفکیک‌شده -->
+    <script src="C02-config.js"></script>
+    <script src="C06-landing-gateway.js"></script>
+    <script src="C10-gis-main-map.js"></script>
+    <script src="C12-challenge-group1-word-spiral.js"></script>
+    <script src="C13-challenge-group2-title-hall.js"></script>
+    <script src="C14-challenge-group3-proposal.js"></script>
+    <script src="C15-micro-equity-engine.js"></script>
+</body>
+</html> html>
 <html lang="fa" dir="rtl" id="html-root">
 <head>
     <meta charset="UTF-8">
