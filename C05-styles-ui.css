@@ -1,18 +1,123 @@
-/* تنظیم دقیق نوار افقی کارت‌های گام‌ها در پایین صفحه بدون خروج از کادر */
+/* C05-styles-ui.css - داشبورد افقی مینیمال نوو-بی با نقشه قفل‌شده و چیدمان چپ به راست */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #aad3df; /* همرنگ دقیق رنگ اقیانوس نقشه جهت یکدست شدن کامل */
+    font-family: system-ui, -apple-system, sans-serif;
+    direction: ltr; /* جهت کلی صفحه برای چیدمان چپ به راست گام‌ها */
+    color: #1e293b;
+}
+
+.command-viewport {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #aad3df;
+    overflow: hidden;
+}
+
+/* هدر بالایی */
+.top-header-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #cbd5e1;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-left, .header-right, .header-center {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.lang-select {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-clean {
+    background: transparent;
+    border: none;
+    color: #475569;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.rotating-nb-logo {
+    width: 34px;
+    height: 34px;
+    border: 2px solid #0284c7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #0284c7;
+    font-weight: bold;
+    background: #f0f9ff;
+}
+
+/* قاب سراسری و قفل‌شده نقشه */
+.globe-stage-wrapper {
+    position: absolute;
+    top: 52px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 52px);
+    background-color: #aad3df;
+    overflow: hidden;
+    z-index: 1;
+}
+
+#gis-globe-root {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+/* نوار افقی کارت‌های گام‌ها در پایین صفحه (از چپ به راست LTR) */
 .steps-container {
     position: absolute;
-    bottom: 10px;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
     width: 98%;
     max-width: 1400px;
     display: flex;
-    gap: 10px;
+    flex-direction: row; /* ترتیب چپ به راست */
+    direction: rtl; /* متن داخل کارت‌ها فارسی ماندگار شود */
+    gap: 12px;
     z-index: 20;
     overflow-x: auto;
     padding: 6px 4px;
     box-sizing: border-box;
-    /* سفارشی‌سازی اسکرول‌بار برای زیبایی بیشتر */
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
 }
@@ -27,20 +132,20 @@
 }
 
 .step-box {
-    flex: 0 0 240px; /* اندازه‌گیری ثابت و منظم کارت‌ها بدون بیرون‌زدگی */
+    flex: 0 0 240px;
     background: rgba(255, 255, 255, 0.96);
     border: 1px solid #cbd5e1;
     backdrop-filter: blur(8px);
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
 .step-box:hover {
     border-color: #0284c7;
-    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.12);
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.15);
     transform: translateY(-2px);
 }
 
@@ -83,4 +188,47 @@
     font-size: 11px;
     transition: 0.2s;
     width: 100%;
+}
+
+/* مودال‌ها */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    direction: rtl;
+}
+
+.modal-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 28px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 460px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.modal-title {
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.modal-desc {
+    color: #334155;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: justify;
 }
