@@ -1,4 +1,4 @@
-/* C10-gis-main-map.js - نقشه زنده رزولوشن بالا با قابلیت زوم */
+/* C10-gis-main-map.js - نقشه زنده قفل‌شده (فقط قابلیت زوم/بزرگ‌نمایی) */
 
 (function loadLeafletAndInitMap() {
     if (!document.getElementById('leaflet-css')) {
@@ -25,24 +25,30 @@ function initLiveWorldMap() {
 
     mapContainer.innerHTML = '<div id="live-map-canvas" style="width:100%; height:100%; position:absolute; top:0; left:0; z-index:1; background:#aad3df;"></div>';
 
-    // تنظیم کنترل زوم و محدوده حرکت
+    // تنظیم نقشه ثابت و مرکزگذاری‌شده (بدون جابه‌جایی دستی، فقط زوم)
     const map = L.map('live-map-canvas', {
-        center: [25, 10],
+        center: [25, 12],
         zoom: 2,
         minZoom: 1,
-        maxZoom: 10,
-        zoomControl: true, // فعال کردن دکمه‌های زوم برای راحتی کاربر
+        maxZoom: 8,
+        zoomControl: true,       // امکان بزرگ‌نمایی/کوچک‌نمایی با دکمه‌ها
+        dragging: false,         // قفل کردن جابه‌جایی نقشه (پنینگ غیرفعال)
+        doubleClickZoom: true,   // زوم با دو بار کلیک
+        scrollWheelZoom: true,  // زوم با اسکرول ماوس
+        boxZoom: false,
+        keyboard: false,
+        bounceAtZoomLimits: false,
         attributionControl: false
     });
 
-    // لایه زنده با رزولوشن بالا (HD Retina Vector Tiles)
+    // لایه زنده با رزولوشن بالا
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         subdomains: ['a', 'b', 'c'],
         detectRetina: true
     }).addTo(map);
 
-    // نودهای فعال روی نقشه
+    // نودهای فعال شرکت‌کنندگان روی نقشه
     const liveParticipants = [
         { lat: 35.6892, lng: 51.3890, city: "تهران" },
         { lat: 51.5074, lng: -0.1278, city: "لندن" },
