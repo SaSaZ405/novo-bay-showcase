@@ -1,109 +1,68 @@
-/* ============================================================
-   C10-gis-main-map.js | کره مشبک معلق، خطوط مداری و نقاط ریز طلایی چشمک‌زن
-   ============================================================ */
+/* C10-gis-main-map.js - نقشه‌ی ۲بعدی تخت جهانی GIS با Leaflet.js */
 
-const scriptTag = document.createElement('script');
-scriptTag.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
-document.head.appendChild(scriptTag);
-
-scriptTag.onload = () => {
-    initAdvancedGlobe();
-};
-
-function initAdvancedGlobe() {
-    const container = document.getElementById('gis-globe-root');
-    if (!container) return;
-
-    const width = container.clientWidth || 420;
-    const height = container.clientHeight || 420;
-
-    // 1. Scene & Camera
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.z = 210;
-
-    // 2. Renderer با پس‌زمینه شفاف
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.innerHTML = '';
-    container.appendChild(renderer.domElement);
-
-    const globeGroup = new THREE.Group();
-    scene.add(globeGroup);
-
-    // 3. کره اصلی تیره و شفاف (زیرین)
-    const baseGeo = new THREE.SphereGeometry(60, 32, 32);
-    const baseMat = new THREE.MeshBasicMaterial({ 
-        color: 0x020813, 
-        transparent: true, 
-        opacity: 0.6 
-    });
-    globeGroup.add(new THREE.Mesh(baseGeo, baseMat));
-
-    // 4. شبکه مداری و نصف‌النهاری معلق (کمی بزرگ‌تر برای ایجاد فاصله معلق)
-    const gridGeo = new THREE.SphereGeometry(63.5, 24, 24);
-    const gridMat = new THREE.MeshBasicMaterial({
-        color: 0x00e5ff,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.25
-    });
-    const floatingGrid = new THREE.Mesh(gridGeo, gridMat);
-    globeGroup.add(floatingGrid);
-
-    // 5. نقاط ریز و طلایی چشمک‌زن (نشان‌دهنده تراکم فعالیت کشورها روی مرزها و گره‌ها)
-    const nodesCount = 180;
-    const nodesGeometry = new THREE.BufferGeometry();
-    const nodesPositions = [];
-
-    for (let i = 0; i < nodesCount; i++) {
-        const u = Math.random();
-        const v = Math.random();
-        const theta = u * 2.0 * Math.PI;
-        const phi = Math.acos(2.0 * v - 1.0);
-        
-        const r = 63.8;
-        const x = r * Math.sin(phi) * Math.cos(theta);
-        const y = r * Math.sin(phi) * Math.sin(theta);
-        const z = r * Math.cos(phi);
-
-        nodesPositions.push(x, y, z);
+(function loadLeafletAndInitMap() {
+    // بارگذاری فایل CSS کتابخانه Leaflet
+    if (!document.getElementById('leaflet-css')) {
+        const cssLink = document.createElement('link');
+        cssLink.id = 'leaflet-css';
+        cssLink.rel = 'stylesheet';
+        cssLink.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        document.head.appendChild(cssLink);
     }
 
-    nodesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(nodesPositions, 3));
+    // بارگذاری اسکریپت Leaflet
+    if (typeof L === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        script.onload = init2DWorldMap;
+        document.head.appendChild(script);
+    } else {
+        init2DWorldMap();
+    }
+})();
 
-    const nodesMaterial = new THREE.PointsMaterial({
-        size: 1.5,
-        color: 0xffd700, // طلایی درخشان
-        transparent: true,
-        opacity: 0.9
+function init2DWorldMap() {
+    const mapContainer = document.getElementById('gis-globe-root');
+    if (!mapContainer) return;
+
+    // تغییر آی‌دی کانتینر برای نقشه ۲بعدی
+    mapContainer.innerHTML = '<div id="map-2d-root" style="width:100%; height:100%;"></div>';
+
+    // ایجاد نقشه‌ی تخت دو بعدی
+    const map = L.map('map-2d-root', {
+        center: [20, 10],
+        zoom: 2,
+        minZoom: 2,
+        maxZoom: 6,
+        zoomControl: false,
+        attributionControl: false
     });
 
-    const blinkingNodes = new THREE.Points(nodesGeometry, nodesMaterial);
-    globeGroup.add(blinkingNodes);
+    // لایه نقشه‌ی تخت جهانی تم روشن (Positron Minimal Bright)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd'
+    }).addTo(map);
 
-    // 6. Animation Loop (چرخش روان همراه با افکت چشمک‌زن زنده نقاط)
-    let clock = new THREE.Clock();
-    function animate() {
-        requestAnimationFrame(animate);
+    // افزودن نودهای فعال پلتفرم روی کشورهای جهان (نقاط زنده)
+    const activeNodes = [
+        { lat: 35.6892, lng: 51.3890, name: "تهران" },
+        { lat: 51.5074, lng: -0.1278, name: "لندن" },
+        { lat: 52.5200, lng: 13.4050, name: "برلین" },
+        { lat: 39.9042, lng: 116.4074, name: "پکن" },
+        { lat: 40.7128, lng: -74.0060, name: "نیویورک" },
+        { lat: 41.9028, lng: 12.4964, name: "رم" },
+        { lat: 55.6761, lng: 12.5683, name: "کپنهاگ" }
+    ];
 
-        globeGroup.rotation.y += 0.0025;
-
-        const elapsedTime = clock.getElapsedTime();
-        nodesMaterial.size = 1.2 + Math.sin(elapsedTime * 4) * 0.4;
-
-        renderer.render(scene, camera);
-    }
-    animate();
-
-    // Responsive Window Resize
-    window.addEventListener('resize', () => {
-        if (!container) return;
-        const w = container.clientWidth;
-        const h = container.clientHeight;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
+    activeNodes.forEach(node => {
+        L.circleMarker([node.lat, node.lng], {
+            radius: 6,
+            fillColor: '#0284c7',
+            color: '#ffffff',
+            weight: 2,
+            opacity: 1,
+            fillOpacity: 0.8
+        }).addTo(map).bindPopup(`<b>نود فعال: ${node.name}</b>`);
     });
 }
