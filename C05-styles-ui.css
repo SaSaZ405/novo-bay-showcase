@@ -1,9 +1,9 @@
-/* C05-styles-ui.css - داشبورد مینیمال با جانمایی دقیق کارت‌ها */
+/* C05-styles-ui.css - v2.0 - فیکس قطعی کارت‌ها در پایین صفحه */
 
 body, html {
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     overflow: hidden;
     background-color: #aad3df;
@@ -23,7 +23,7 @@ body, html {
     overflow: hidden;
 }
 
-/* هدر بالایی */
+/* هدر بالای صفحه */
 .top-header-bar {
     position: absolute;
     top: 0;
@@ -102,48 +102,33 @@ body, html {
     z-index: 2;
 }
 
-/* نوار افقی کارت‌های گام‌ها - مهارشده کاملاً داخل کادر */
+/* نوار افقی کارت‌های گام‌ها - فیکس‌شده دقیق بالای نوار پایین موبایل */
 .steps-container {
     position: absolute;
-    bottom: 8px;
+    bottom: 25px !important; /* فاصله مناسب از لبه پایین */
     left: 50%;
     transform: translateX(-50%);
-    width: 98%;
+    width: 96%;
     max-width: 1400px;
     display: flex;
     flex-direction: row;
     direction: rtl;
     gap: 8px;
-    z-index: 99;
+    z-index: 999; /* بالاترین لایه جهت عدم تداخل */
     overflow-x: auto;
     padding: 4px;
     box-sizing: border-box;
-    scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
-}
-
-.steps-container::-webkit-scrollbar {
-    height: 3px;
-}
-
-.steps-container::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
 }
 
 .step-box {
-    flex: 0 0 210px;
-    max-height: 105px;
+    flex: 0 0 200px; /* کاهش عرض کارت‌ها جهت فیت شدن بهتر */
     background: rgba(255, 255, 255, 0.96);
     border: 1px solid #cbd5e1;
     backdrop-filter: blur(8px);
     padding: 8px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .box-title {
