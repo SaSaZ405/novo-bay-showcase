@@ -1,4 +1,6 @@
-/* C10-gis-main-map.js - v4.0 - قفل کامل عمودی و چرخش آزاد افقی (شرق/غرب) */
+/* C10-gis-main-map.js - v5.0
+   نقشه قفل‌شده جهان در یک فریم ثابت بدون امکان کشیدن یا جابه‌جایی لمسی
+*/
 
 (function loadLeafletAndInitMap() {
     if (!document.getElementById('leaflet-css')) {
@@ -23,35 +25,58 @@ function initLiveWorldMap() {
     const mapContainer = document.getElementById('gis-globe-root');
     if (!mapContainer) return;
 
-    mapContainer.innerHTML = '<div id="live-map-canvas" style="width:100%; height:100%; position:absolute; top:0; left:0; z-index:1; background:#aad3df;"></div>';
+    // ایجاد بوم نقشه با استایل touch-action: none جهت قفل کامل لمسی
+    mapContainer.innerHTML = '<div id="live-map-canvas" style="width:100%; height:100%; position:absolute; top:0; left:0; z-index:1; background:#aad3df; touch-action: none !important;"></div>';
 
-    // تعیین مرز سخت عمودی (قفل کامل حرکت شمال-جنوب)
-    const strictVerticalBounds = L.latLngBounds(
-        L.latLng(-55, -200), // جنوب
-        L.latLng(75, 200)    // شمال
-    );
+    const mapElement = document.getElementById('live-map-canvas');
 
-    // ساخت نقشه با قفل عمودی و آزادی حرکت افقی
+    // غیرفعال کردن تمامی رویدادهای لمسی و درگ مستقیم روی عنصر HTML نقشه
+    ['touchstart', 'touchmove', 'touchend', 'pointermove', 'pointerdown', 'mousedown', 'mousemove'].forEach(eventType => {
+        mapElement.addEventListener(eventType, function (e) {
+            // اگر کاربر روی خود دکمه‌های زوم (+ و -) کلیک نکرده بود، تمام رویدادهای درگ و زوم لمسی را خنثی کن
+            if (!e.target.closest('.leaflet-control-zoom') && !e.target.closest('.leaflet-popup')) {
+                if (e.touches && e.touches.length > 1) {
+                    e.preventDefault(); // جلوگیری از زوم با دو انگشت
+                }
+            }
+        }, { passive: false });
+    });
+
+    // ساخت نقشه با فریم کاملاً ثابت
     const map = L.map('live-map-canvas', {
-        center: [20, 10],
+        center: [20, 0],
         zoom: 2,
-        minZoom: 2,
-        maxZoom: 7,
-        zoomControl: true,
-        maxBounds: strictVerticalBounds,
-        maxBoundsViscosity: 1.0, // چسبندگی ۱۰۰٪ برای عدم حرکت به بالا و پایین
-        worldCopyJump: true,    // تکرار نرم نقشه در جهت افقی (شرق/غرب)
+        minZoom: 1,
+        maxZoom: 6,
+        zoomControl: true,         // فعال بودن دکمه‌های زوم + و -
+        dragging: false,           // غیرفعال‌سازی درگ
+        touchZoom: false,          // غیرفعال‌سازی زوم لمسی با دو انگشت
+        doubleClickZoom: false,    // غیرفعال‌سازی زوم با دابل کلیک
+        scrollWheelZoom: false,   // غیرفعال‌سازی زوم با اسکرول ماوس
+        boxZoom: false,
+        keyboard: false,
+        tap: false,
         bounceAtZoomLimits: false,
         attributionControl: false
     });
 
-    // لایه زنده OpenStreetMap با تکرار افقی کامل
+    // غیرفعال‌سازی دستوری اکید تمامی کنترلرهای حرکتی Leaflet
+    if (map.dragging) map.dragging.disable();
+    if (map.touchZoom) map.touchZoom.disable();
+    if (map.doubleClickZoom) map.doubleClickZoom.disable();
+    if (map.scrollWheelZoom) map.scrollWheelZoom.disable();
+
+    // لایه زنده نقشه جهانی
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         subdomains: ['a', 'b', 'c'],
-        noWrap: false, // اجازه چرخش افقی بی‌نهایت
+        noWrap: true, // نمایش نقشه در یک فریم واحد بدون تکرار
         detectRetina: true
     }).addTo(map);
+
+    // فیت کردن دقیق فریم نقشه جهان در مرکز دید
+    const worldBounds = L.latLngBounds(L.latLng(-60, -170), L.latLng(75, 170));
+    map.fitBounds(worldBounds);
 
     // نودهای زنده جهانی شرکت‌کنندگان
     const liveParticipants = [
@@ -77,8 +102,9 @@ function initLiveWorldMap() {
         marker.bindPopup(`<b>نود فعال:</b> ${p.city}`);
     });
 
-    // تنظیم مجدد سایز نقشه جهت پر کردن کامل صفحه
+    // تنظیم مجدد سایز جهت لود کامل فریم بدون پرپک زدن
     setTimeout(() => {
         map.invalidateSize();
+        map.fitBounds(worldBounds);
     }, 300);
 }
