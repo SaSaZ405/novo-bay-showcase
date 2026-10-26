@@ -436,3 +436,53 @@ body, html {
 .rolling-anim {
     animation: diceSpin3D 0.7s ease-in-out infinite;
 }
+
+/* استایل ۳ نمودار میله‌ای افقی ظریف بدون کادر در بالا */
+.top-mini-charts-container {
+    position: fixed;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    padding: 5px 10px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 170px;
+    border: none !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.micro-chart-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    direction: ltr !important; /* چپ به راست */
+}
+
+.micro-chart-label {
+    font-size: 7.5px;
+    color: #0369a1;
+    font-weight: bold;
+    width: 35px;
+    text-align: right;
+    direction: rtl;
+}
+
+.micro-bar-track {
+    flex-grow: 1;
+    background: #e2e8f0;
+    height: 3px !important; /* بسیار ظریف و باریک */
+    border-radius: 2px;
+    overflow: hidden;
+    border: none !important; /* بدون کادر */
+}
+
+.micro-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0284c7, #10b981);
+    border-radius: 2px;
+}
