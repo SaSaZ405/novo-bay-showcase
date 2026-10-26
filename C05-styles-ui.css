@@ -1,6 +1,4 @@
-/* C05-styles-ui.css - v2.2
-   داشبورد مینیمال سفید یخچالی و نوار گام‌های ۵گانه از چپ به راست
-*/
+/* C05-styles-ui.css - نسخه کامل و نهایی (موبایل و دسکتاپ) */
 
 body, html {
     margin: 0;
@@ -106,28 +104,28 @@ body, html {
     z-index: 2;
 }
 
-/* نوار افقی کارت‌های گام‌ها (ترتیب چپ به راست: گام ۱ تا ۵) */
+/* نوار افقی کارت‌های گام‌ها (فیکس‌شده در دسکتاپ و موبایل - چپ به راست) */
 .steps-container {
-    position: absolute;
-    bottom: 20px !important;
+    position: fixed;
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
     width: 96%;
-    max-width: 1400px;
+    max-width: 1450px;
     display: flex;
     flex-direction: row;
-    direction: ltr !important; /* چینش کارت‌ها از چپ به راست */
-    gap: 10px;
-    z-index: 999;
+    direction: ltr !important; /* چینش از چپ به راست: گام ۱ تا ۵ */
+    gap: 12px;
+    z-index: 9999;
     overflow-x: auto;
-    padding: 6px;
+    padding: 8px;
     box-sizing: border-box;
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
 }
 
 .steps-container::-webkit-scrollbar {
-    height: 4px;
+    height: 6px;
 }
 
 .steps-container::-webkit-scrollbar-thumb {
@@ -136,15 +134,17 @@ body, html {
 }
 
 .step-box {
-    flex: 0 0 220px;
+    flex: 1 1 0px;
+    min-width: 210px;
+    max-width: 260px;
     background: rgba(255, 255, 255, 0.96);
     border: 1px solid #cbd5e1;
     backdrop-filter: blur(8px);
     padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     box-sizing: border-box;
-    direction: rtl !important; /* متون داخل کارت‌ها راست‌چین و فارسی */
+    direction: rtl !important; /* متن داخل کارت‌ها راست‌چین و فارسی */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -204,7 +204,7 @@ body, html {
     height: 100vh;
     background: rgba(15, 23, 42, 0.4);
     backdrop-filter: blur(6px);
-    z-index: 1000;
+    z-index: 10000;
     display: flex;
     justify-content: center;
     align-items: center;
