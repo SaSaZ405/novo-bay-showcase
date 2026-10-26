@@ -365,3 +365,74 @@ body, html {
 .rolling-anim {
     animation: diceSpin3D 0.7s ease-in-out infinite;
 }
+
+/* استایل باکس کوچک‌شده بالای تاس در سمت راست */
+.right-floating-cluster {
+    position: fixed;
+    right: 12px;
+    bottom: 78px;
+    z-index: 9999;
+}
+
+.small-mini-box {
+    width: 75px !important;
+    min-width: 70px !important;
+    padding: 3px !important;
+    font-size: 7.5px !important;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    direction: rtl;
+}
+
+.small-mini-box .box-title {
+    font-size: 7px !important;
+}
+
+/* تاس شانس قرار گرفته در ردیف پایین کنار سایر باکس‌ها */
+#floating-polyhedral-dice {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease-in-out;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    flex: 0 0 50px;
+}
+
+#floating-polyhedral-dice:hover {
+    transform: scale(1.1);
+}
+
+.dice-icon-wrapper {
+    width: 42px;
+    height: 42px;
+}
+
+.d20-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.dice-label-badge {
+    background: rgba(6, 78, 59, 0.9);
+    border: 1px solid #fbbf24;
+    color: #fef3c7;
+    font-size: 7.5px;
+    font-weight: bold;
+    padding: 1px 4px;
+    border-radius: 8px;
+    margin-top: -2px;
+}
+
+@keyframes diceSpin3D {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.rolling-anim {
+    animation: diceSpin3D 0.7s ease-in-out infinite;
+}
