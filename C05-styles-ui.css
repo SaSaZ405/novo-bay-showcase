@@ -1,4 +1,4 @@
-/* C05-styles-ui.css - داشبورد مینیمال سفید یخچالی نوو-بی */
+/* C05-styles-ui.css - داشبورد مینیمال سفید یخچالی نوو-بی و هماهنگ با نقشه زنده */
 
 body, html {
     margin: 0;
@@ -80,29 +80,29 @@ body, html {
     background: #f0f9ff;
 }
 
-/* استیج اصلی صفحه با الگو و پس‌زمینه نقشه‌ی تخت هندسی تمیز */
+/* استیج اصلی صفحه مختص نمایش نقشه زنده جهانی */
 .globe-stage-wrapper {
     position: absolute;
     top: 52px;
     left: 0;
     width: 100vw;
     height: calc(100vh - 52px);
-    background-color: #f1f5f9;
-    background-image: linear-gradient(90deg, #e2e8f0 1px, transparent 1px), linear-gradient(0deg, #e2e8f0 1px, transparent 1px);
-    background-size: 40px 40px; /* شبکه مختصات جغرافیایی مینیمال و مدرن GIS */
+    background-color: #f8fafc;
     overflow: hidden;
+    z-index: 1;
 }
 
+/* کانتینر ریشه نقشه برای فیت شدن کامل Leaflet */
 #gis-globe-root {
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 2;
 }
 
-/* نوار افقی کارت‌های گام‌ها در پایین صفحه */
+/* نوار افقی کارت‌های گام‌ها در پایین صفحه (بالاتر از نقشه با z-index مناسب) */
 .steps-container {
     position: absolute;
     bottom: 16px;
