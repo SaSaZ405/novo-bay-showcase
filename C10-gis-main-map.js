@@ -1,4 +1,4 @@
-/* C10-gis-main-map.js - v7.0 - باز کردن سقف زوم تا عمیق‌ترین سطح خیابانی (maxZoom: 18) */
+/* C10-gis-main-map.js - v8.0 - حذف دکمه‌های + و - و حفظ قابلیت زوم با دست/موس */
 
 (function loadLeafletAndInitMap() {
     if (!document.getElementById('leaflet-css')) {
@@ -25,22 +25,22 @@ function initLiveWorldMap() {
 
     mapContainer.innerHTML = '<div id="live-map-canvas" style="width:100%; height:100%; position:absolute; top:0; left:0; z-index:1; background:#aad3df;"></div>';
 
-    // تنظیمات نقشه با آزاد کردن سقف زوم تا 18
+    // تنظیمات نقشه بدون نمایش دکمه‌های زوم (+) و (-)
     const map = L.map('live-map-canvas', {
         center: [20, 10],
         zoom: 2,
         minZoom: 1,
-        maxZoom: 18,               // افزایش سقف زوم برای مشاهدات بسیار دقیق خیابانی
-        zoomControl: true,         // دکمه‌های + و -
-        dragging: true,            // قابلیت جابه‌جایی روان نقشه
-        touchZoom: true,           // زوم با دو انگشت روی موبایل
-        scrollWheelZoom: true,    // زوم با اسکرول موس
-        doubleClickZoom: true,     // زوم با دابل کلیک
+        maxZoom: 18,
+        zoomControl: false,        // حذف کامل دکمه‌های + و - از روی صفحه
+        dragging: true,            // قابلیت جابه‌جایی نقشه
+        touchZoom: true,           // زوم با دو انگشت روی موبایل فعال
+        scrollWheelZoom: true,    // زوم با اسکرول موس فعال
+        doubleClickZoom: true,
         boxZoom: true,
         attributionControl: false
     });
 
-    // لایه کاشی‌های نقشه با پشتیبانی از زوم فوق‌العاده عمیق تا سطح ۱۹
+    // لایه نقشه جهانی
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         maxNativeZoom: 19,
