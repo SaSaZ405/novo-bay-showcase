@@ -1,4 +1,4 @@
-/* C10-gis-main-map.js - قفل کردن حرکت عمودی و تنظیم نقشه زنده */
+/* C10-gis-main-map.js - نقشه زنده رزولوشن بالا با قابلیت زوم */
 
 (function loadLeafletAndInitMap() {
     if (!document.getElementById('leaflet-css')) {
@@ -25,30 +25,24 @@ function initLiveWorldMap() {
 
     mapContainer.innerHTML = '<div id="live-map-canvas" style="width:100%; height:100%; position:absolute; top:0; left:0; z-index:1; background:#aad3df;"></div>';
 
-    // محدود کردن مرزهای جغرافیایی برای قفل کردن حرکت شمال به جنوب (عرض جغرافیایی ثابت)
-    const bounds = L.latLngBounds(
-        L.latLng(-60, -180), // جنوب
-        L.latLng(75, 180)    // شمال
-    );
-
+    // تنظیم کنترل زوم و محدوده حرکت
     const map = L.map('live-map-canvas', {
-        center: [20, 10],
-        zoom: 3,
-        minZoom: 3,
-        maxZoom: 6,
-        zoomControl: false,
-        attributionControl: false,
-        maxBounds: bounds,
-        maxBoundsViscosity: 1.0 // قفل محکم جهت جلوگیری از خروج از محدوده عمودی
+        center: [25, 10],
+        zoom: 2,
+        minZoom: 1,
+        maxZoom: 10,
+        zoomControl: true, // فعال کردن دکمه‌های زوم برای راحتی کاربر
+        attributionControl: false
     });
 
-    // لایه زنده اقیانوسی و نقشه‌ی جهان
+    // لایه زنده با رزولوشن بالا (HD Retina Vector Tiles)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        subdomains: ['a', 'b', 'c']
+        subdomains: ['a', 'b', 'c'],
+        detectRetina: true
     }).addTo(map);
 
-    // نودهای فعال شرکت‌کنندگان روی نقشه
+    // نودهای فعال روی نقشه
     const liveParticipants = [
         { lat: 35.6892, lng: 51.3890, city: "تهران" },
         { lat: 51.5074, lng: -0.1278, city: "لندن" },
@@ -61,12 +55,12 @@ function initLiveWorldMap() {
 
     liveParticipants.forEach(p => {
         const marker = L.circleMarker([p.lat, p.lng], {
-            radius: 7,
+            radius: 6,
             fillColor: '#0284c7',
             color: '#ffffff',
             weight: 2,
             opacity: 1,
-            fillOpacity: 0.9
+            fillOpacity: 0.95
         }).addTo(map);
 
         marker.bindPopup(`<b>نود فعال:</b> ${p.city}`);
@@ -74,5 +68,5 @@ function initLiveWorldMap() {
 
     setTimeout(() => {
         map.invalidateSize();
-    }, 400);
+    }, 300);
 }
