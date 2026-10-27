@@ -1,430 +1,133 @@
-/* C05-styles-ui.css - نسخه مینی‌مال فوق‌العاده کوچک (۶ باکس در پایین صفحه) */
+/* =========================================================
+   NOVO-BAY UI STYLES (C05-styles-ui.css) - نسخه یکپارچه
+   ========================================================= */
 
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #aad3df;
-    font-family: system-ui, -apple-system, sans-serif;
-    direction: ltr;
-    color: #1e293b;
+/* استایل نوار تبلیغاتی بالا */
+.ad-banner-bar {
+    position: fixed;
+    top: 44px;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #064e3b, #0284c7);
+    color: #fef3c7;
+    padding: 5px 15px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    font-size: 11px;
 }
 
-.command-viewport {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+.ad-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.ad-badge {
+    background: #fbbf24;
+    color: #78350f;
+    font-size: 8.5px;
+    font-weight: bold;
+    padding: 1px 6px;
+    border-radius: 4px;
+}
+
+.ad-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: rtl;
+}
+
+.ad-close-btn {
+    background: transparent;
+    border: none;
+    color: #fef3c7;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 5px;
+    font-weight: bold;
+}
+
+/* معماری استاندارد و یکپارچه داک پایین صفحه (Command Bottom Dock) */
+.command-bottom-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(240, 249, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid #cbd5e1;
+    z-index: 9999;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    background: #aad3df;
-    overflow: hidden;
-    opacity: 1 !important;
-    pointer-events: auto !important;
+    gap: 4px;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
 }
 
-/* هدر بالای صفحه */
-.top-header-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40px;
-    z-index: 50;
+.dock-top-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #cbd5e1;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    justify-content: space-between;
+    width: 100%;
+    gap: 8px;
 }
 
-.header-left, .header-right, .header-center {
+.dock-side-box {
+    width: 95px !important;
+    min-width: 95px !important;
+    margin: 0 !important;
+}
+
+.dock-right-cluster {
     display: flex;
     align-items: center;
     gap: 6px;
 }
 
-.lang-select {
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    color: #0f172a;
-    padding: 2px 4px;
-    border-radius: 4px;
-    font-size: 9px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.btn-clean {
-    background: transparent;
-    border: none;
-    color: #475569;
-    font-size: 13px;
-    cursor: pointer;
-    padding: 2px;
-}
-
-.rotating-nb-logo {
-    width: 24px;
-    height: 24px;
-    border: 2px solid #0284c7;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 8px;
-    color: #0284c7;
-    font-weight: bold;
-    background: #f0f9ff;
-}
-
-/* استیج نقشه GIS */
-.globe-stage-wrapper {
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 40px);
-    background-color: #aad3df;
-    overflow: hidden;
-    z-index: 1;
-}
-
-#gis-globe-root {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-}
-
-/* نوار افقی ۶ باکس فوق‌العاده کوچک و مرکز‌شده در پایین صفحه */
-.steps-container {
-    position: fixed;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 98%;
-    max-width: 1350px;
-    display: flex;
-    flex-direction: row;
-    direction: ltr !important; /* چینش از چپ به راست: گام ۱ تا ۶ */
-    gap: 5px;
-    z-index: 9999;
-    overflow-x: auto;
-    padding: 3px;
-    box-sizing: border-box;
-    scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
-}
-
-.steps-container::-webkit-scrollbar {
-    height: 3px;
-}
-
-.steps-container::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-}
-
-.step-box {
-    flex: 0 0 102px; /* ابعاد بسیار کوچک (یک‌سوم سایز قبلی) */
-    min-width: 92px;
-    max-width: 112px;
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid #cbd5e1;
-    backdrop-filter: blur(8px);
-    padding: 5px;
-    border-radius: 6px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    box-sizing: border-box;
-    direction: rtl !important; /* متن داخل کارت‌ها راست‌چین و فارسی */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.box-title {
-    font-size: 8px;
-    color: #0369a1;
-    font-weight: bold;
-    margin-bottom: 3px;
-    display: flex;
-    justify-content: space-between;
-    gap: 1px;
-}
-
-.input-custom {
-    width: 100%;
-    background: #f8fafc;
-    border: 1px solid #cbd5e1;
-    color: #0f172a;
-    padding: 2px 3px;
-    border-radius: 3px;
-    font-size: 8px;
-    margin-bottom: 3px;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-.input-custom:focus {
-    outline: none;
-    border-color: #0284c7;
-    background: #ffffff;
-}
-
-.btn-gold {
-    background: linear-gradient(135deg, #0284c7, #0369a1);
-    color: #ffffff;
-    border: none;
-    padding: 3px 4px;
-    font-weight: bold;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 7.5px;
-    width: 100%;
-    transition: 0.2s;
-    text-align: center;
-}
-
-.btn-gold:hover {
-    background: linear-gradient(135deg, #0369a1, #075985);
-}
-
-/* استایل مودال‌ها */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(15, 23, 42, 0.4);
-    backdrop-filter: blur(6px);
-    z-index: 10000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    direction: rtl;
-}
-
-.modal-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    padding: 20px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.modal-title {
-    color: #0f172a;
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.modal-desc {
-    color: #334155;
-    font-size: 11px;
-    line-height: 1.5;
-    margin-bottom: 14px;
-    text-align: justify;
-}
-
-/* استایل تاس شناور چندوجهی (سبز و طلایی D20 بدون قاب) */
-#floating-polyhedral-dice {
-    position: fixed;
-    right: 16px;
-    bottom: 85px; /* بالاتراز کادر گام‌ها، آزاد روی نقشه */
-    z-index: 99999;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease-in-out;
-    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
-}
-
-#floating-polyhedral-dice:hover {
-    transform: scale(1.1);
-}
-
-.dice-icon-wrapper {
-    width: 58px;
-    height: 58px;
-}
-
-.d20-svg {
-    width: 100%;
-    height: 100%;
-}
-
-.dice-label-badge {
-    background: rgba(6, 78, 59, 0.9);
-    border: 1px solid #fbbf24;
-    color: #fef3c7;
-    font-size: 8px;
-    font-weight: bold;
-    padding: 1px 6px;
-    border-radius: 10px;
-    margin-top: -4px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-/* انیمیشن چرخش سه‌بعدی هنگام پرتاب تاس */
-@keyframes diceSpin3D {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.25); }
-    100% { transform: rotate(360deg) scale(1); }
-}
-
-.rolling-anim {
-    animation: diceSpin3D 0.7s ease-in-out infinite;
-}
-
-/* استایل باکس شناور گوشه پایین سمت چپ */
-.floating-left-box {
-    position: fixed;
-    left: 12px;
-    bottom: 85px;
-    z-index: 9999;
-    width: 105px;
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid #cbd5e1;
-    backdrop-filter: blur(8px);
-    padding: 5px;
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    direction: rtl;
-    box-sizing: border-box;
-}
-
-/* خوشه شناور سمت راست (تاس و باکس بالای آن) */
-.right-floating-cluster {
-    position: fixed;
-    right: 12px;
-    bottom: 85px;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#floating-polyhedral-dice {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s ease-in-out;
-    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
-    margin-top: 4px;
-}
-
-#floating-polyhedral-dice:hover {
-    transform: scale(1.1);
-}
-
-.dice-icon-wrapper {
-    width: 52px;
-    height: 52px;
-}
-
-.d20-svg {
-    width: 100%;
-    height: 100%;
-}
-
-.dice-label-badge {
-    background: rgba(6, 78, 59, 0.9);
-    border: 1px solid #fbbf24;
-    color: #fef3c7;
-    font-size: 8px;
-    font-weight: bold;
-    padding: 1px 6px;
-    border-radius: 10px;
-    margin-top: -2px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-@keyframes diceSpin3D {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.25); }
-    100% { transform: rotate(360deg) scale(1); }
-}
-
-.rolling-anim {
-    animation: diceSpin3D 0.7s ease-in-out infinite;
-}
-
-/* استایل باکس کوچک‌شده بالای تاس در سمت راست */
-.right-floating-cluster {
-    position: fixed;
-    right: 12px;
-    bottom: 78px;
-    z-index: 9999;
-}
-
 .small-mini-box {
-    width: 75px !important;
-    min-width: 70px !important;
-    padding: 3px !important;
-    font-size: 7.5px !important;
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid #cbd5e1;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    direction: rtl;
+    width: 85px !important;
+    min-width: 85px !important;
+    margin: 0 !important;
+    padding: 4px !important;
 }
 
-.small-mini-box .box-title {
-    font-size: 7px !important;
-}
-
-/* تاس شانس قرار گرفته در ردیف پایین کنار سایر باکس‌ها */
-#floating-polyhedral-dice {
-    cursor: pointer;
+/* تاس درون داک */
+.dice-card-box {
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 52px;
+    background: #f0fdf4 !important;
+    border: 1px solid #10b981 !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease-in-out;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
-    flex: 0 0 50px;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 2px !important;
+    margin: 0 !important;
+    transition: transform 0.2s ease;
 }
 
-#floating-polyhedral-dice:hover {
-    transform: scale(1.1);
+.dice-card-box:hover {
+    transform: scale(1.05);
 }
 
 .dice-icon-wrapper {
-    width: 42px;
-    height: 42px;
+    width: 32px;
+    height: 32px;
 }
 
 .d20-svg {
     width: 100%;
     height: 100%;
-}
-
-.dice-label-badge {
-    background: rgba(6, 78, 59, 0.9);
-    border: 1px solid #fbbf24;
-    color: #fef3c7;
-    font-size: 7.5px;
-    font-weight: bold;
-    padding: 1px 4px;
-    border-radius: 8px;
-    margin-top: -2px;
 }
 
 @keyframes diceSpin3D {
@@ -437,87 +140,31 @@ body, html {
     animation: diceSpin3D 0.7s ease-in-out infinite;
 }
 
-/* استایل ۳ نمودار میله‌ای افقی ظریف بدون کادر در بالا */
-.top-mini-charts-container {
-    position: fixed;
-    top: 48px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(6px);
-    padding: 5px 10px;
-    border-radius: 6px;
+/* نمودارهای مرکزی در داک */
+.bottom-mini-charts-container {
     display: flex;
     flex-direction: column;
     gap: 3px;
-    width: 170px;
+    flex-grow: 1;
+    max-width: 340px;
+    background: transparent !important;
     border: none !important;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    box-shadow: none !important;
+    padding: 0 !important;
 }
 
 .micro-chart-row {
     display: flex;
     align-items: center;
     gap: 6px;
-    direction: ltr !important; /* چپ به راست */
-}
-
-.micro-chart-label {
-    font-size: 7.5px;
-    color: #0369a1;
-    font-weight: bold;
-    width: 35px;
-    text-align: right;
-    direction: rtl;
-}
-
-.micro-bar-track {
-    flex-grow: 1;
-    background: #e2e8f0;
-    height: 3px !important; /* بسیار ظریف و باریک */
-    border-radius: 2px;
-    overflow: hidden;
-    border: none !important; /* بدون کادر */
-}
-
-.micro-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #0284c7, #10b981);
-    border-radius: 2px;
-}
-
-/* نمودارهای میله‌ای افقی بدون کاور، طویل و ظریف در پایین صفحه (بین باکس‌های چپ و راست) */
-.bottom-mini-charts-container {
-    position: fixed;
-    bottom: 85px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9998;
-    background: transparent !important; /* حذف کامل کاور و پس‌زمینه */
-    backdrop-filter: none !important;
-    padding: 2px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 480px; /* طول بیشتر برای کشیدگی مناسب بین دو طرف */
-    max-width: 75vw;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-.micro-chart-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    direction: ltr !important; /* شروع از سمت چپ برای قرارگیری پرچم و نام در منتهی‌الیه چپ */
+    direction: ltr !important;
 }
 
 .micro-country-info {
     display: flex;
     align-items: center;
-    gap: 4px;
-    min-width: 75px;
+    gap: 3px;
+    min-width: 70px;
     direction: ltr !important;
 }
 
@@ -529,16 +176,14 @@ body, html {
     font-size: 8px;
     color: #0f172a;
     font-weight: bold;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9); /* خوانایی بالا بدون کاور */
 }
 
 .micro-bar-track {
     flex-grow: 1;
-    background: rgba(226, 232, 240, 0.7);
-    height: 3px !important; /* ظریف و باریک */
+    background: rgba(203, 213, 225, 0.8);
+    height: 3px !important;
     border-radius: 2px;
     overflow: hidden;
-    border: none !important;
 }
 
 .micro-bar-fill {
@@ -547,56 +192,63 @@ body, html {
     border-radius: 2px;
 }
 
-/* =========================================================
-   تنظیمات نهایی و ضد به هم ریختگی موبایل
-   ========================================================= */
+/* ردیف پایین داک (۴ باکس گام‌ها با اسکرول افقی ایمن) */
+.steps-container {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 6px !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    padding-bottom: 2px;
+}
+
+.steps-container::-webkit-scrollbar {
+    height: 2px;
+}
+.steps-container::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 2px;
+}
+
+.steps-container .step-box {
+    flex: 0 0 105px !important;
+    min-width: 105px !important;
+    margin: 0 !important;
+}
+
+/* تنظیمات ریسپانسیو موبایل */
 @media (max-width: 768px) {
-    /* نوار پایین صفحه با قابلیت اسکرول افقی روان در موبایل */
-    .steps-container {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        justify-content: flex-start !important;
-        gap: 6px !important;
-        padding: 6px 8px !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-        background: rgba(255, 255, 255, 0.95) !important;
-        backdrop-filter: blur(6px);
+    .ad-banner-bar {
+        font-size: 9.5px;
+        padding: 4px 10px;
+        top: 40px;
     }
-
-    /* کوچک کردن اندازه باکس‌ها در موبایل برای تناسب بهتر */
-    .steps-container .step-box, 
-    .steps-container .dice-card-box {
-        flex: 0 0 85px !important;
-        min-width: 85px !important;
-        max-width: 85px !important;
-        font-size: 7px !important;
-        padding: 4px !important;
-    }
-
-    .steps-container input.input-custom {
-        font-size: 8px !important;
-        padding: 2px !important;
-        height: 20px !important;
-    }
-
-    .steps-container button.btn-gold {
+    .dock-side-box {
+        width: 80px !important;
+        min-width: 80px !important;
         font-size: 7.5px !important;
-        padding: 3px !important;
-        margin-top: 4px !important;
     }
-
-    /* تنظیم جایگاه نمودارها و باکس‌های شناور در موبایل */
+    .small-mini-box {
+        width: 75px !important;
+        min-width: 75px !important;
+    }
+    .dice-card-box {
+        width: 42px !important;
+        min-width: 42px !important;
+    }
     .bottom-mini-charts-container {
-        bottom: 85px !important;
-        width: 65vw !important;
-        max-width: 220px !important;
+        max-width: 170px;
     }
-
-    .floating-left-box, 
-    .right-floating-cluster {
-        bottom: 85px !important;
+    .micro-country-info {
+        min-width: 50px;
+    }
+    .micro-chart-label {
+        font-size: 7px;
+    }
+    .steps-container .step-box {
+        flex: 0 0 90px !important;
+        min-width: 90px !important;
     }
 }
