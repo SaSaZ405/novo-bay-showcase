@@ -548,35 +548,53 @@ body, html {
 }
 
 /* =========================================================
-   تطبیق‌دهنده نمایش موبایل و دسکتاپ (بدون دست زدن به کدهای قبلی)
+   تطبیق نهایی موبایل (جایگزین بلوک قبلی در انتهای C05-styles-ui.css)
    ========================================================= */
 @media (max-width: 768px) {
+    .steps-container {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .steps-container::-webkit-scrollbar {
+        height: 3px;
+    }
+    .steps-container::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 2px;
+    }
+
     .floating-left-box {
-        left: 8px;
-        bottom: 80px;
-        width: 100px;
-        padding: 5px;
+        left: 6px;
+        bottom: 75px;
+        width: 90px;
+        padding: 4px;
+        font-size: 8px;
     }
 
     .right-floating-cluster {
-        right: 8px;
-        bottom: 80px;
+        right: 6px;
+        bottom: 75px;
     }
 
     .small-mini-box {
-        width: 100px !important;
-        padding: 5px !important;
+        width: 90px !important;
+        padding: 4px !important;
     }
 
     .bottom-mini-charts-container {
-        bottom: 82px;
-        width: 42vw;
-        min-width: 160px;
-        gap: 4px;
+        bottom: 78px;
+        width: 70vw;
+        max-width: 260px;
+        gap: 3px;
+        padding: 2px 6px;
     }
 
     .micro-country-info {
-        min-width: 55px;
+        min-width: 50px;
     }
 
     .micro-chart-label {
@@ -584,6 +602,6 @@ body, html {
     }
 
     .micro-bar-track {
-        height: 3px !important;
+        height: 2.5px !important;
     }
 }
