@@ -77,9 +77,9 @@
             <button class="ad-close-btn" onclick="closeAdBanner()">&times;</button>
         </div>
 
-        <!-- ZONE 2: MAIN GIS MAP SECTION WITH BLINKING DAY COUNTER -->
+        <!-- ZONE 2: MAIN GIS MAP SECTION WITH BLINKING DAY COUNTER (1 to 10) -->
         <div class="globe-stage-wrapper">
-            <!-- Blinking Triangle Day Counter (1 to 10 cycle) -->
+            <!-- Blinking Triangle Day Counter (Counting 1 up to 10) -->
             <div class="phase-10-badge-bottom-left" id="dayCounterVal">1</div>
 
             <!-- Watermark NB Overlay -->
@@ -256,13 +256,13 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Day Counter 1 to 10 Loop Animation
+        // Day Counter from 1 up to 10 Loop Animation
         let currentDayNum = 1;
         setInterval(() => {
             currentDayNum = currentDayNum >= 10 ? 1 : currentDayNum + 1;
             const badgeEl = document.getElementById('dayCounterVal');
             if (badgeEl) badgeEl.textContent = currentDayNum;
-        }, 1000); // Changes every 1 second
+        }, 1200);
 
         function closeAdBanner() {
             document.getElementById('ad-banner').style.display = 'none';
