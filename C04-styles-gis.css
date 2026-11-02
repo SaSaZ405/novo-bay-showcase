@@ -1,4 +1,4 @@
-/* Zone 2: GIS Map Section & Corrected NB Watermark Styling */
+/* Zone 2: GIS Map Section & Bottom-Left Triangle Day Counter Styling */
 
 .globe-stage-wrapper {
     position: relative;
@@ -20,7 +20,7 @@
     background: #cbd5e1 !important;
 }
 
-/* Corrected Watermark NB Overlay (Forced LTR direction) */
+/* Corrected Watermark NB Overlay */
 .nb-watermark-overlay {
     position: absolute;
     top: 50%;
@@ -41,19 +41,19 @@
     letter-spacing: -10px;
 }
 
-/* Phase 10 Yellow Badge */
-.phase-10-badge {
+/* Challenge Day Counter Badge (Moved to Bottom-Left Corner as a Triangle) */
+.phase-10-badge-bottom-left {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     background: #facc15;
     color: #991b1b;
-    font-size: 56px;
+    font-size: 52px;
     font-weight: 900;
-    padding: 10px 35px 15px 20px;
-    clip-path: polygon(0 0, 100% 0, 75% 100%, 0 100%);
+    padding: 25px 25px 10px 35px;
+    clip-path: polygon(0 100%, 100% 100%, 0 0);
     z-index: 500;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: -4px -4px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* Map Floating Legend Box */
