@@ -77,10 +77,10 @@
             <button class="ad-close-btn" onclick="closeAdBanner()">&times;</button>
         </div>
 
-        <!-- ZONE 2: MAIN GIS MAP SECTION WITH CORRECTED TRIANGLE DAY COUNTER -->
+        <!-- ZONE 2: MAIN GIS MAP SECTION WITH BLINKING DAY COUNTER -->
         <div class="globe-stage-wrapper">
-            <!-- Day Counter Triangle Badge (Bottom-Left) -->
-            <div class="phase-10-badge-bottom-left">10</div>
+            <!-- Blinking Triangle Day Counter (1 to 10 cycle) -->
+            <div class="phase-10-badge-bottom-left" id="dayCounterVal">1</div>
 
             <!-- Watermark NB Overlay -->
             <div class="nb-watermark-overlay">
@@ -105,7 +105,6 @@
         <div class="command-bottom-dock">
             
             <div class="dock-top-row">
-                <!-- Participants Counter -->
                 <div class="step-box dock-side-box">
                     <div class="counter-header">
                         <i class="fa-solid fa-user-group"></i>
@@ -115,7 +114,6 @@
                     <span class="sub-label">Live Counter</span>
                 </div>
 
-                <!-- Country Progress Bars -->
                 <div class="bottom-mini-charts-container">
                     <div class="micro-chart-row">
                         <div class="micro-country-info">
@@ -143,7 +141,6 @@
                     </div>
                 </div>
 
-                <!-- Rewards & Trophies -->
                 <div class="step-box dock-side-box trophy-box">
                     <div class="counter-header">
                         <i class="fa-solid fa-trophy" style="color: #ca8a04;"></i>
@@ -153,24 +150,19 @@
                     <span class="sub-label">Trophy Pass</span>
                 </div>
 
-                <!-- Two Classic 3D Dice Box with Result Display Box -->
                 <div class="step-box dice-card-box-borderless" id="diceContainer" onclick="rollClassicDice()">
                     <div class="two-dice-svg-box">
                         <svg viewBox="0 0 120 52" class="two-dice-svg" id="diceSvg">
-                            <!-- Die 1 -->
                             <g transform="translate(4, 2)">
                                 <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
-                                <!-- Default dots (e.g. 5) -->
                                 <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
                                 <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
                                 <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
                                 <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
                                 <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
                             </g>
-                            <!-- Die 2 -->
                             <g transform="translate(60, 2)">
                                 <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
-                                <!-- Default dots (e.g. 3) -->
                                 <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
                                 <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
                                 <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
@@ -181,7 +173,6 @@
                 </div>
             </div>
 
-            <!-- Challenge Steps Row -->
             <div class="steps-container">
                 <div class="step-box challenge-bubble">
                     <div class="pencil-badge"><i class="fa-solid fa-pencil"></i></div>
@@ -214,7 +205,6 @@
                 </div>
             </div>
 
-            <!-- ZONE 5: CHAT ROOM & COMPANION BOX -->
             <div class="zone5-container">
                 <div class="chat-room-box">
                     <div class="chat-title">Challenge Chat Room</div>
@@ -236,7 +226,6 @@
                 <div class="right-companion-panel"></div>
             </div>
 
-            <!-- FOOTER BANNER -->
             <footer class="footer-ad-bar">
                 <span>Advertisements</span>
                 <span class="highlight">FEATURED PROJECT: MICRO-EQUITY OPPORTUNITY</span>
@@ -267,11 +256,18 @@
         setInterval(updateClock, 1000);
         updateClock();
 
+        // Day Counter 1 to 10 Loop Animation
+        let currentDayNum = 1;
+        setInterval(() => {
+            currentDayNum = currentDayNum >= 10 ? 1 : currentDayNum + 1;
+            const badgeEl = document.getElementById('dayCounterVal');
+            if (badgeEl) badgeEl.textContent = currentDayNum;
+        }, 1000); // Changes every 1 second
+
         function closeAdBanner() {
             document.getElementById('ad-banner').style.display = 'none';
         }
 
-        // Classic Two Dice Roll Logic with Result Box Update
         function rollClassicDice() {
             const d1 = Math.floor(Math.random() * 6) + 1;
             const d2 = Math.floor(Math.random() * 6) + 1;
@@ -279,7 +275,6 @@
             
             document.getElementById('diceValBox').textContent = `تاس‌ها: ${d1} و ${d2} (مجموع: ${sum})`;
             
-            // Simple visual animation rotation class on SVG
             const svgBox = document.getElementById('diceSvg');
             svgBox.style.transform = "scale(1.1) rotate(5deg)";
             setTimeout(() => {
