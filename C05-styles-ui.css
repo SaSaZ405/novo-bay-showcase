@@ -1,254 +1,312 @@
-/* =========================================================
-   NOVO-BAY UI STYLES (C05-styles-ui.css) - نسخه یکپارچه
-   ========================================================= */
+/* Zone 3, 4 & 5: Docks, Challenge Cards, Chat & Footer Bar */
 
-/* استایل نوار تبلیغاتی بالا */
-.ad-banner-bar {
-    position: fixed;
-    top: 44px;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(90deg, #064e3b, #0284c7);
-    color: #fef3c7;
-    padding: 5px 15px;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    font-size: 11px;
-}
-
-.ad-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    overflow: hidden;
-}
-
-.ad-badge {
-    background: #fbbf24;
-    color: #78350f;
-    font-size: 8.5px;
-    font-weight: bold;
-    padding: 1px 6px;
-    border-radius: 4px;
-}
-
-.ad-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    direction: rtl;
-}
-
-.ad-close-btn {
-    background: transparent;
-    border: none;
-    color: #fef3c7;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 0 5px;
-    font-weight: bold;
-}
-
-/* معماری استاندارد و یکپارچه داک پایین صفحه (Command Bottom Dock) */
 .command-bottom-dock {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(240, 249, 255, 0.95);
-    backdrop-filter: blur(8px);
-    border-top: 1px solid #cbd5e1;
-    z-index: 9999;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 6px 10px;
-    box-sizing: border-box;
-    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+    gap: 16px;
+    padding: 16px;
+    background: #e0f2fe;
 }
 
+/* Top Dock Row */
 .dock-top-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    gap: 8px;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 .dock-side-box {
-    width: 95px !important;
-    min-width: 95px !important;
-    margin: 0 !important;
+    background: #ffffff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 12px 20px;
+    min-width: 160px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
 }
 
-.dock-right-cluster {
+.counter-header {
     display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.small-mini-box {
-    width: 85px !important;
-    min-width: 85px !important;
-    margin: 0 !important;
-    padding: 4px !important;
-}
-
-/* تاس درون داک */
-.dice-card-box {
-    width: 48px !important;
-    min-width: 48px !important;
-    height: 52px;
-    background: #f0fdf4 !important;
-    border: 1px solid #10b981 !important;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    border-radius: 6px;
-    padding: 2px !important;
-    margin: 0 !important;
-    transition: transform 0.2s ease;
+    gap: 6px;
+    font-size: 11px;
+    color: #1e40af;
+    font-weight: bold;
 }
 
-.dice-card-box:hover {
-    transform: scale(1.05);
+.counter-value {
+    font-size: 32px;
+    font-weight: 900;
+    color: #1e293b;
+    margin: 4px 0;
 }
 
-.dice-icon-wrapper {
-    width: 32px;
-    height: 32px;
+.sub-label {
+    font-size: 10px;
+    color: #64748b;
+    text-transform: uppercase;
 }
 
-.d20-svg {
-    width: 100%;
-    height: 100%;
-}
-
-@keyframes diceSpin3D {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.2); }
-    100% { transform: rotate(360deg) scale(1); }
-}
-
-.rolling-anim {
-    animation: diceSpin3D 0.7s ease-in-out infinite;
-}
-
-/* نمودارهای مرکزی در داک */
+/* Mini Country Progress Bars */
 .bottom-mini-charts-container {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 12px 16px;
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    flex-grow: 1;
-    max-width: 340px;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
+    gap: 8px;
+    max-width: 450px;
 }
 
 .micro-chart-row {
     display: flex;
     align-items: center;
-    gap: 6px;
-    direction: ltr !important;
+    gap: 10px;
 }
 
 .micro-country-info {
     display: flex;
     align-items: center;
-    gap: 3px;
-    min-width: 70px;
-    direction: ltr !important;
-}
-
-.country-flag {
-    font-size: 10px;
-}
-
-.micro-chart-label {
-    font-size: 8px;
-    color: #0f172a;
+    gap: 6px;
+    width: 60px;
+    font-size: 11px;
     font-weight: bold;
 }
 
 .micro-bar-track {
-    flex-grow: 1;
-    background: rgba(203, 213, 225, 0.8);
-    height: 3px !important;
-    border-radius: 2px;
+    flex: 1;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
     overflow: hidden;
 }
 
 .micro-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, #0284c7, #10b981);
-    border-radius: 2px;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 5px;
 }
 
-/* ردیف پایین داک (۴ باکس گام‌ها با اسکرول افقی ایمن) */
+.bar-val {
+    font-size: 10px;
+    font-weight: bold;
+    color: #64748b;
+}
+
+/* Dice Box */
+.dice-card-box {
+    background: #ffffff;
+    border: 2px solid #facc15;
+    border-radius: 12px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(234, 179, 8, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.dice-card-box:hover {
+    transform: scale(1.08);
+}
+
+.rolling-anim {
+    animation: spinDice 0.5s infinite linear;
+}
+
+@keyframes spinDice {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.d20-svg {
+    width: 54px;
+    height: 54px;
+}
+
+/* Challenge Steps Container */
 .steps-container {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    gap: 6px !important;
-    justify-content: flex-start !important;
-    width: 100% !important;
-    padding-bottom: 2px;
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.steps-container::-webkit-scrollbar {
-    height: 2px;
-}
-.steps-container::-webkit-scrollbar-thumb {
-    background: #94a3b8;
-    border-radius: 2px;
-}
-
-.steps-container .step-box {
-    flex: 0 0 105px !important;
-    min-width: 105px !important;
-    margin: 0 !important;
+.challenge-bubble {
+    flex: 1;
+    min-width: 220px;
+    background: #eff6ff;
+    border: 2px solid #93c5fd;
+    border-radius: 16px;
+    padding: 16px;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
 }
 
-/* تنظیمات ریسپانسیو موبایل */
-@media (max-width: 768px) {
-    .ad-banner-bar {
-        font-size: 9.5px;
-        padding: 4px 10px;
-        top: 40px;
-    }
-    .dock-side-box {
-        width: 80px !important;
-        min-width: 80px !important;
-        font-size: 7.5px !important;
-    }
-    .small-mini-box {
-        width: 75px !important;
-        min-width: 75px !important;
-    }
-    .dice-card-box {
-        width: 42px !important;
-        min-width: 42px !important;
-    }
-    .bottom-mini-charts-container {
-        max-width: 170px;
-    }
-    .micro-country-info {
-        min-width: 50px;
-    }
-    .micro-chart-label {
-        font-size: 7px;
-    }
-    .steps-container .step-box {
-        flex: 0 0 90px !important;
-        min-width: 90px !important;
-    }
+.pencil-badge {
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    background: #facc15;
+    color: #854d0e;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.box-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+}
+
+.step-desc {
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 12px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group input {
+    padding: 8px 10px;
+    border: 1px solid #bfdbfe;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.btn-enter {
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-enter:hover {
+    background: #1d4ed8;
+}
+
+.btn-full {
+    width: 100%;
+    padding: 10px;
+}
+
+.payment-node {
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #991b1b;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #f87171;
+}
+
+/* Zone 5: Chat Room & Footer */
+.zone5-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.chat-room-box {
+    flex: 1;
+    background: #fef9c3;
+    border: 1px solid #fde047;
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    height: 180px;
+}
+
+.chat-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #854d0e;
+    margin-bottom: 6px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 11px;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #334155;
+}
+
+.chat-input-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.chat-input-row input {
+    flex: 1;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #fde047;
+    font-size: 11px;
+}
+
+.chat-input-row button {
+    background: #ca8a04;
+    color: #ffffff;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.right-companion-panel {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+.footer-ad-bar {
+    background: #facc15;
+    color: #78350f;
+    padding: 6px 16px;
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid #eab308;
+    margin-top: 10px;
+}
+
+.footer-ad-bar .highlight {
+    color: #991b1b;
 }
