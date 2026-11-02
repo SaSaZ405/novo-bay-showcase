@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl" id="html-root">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NOVO-BAY | Global Command Center</title>
     <!-- CSS Dependencies -->
     <link rel="stylesheet" href="C03-styles-core.css">
@@ -16,49 +16,56 @@
     <!-- COMMAND VIEWPORT MAIN -->
     <div class="command-viewport" id="mainDashboard">
 
-        <!-- ZONE 1: TOP HEADER BAR -->
+        <!-- ZONE 1: TOP HEADER BAR (RESPONSIVE MULTI-TIER) -->
         <header class="top-header-bar">
-            <!-- Left Controls: Language, Menu & Audio -->
-            <div class="header-left">
-                <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
-                    <option value="en">En</option>
-                    <option value="fa" selected>فارسی</option>
-                    <option value="ru">Русский</option>
-                    <option value="zh">中文</option>
-                    <option value="ar">العربية</option>
-                    <option value="fr">Français</option>
-                    <option value="de">Deutsch</option>
-                    <option value="it">Italiano</option>
-                </select>
+            <!-- Tier 1: Brand & Language -->
+            <div class="header-row-primary">
+                <div class="header-brand-cluster">
+                    <div class="rotating-nb-logo">NB</div>
+                    <span class="brand-title">NOVO-BAY</span>
+                </div>
 
-                <button class="header-btn" title="منو" onclick="togglePanel('sideMenu')">
-                    <i class="fa-solid fa-bars"></i> Menu
-                </button>
+                <div class="header-center-tools">
+                    <div class="header-clock" id="liveClock">00:00:00 UTC</div>
+                </div>
 
-                <div class="header-clock" id="liveClock">00:00:00 UTC</div>
+                <div class="header-controls-cluster">
+                    <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
+                        <option value="en">En</option>
+                        <option value="fa" selected>فارسی</option>
+                        <option value="ru">Русский</option>
+                        <option value="zh">中文</option>
+                        <option value="ar">العربية</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="it">Italiano</option>
+                    </select>
+
+                    <button class="header-btn" title="منو" onclick="togglePanel('sideMenu')">
+                        <i class="fa-solid fa-bars"></i> Menu
+                    </button>
+                </div>
             </div>
 
-            <!-- Center Brand Logo & Welcome -->
-            <div class="header-center">
-                <div class="rotating-nb-logo">NB</div>
-                <span class="brand-title">NOVO-BAY</span>
-            </div>
-
-            <!-- Right Controls: Audio Player & Media Controls -->
-            <div class="header-right">
+            <!-- Tier 2: News Ticker, Tenders & Audio Controls -->
+            <div class="header-row-secondary">
                 <div class="news-ticker">
                     <i class="fa-solid fa-bullhorn news-icon"></i>
-                    <span id="newsText">آخرین اخبار: فراخوان ثبت آثار و ایده‌ها در چالش ۱۰ روزه بین‌المللی NOVO-BAY...</span>
+                    <marquee scrollamount="4" behavior="scroll" direction="right" id="newsMarquee">
+                        آخرین اخبار و مناقصات: اطلاعیه ثبت پیشنهادات چالش ۱۰ روزه بین‌المللی NOVO-BAY | فرصت سرمایه‌گذاری میکرو-اکویتی فعال شد...
+                    </marquee>
                 </div>
-                
-                <button class="header-btn audio-btn" id="audioToggleBtn" onclick="toggleAudio()">
-                    <i class="fa-solid fa-music" id="playIcon"></i>
-                </button>
 
-                <div class="media-nav-btns">
-                    <button class="nav-btn"><i class="fa-solid fa-backward-step"></i></button>
-                    <button class="nav-btn"><i class="fa-solid fa-play"></i></button>
-                    <button class="nav-btn"><i class="fa-solid fa-forward-step"></i></button>
+                <div class="audio-player-mini">
+                    <button class="header-btn audio-btn" id="audioToggleBtn" onclick="toggleAudio()">
+                        <i class="fa-solid fa-music" id="playIcon"></i>
+                    </button>
+
+                    <div class="media-nav-btns">
+                        <button class="nav-btn"><i class="fa-solid fa-backward-step"></i></button>
+                        <button class="nav-btn"><i class="fa-solid fa-play"></i></button>
+                        <button class="nav-btn"><i class="fa-solid fa-forward-step"></i></button>
+                    </div>
                 </div>
             </div>
         </header>
@@ -77,7 +84,7 @@
             <!-- Phase 10 Yellow Corner Badge -->
             <div class="phase-10-badge">10</div>
 
-            <!-- Corrected Watermark NB Overlay (Forced LTR to prevent reversal) -->
+            <!-- Corrected Watermark NB Overlay -->
             <div class="nb-watermark-overlay">
                 <span class="watermark-letter">NB</span>
             </div>
@@ -145,7 +152,7 @@
                         <i class="fa-solid fa-trophy" style="color: #ca8a04;"></i>
                         <span class="box-title">Rewards</span>
                     </div>
-                    <div class="counter-value" style="font-size: 18px; color: #ca8a04;">🏆 10 Days</div>
+                    <div class="counter-value" style="font-size: 16px; color: #ca8a04;">🏆 10 Days</div>
                     <span class="sub-label">Trophy Pass</span>
                 </div>
 
