@@ -1,4 +1,4 @@
-/* Zone 2: GIS Map Section & Blinking Bottom-Left Triangle Day Counter Styling */
+/* Zone 2: GIS Map Section & Blinking Bottom-Left Triangle Fraction Day Counter Styling */
 
 .globe-stage-wrapper {
     position: relative;
@@ -44,29 +44,46 @@
 /* Blinking Animation for Triangle Day Counter */
 @keyframes triangleBlink {
     0% { opacity: 1; filter: brightness(1); }
-    50% { opacity: 0.6; filter: brightness(1.25); }
+    50% { opacity: 0.65; filter: brightness(1.2); }
     100% { opacity: 1; filter: brightness(1); }
 }
 
-/* Challenge Day Counter Triangle Badge (Enlarged & Perfectly Positioned Bottom-Left) */
+/* Challenge Day Counter Triangle Badge (Fraction Style: Day / Cycle) */
 .phase-10-badge-bottom-left {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 115px;
-    height: 115px;
+    width: 130px;
+    height: 130px;
     background: #facc15;
-    color: #991b1b;
-    font-size: 46px;
-    font-weight: 900;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-    padding: 0 0 14px 18px;
+    padding: 0 0 16px 16px;
     clip-path: polygon(0 0, 0 100%, 100% 100%);
     z-index: 500;
     box-shadow: 4px -4px 15px rgba(0, 0, 0, 0.2);
     animation: triangleBlink 1.2s infinite ease-in-out;
+    direction: ltr !important;
+}
+
+/* Fraction Style Text (All elements in Bold Red Color) */
+.fraction-text {
+    font-size: 32px;
+    font-weight: 900;
+    color: #991b1b; /* Deep Red Color */
+    font-family: Arial, monospace, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.fraction-text .slash-red {
+    color: #991b1b;
+    font-weight: 900;
+    margin: 0 1px;
 }
 
 /* Map Floating Legend Box */
