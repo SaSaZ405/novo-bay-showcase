@@ -72,15 +72,14 @@
             <button class="ad-close-btn" onclick="closeAdBanner()">&times;</button>
         </div>
 
-        <!-- ZONE 2: MAIN GIS MAP SECTION WITH N&B WATERMARK -->
+        <!-- ZONE 2: MAIN GIS MAP SECTION WITH FIXED NB WATERMARK -->
         <div class="globe-stage-wrapper">
             <!-- Phase 10 Yellow Corner Badge -->
             <div class="phase-10-badge">10</div>
 
-            <!-- Giant Watermark N B Overlay -->
+            <!-- Corrected Watermark NB Overlay (Forced LTR to prevent reversal) -->
             <div class="nb-watermark-overlay">
-                <span class="watermark-letter">N</span>
-                <span class="watermark-letter">B</span>
+                <span class="watermark-letter">NB</span>
             </div>
 
             <!-- Leaflet Map Canvas -->
@@ -97,19 +96,19 @@
             </div>
         </div>
 
-        <!-- ZONE 3 & 4: COMMAND BOTTOM DOCK (Stats, Dice, Challenge Steps) -->
+        <!-- ZONE 3 & 4: COMMAND BOTTOM DOCK (Stats, Trophy, Dice, Challenge Steps) -->
         <div class="command-bottom-dock">
             
-            <!-- Top Dock Row: Stats, Countries & Dice -->
+            <!-- Top Dock Row: Counter, Country Bars, Trophy Rewards & Dice -->
             <div class="dock-top-row">
-                <!-- Participants Counter & Leaderboard -->
+                <!-- Participants Counter -->
                 <div class="step-box dock-side-box">
                     <div class="counter-header">
                         <i class="fa-solid fa-user-group"></i>
-                        <span class="box-title">Participants Counter</span>
+                        <span class="box-title">Participants</span>
                     </div>
                     <div class="counter-value" id="participantCount">10</div>
-                    <span class="sub-label">Leaderboard</span>
+                    <span class="sub-label">Counter</span>
                 </div>
 
                 <!-- Country Progress Bars -->
@@ -140,6 +139,16 @@
                     </div>
                 </div>
 
+                <!-- Rewards & Trophies (جام جوایز) -->
+                <div class="step-box dock-side-box trophy-box">
+                    <div class="counter-header">
+                        <i class="fa-solid fa-trophy" style="color: #ca8a04;"></i>
+                        <span class="box-title">Rewards</span>
+                    </div>
+                    <div class="counter-value" style="font-size: 18px; color: #ca8a04;">🏆 10 Days</div>
+                    <span class="sub-label">Trophy Pass</span>
+                </div>
+
                 <!-- D20 Polyhedral Dice -->
                 <div class="step-box dice-card-box" id="diceContainer" onclick="rollPolyhedralDice()">
                     <div class="dice-icon-wrapper">
@@ -157,7 +166,7 @@
                 </div>
             </div>
 
-            <!-- Challenge Steps Row -->
+            <!-- Challenge Steps Row (Words, Titles, Webinar Stage) -->
             <div class="steps-container">
                 <!-- Step 1: Words -->
                 <div class="step-box challenge-bubble">
@@ -193,7 +202,7 @@
                 </div>
             </div>
 
-            <!-- ZONE 5: CHAT ROOM & FOOTER AD -->
+            <!-- ZONE 5: CHAT ROOM & COMPANION BOX -->
             <div class="zone5-container">
                 <div class="chat-room-box">
                     <div class="chat-title">Challenge Chat Room</div>
@@ -213,7 +222,7 @@
                 </div>
 
                 <div class="right-companion-panel">
-                    <!-- Space for dynamic analysis or extra reports -->
+                    <!-- Companion Space -->
                 </div>
             </div>
 
@@ -240,7 +249,6 @@
     <script src="C20-security-anti-cheat.js"></script>
 
     <script>
-        // Inline Helper for Clock & Roll
         function updateClock() {
             const now = new Date();
             const utcString = now.toUTCString().split(' ')[4] + ' UTC';
