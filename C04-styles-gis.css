@@ -1,4 +1,4 @@
-/* Zone 2: GIS Map Section & Bottom-Left Triangle Day Counter Styling */
+/* Zone 2: GIS Map Section & Blinking Bottom-Left Triangle Day Counter Styling */
 
 .globe-stage-wrapper {
     position: relative;
@@ -41,7 +41,14 @@
     letter-spacing: -10px;
 }
 
-/* Challenge Day Counter Triangle Badge (Fixed precisely in Bottom-Left Corner) */
+/* Blinking Animation for Triangle Day Counter */
+@keyframes triangleBlink {
+    0% { opacity: 1; filter: brightness(1); }
+    50% { opacity: 0.65; filter: brightness(1.2); }
+    100% { opacity: 1; filter: brightness(1); }
+}
+
+/* Challenge Day Counter Triangle Badge (Bottom-Left with Blink Effect) */
 .phase-10-badge-bottom-left {
     position: absolute;
     bottom: 0;
@@ -59,6 +66,7 @@
     clip-path: polygon(0 0, 0 100%, 100% 100%);
     z-index: 500;
     box-shadow: 3px -3px 12px rgba(0, 0, 0, 0.15);
+    animation: triangleBlink 1.2s infinite ease-in-out;
 }
 
 /* Map Floating Legend Box */
