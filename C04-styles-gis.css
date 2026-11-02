@@ -44,28 +44,28 @@
 /* Blinking Animation for Triangle Day Counter */
 @keyframes triangleBlink {
     0% { opacity: 1; filter: brightness(1); }
-    50% { opacity: 0.65; filter: brightness(1.2); }
+    50% { opacity: 0.6; filter: brightness(1.25); }
     100% { opacity: 1; filter: brightness(1); }
 }
 
-/* Challenge Day Counter Triangle Badge (Bottom-Left with Blink Effect) */
+/* Challenge Day Counter Triangle Badge (Enlarged & Perfectly Positioned Bottom-Left) */
 .phase-10-badge-bottom-left {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 95px;
-    height: 95px;
+    width: 115px;
+    height: 115px;
     background: #facc15;
     color: #991b1b;
-    font-size: 42px;
+    font-size: 46px;
     font-weight: 900;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-    padding: 0 0 10px 14px;
+    padding: 0 0 14px 18px;
     clip-path: polygon(0 0, 0 100%, 100% 100%);
     z-index: 500;
-    box-shadow: 3px -3px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 4px -4px 15px rgba(0, 0, 0, 0.2);
     animation: triangleBlink 1.2s infinite ease-in-out;
 }
 
