@@ -1,51 +1,55 @@
-/* Zone 3, 4 & 5: Docks, Challenge Cards, Chat & Footer Bar */
+/* ==========================================================
+   NOVO-BAY UNIFIED UI STYLES - REVISED & CLEANED (C05)
+   ========================================================== */
 
+/* Command Bottom Dock Container */
 .command-bottom-dock {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 16px;
+    gap: 12px;
+    padding: 12px 16px;
     background: #e0f2fe;
+    width: 100%;
 }
 
-/* Top Dock Row */
+/* Top Dock Row: Counter, Country Progress Bars & Dice */
 .dock-top-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
 }
 
 .dock-side-box {
     background: #ffffff;
     border: 1px solid #bfdbfe;
-    border-radius: 12px;
-    padding: 12px 20px;
-    min-width: 160px;
+    border-radius: 10px;
+    padding: 8px 14px;
+    min-width: 130px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
 }
 
 .counter-header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    font-size: 11px;
+    gap: 4px;
+    font-size: 10px;
     color: #1e40af;
     font-weight: bold;
 }
 
 .counter-value {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 900;
     color: #1e293b;
-    margin: 4px 0;
+    margin: 2px 0;
 }
 
 .sub-label {
-    font-size: 10px;
+    font-size: 9px;
     color: #64748b;
     text-transform: uppercase;
 }
@@ -55,70 +59,70 @@
     flex: 1;
     background: #ffffff;
     border: 1px solid #bfdbfe;
-    border-radius: 12px;
-    padding: 12px 16px;
+    border-radius: 10px;
+    padding: 8px 12px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    max-width: 450px;
+    gap: 6px;
+    max-width: 400px;
 }
 
 .micro-chart-row {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .micro-country-info {
     display: flex;
     align-items: center;
-    gap: 6px;
-    width: 60px;
-    font-size: 11px;
+    gap: 4px;
+    width: 50px;
+    font-size: 10px;
     font-weight: bold;
 }
 
 .micro-bar-track {
     flex: 1;
-    height: 10px;
+    height: 8px;
     background: #e2e8f0;
-    border-radius: 5px;
+    border-radius: 4px;
     overflow: hidden;
 }
 
 .micro-bar-fill {
     height: 100%;
     background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 .bar-val {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: bold;
     color: #64748b;
 }
 
-/* Dice Box */
+/* D20 Dice Box */
 .dice-card-box {
     background: #ffffff;
     border: 2px solid #facc15;
-    border-radius: 12px;
-    width: 70px;
-    height: 70px;
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(234, 179, 8, 0.2);
+    box-shadow: 0 3px 8px rgba(234, 179, 8, 0.2);
     transition: transform 0.2s ease;
 }
 
 .dice-card-box:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
 }
 
 .rolling-anim {
-    animation: spinDice 0.5s infinite linear;
+    animation: spinDice 0.4s infinite linear;
 }
 
 @keyframes spinDice {
@@ -127,162 +131,159 @@
 }
 
 .d20-svg {
-    width: 54px;
-    height: 54px;
+    width: 46px;
+    height: 46px;
 }
 
-/* Challenge Steps Container */
+/* Challenge Steps Container (3 Bubbles Side-by-Side) */
 .steps-container {
     display: flex;
-    gap: 16px;
+    gap: 12px;
     justify-content: space-between;
-    flex-wrap: wrap;
+    width: 100%;
 }
 
 .challenge-bubble {
     flex: 1;
-    min-width: 220px;
+    min-width: 200px;
     background: #eff6ff;
     border: 2px solid #93c5fd;
-    border-radius: 16px;
-    padding: 16px;
+    border-radius: 14px;
+    padding: 12px;
     position: relative;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.08);
 }
 
 .pencil-badge {
     position: absolute;
-    top: -12px;
-    left: 16px;
+    top: -10px;
+    left: 14px;
     background: #facc15;
     color: #854d0e;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    font-size: 11px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
 }
 
 .box-title {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 800;
     color: #1e3a8a;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 .step-desc {
-    font-size: 11px;
+    font-size: 10px;
     color: #64748b;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .input-group input {
-    padding: 8px 10px;
+    padding: 6px 8px;
     border: 1px solid #bfdbfe;
-    border-radius: 6px;
-    font-size: 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    width: 100%;
 }
 
 .btn-enter {
     background: #2563eb;
     color: #ffffff;
     border: none;
-    padding: 8px;
-    border-radius: 6px;
+    padding: 6px;
+    border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 11px;
+    width: 100%;
 }
 
 .btn-enter:hover {
     background: #1d4ed8;
 }
 
-.btn-full {
-    width: 100%;
-    padding: 10px;
-}
-
 .payment-node {
     position: absolute;
-    bottom: -12px;
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
     background: #991b1b;
     color: #ffffff;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: bold;
-    padding: 2px 8px;
-    border-radius: 4px;
+    padding: 1px 6px;
+    border-radius: 3px;
     border: 1px solid #f87171;
 }
 
-/* Zone 5: Chat Room & Footer */
+/* Zone 5: Chat Room & Companion Box */
 .zone5-container {
     display: flex;
-    gap: 16px;
-    margin-top: 10px;
+    gap: 12px;
+    width: 100%;
 }
 
 .chat-room-box {
     flex: 1;
     background: #fef9c3;
     border: 1px solid #fde047;
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: 10px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    height: 180px;
+    height: 150px;
 }
 
 .chat-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     color: #854d0e;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .chat-messages {
     flex: 1;
     overflow-y: auto;
-    font-size: 11px;
+    font-size: 10px;
     font-family: monospace;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
     color: #334155;
 }
 
 .chat-input-row {
     display: flex;
-    gap: 6px;
-    margin-top: 6px;
+    gap: 4px;
+    margin-top: 4px;
 }
 
 .chat-input-row input {
     flex: 1;
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 3px 6px;
+    border-radius: 3px;
     border: 1px solid #fde047;
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .chat-input-row button {
     background: #ca8a04;
     color: #ffffff;
     border: none;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 10px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -291,20 +292,22 @@
     flex: 1;
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    border-radius: 10px;
+    height: 150px;
 }
 
+/* Footer Ad Bar */
 .footer-ad-bar {
     background: #facc15;
     color: #78350f;
-    padding: 6px 16px;
-    font-size: 11px;
+    padding: 5px 12px;
+    font-size: 10px;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-top: 2px solid #eab308;
-    margin-top: 10px;
+    width: 100%;
 }
 
 .footer-ad-bar .highlight {
