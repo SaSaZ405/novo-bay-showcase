@@ -77,9 +77,12 @@
             <button class="ad-close-btn" onclick="closeAdBanner()">&times;</button>
         </div>
 
-        <!-- ZONE 2: MAIN GIS MAP SECTION -->
+        <!-- ZONE 2: MAIN GIS MAP SECTION WITH FIXED TRIANGLE DAY COUNTER -->
         <div class="globe-stage-wrapper">
-            <div class="phase-10-badge-bottom-left">10</div>
+            <!-- Perfect Triangle Day Counter at Bottom-Left -->
+            <div class="phase-10-triangle-badge">
+                <span class="triangle-num">10</span>
+            </div>
 
             <div class="nb-watermark-overlay">
                 <span class="watermark-letter">NB</span>
@@ -146,18 +149,11 @@
                     <span class="sub-label">Trophy Pass</span>
                 </div>
 
-                <div class="step-box dice-card-box" id="diceContainer" onclick="rollPolyhedralDice()">
+                <!-- Classic Dice Format (Two Classic Dice Icons) -->
+                <div class="step-box dice-card-box" id="diceContainer" onclick="rollClassicDice()">
                     <div class="dice-icon-wrapper">
-                        <svg viewBox="0 0 100 100" class="d20-svg">
-                            <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#fef08a" stroke="#ca8a04" stroke-width="3"/>
-                            <polygon points="50,5 50,50 10,25" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
-                            <polygon points="50,5 50,50 90,25" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
-                            <polygon points="10,25 50,50 10,75" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
-                            <polygon points="90,25 50,50 90,75" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
-                            <polygon points="10,75 50,50 50,95" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
-                            <polygon points="90,75 50,50 50,95" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
-                            <text x="50" y="58" font-size="22" text-anchor="middle" fill="#854d0e" font-weight="bold" id="diceVal">D20</text>
-                        </svg>
+                        <i class="fa-solid fa-dice-six" style="font-size: 28px; color: #ca8a04;"></i>
+                        <span style="font-size: 10px; font-weight: bold; color: #854d0e;" id="diceVal">Roll</span>
                     </div>
                 </div>
             </div>
@@ -249,14 +245,14 @@
             document.getElementById('ad-banner').style.display = 'none';
         }
 
-        function rollPolyhedralDice() {
+        function rollClassicDice() {
             const diceEl = document.getElementById('diceContainer');
             const textEl = document.getElementById('diceVal');
             diceEl.classList.add('rolling-anim');
             let count = 0;
             const interval = setInterval(() => {
-                const rand = Math.floor(Math.random() * 20) + 1;
-                textEl.textContent = rand;
+                const rand = Math.floor(Math.random() * 6) + 1;
+                textEl.textContent = '🎲 ' + rand;
                 count++;
                 if (count > 10) {
                     clearInterval(interval);
