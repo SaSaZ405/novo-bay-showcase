@@ -77,10 +77,12 @@
             <button class="ad-close-btn" onclick="closeAdBanner()">&times;</button>
         </div>
 
-        <!-- ZONE 2: MAIN GIS MAP SECTION WITH BLINKING DAY COUNTER (1 to 10) -->
+        <!-- ZONE 2: MAIN GIS MAP SECTION WITH FRACTION-STYLE BLINKING COUNTER -->
         <div class="globe-stage-wrapper">
-            <!-- Blinking Triangle Day Counter (Counting 1 up to 10) -->
-            <div class="phase-10-badge-bottom-left" id="dayCounterVal">1</div>
+            <!-- Triangle Day Counter Badge (Format: Day / Cycle Edition) -->
+            <div class="phase-10-badge-bottom-left">
+                <span class="fraction-text" id="dayFractionDisplay"><strong id="currentDayVal">5</strong><span class="slash-red">/</span><span id="cycleEditionVal">1</span></span>
+            </div>
 
             <!-- Watermark NB Overlay -->
             <div class="nb-watermark-overlay">
@@ -255,14 +257,6 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
-
-        // Day Counter from 1 up to 10 Loop Animation
-        let currentDayNum = 1;
-        setInterval(() => {
-            currentDayNum = currentDayNum >= 10 ? 1 : currentDayNum + 1;
-            const badgeEl = document.getElementById('dayCounterVal');
-            if (badgeEl) badgeEl.textContent = currentDayNum;
-        }, 1200);
 
         function closeAdBanner() {
             document.getElementById('ad-banner').style.display = 'none';
