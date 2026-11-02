@@ -4,193 +4,282 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVO-BAY | Global Command Center</title>
-    
-    <link rel="stylesheet" href="C03-styles-core.css?v=29.0">
-    <link rel="stylesheet" href="C04-styles-gis.css?v=29.0">
-    <link rel="stylesheet" href="C05-styles-ui.css?v=29.0">
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="C03-styles-core.css">
+    <link rel="stylesheet" href="C04-styles-gis.css">
+    <link rel="stylesheet" href="C05-styles-ui.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-ice-minimal">
 
+    <!-- COMMAND VIEWPORT MAIN -->
     <div class="command-viewport" id="mainDashboard">
-        
+
+        <!-- ZONE 1: TOP HEADER BAR -->
         <header class="top-header-bar">
+            <!-- Left Controls: Language, Menu & Audio -->
             <div class="header-left">
                 <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
-                    <option value="fa">فارسی (FA)</option>
-                    <option value="en">English (EN)</option>
-                    <option value="ru">Русский (RU)</option>
-                    <option value="zh">中文 (ZH)</option>
-                    <option value="ar">العربية (AR)</option>
-                    <option value="fr">Français (FR)</option>
-                    <option value="de">Deutsch (DE)</option>
-                    <option value="it">Italiano (IT)</option>
+                    <option value="en">En</option>
+                    <option value="fa" selected>فارسی</option>
+                    <option value="ru">Русский</option>
+                    <option value="zh">中文</option>
+                    <option value="ar">العربية</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
                 </select>
+
+                <button class="header-btn" title="منو" onclick="togglePanel('sideMenu')">
+                    <i class="fa-solid fa-bars"></i> Menu
+                </button>
+
+                <div class="header-clock" id="liveClock">00:00:00 UTC</div>
             </div>
 
+            <!-- Center Brand Logo & Welcome -->
             <div class="header-center">
-                <button class="btn-clean" onclick="toggleAudioGuide()" title="صدا">🔊</button>
-                <span id="txt-welcome-banner" style="font-size: 11px; color: #0284c7; font-weight: bold;">خوش‌آمدید به نوو-بی</span>
+                <div class="rotating-nb-logo">NB</div>
+                <span class="brand-title">NOVO-BAY</span>
             </div>
 
+            <!-- Right Controls: Audio Player & Media Controls -->
             <div class="header-right">
-                <div class="rotating-nb-logo">NB</div>
-                <button class="btn-clean" title="منو">☰</button>
+                <div class="news-ticker">
+                    <i class="fa-solid fa-bullhorn news-icon"></i>
+                    <span id="newsText">آخرین اخبار: فراخوان ثبت آثار و ایده‌ها در چالش ۱۰ روزه بین‌المللی NOVO-BAY...</span>
+                </div>
+                
+                <button class="header-btn audio-btn" id="audioToggleBtn" onclick="toggleAudio()">
+                    <i class="fa-solid fa-music" id="playIcon"></i>
+                </button>
+
+                <div class="media-nav-btns">
+                    <button class="nav-btn"><i class="fa-solid fa-backward-step"></i></button>
+                    <button class="nav-btn"><i class="fa-solid fa-play"></i></button>
+                    <button class="nav-btn"><i class="fa-solid fa-forward-step"></i></button>
+                </div>
             </div>
         </header>
 
-        <!-- نوار تبلیغاتی مدرن در منتهی‌الیه بالا (زیر هدر) -->
-        <div id="ad-banner-bar" class="ad-banner-bar">
+        <!-- ADVERTISEMENT BANNER -->
+        <div class="ad-banner-bar" id="ad-banner">
             <div class="ad-content">
-                <span class="ad-badge">ویژه 🇨🇭</span>
-                <span id="ad-text-el" class="ad-text">پلتفرم جهانی نوو-بی؛ فرصت استثنایی توسعه شبکه و سرمایه‌گذاری بین‌المللی</span>
+                <span class="ad-badge">پروژه ویژه</span>
+                <span class="ad-text" id="txt-ad-el">پلتفرم جهانی نوآوری؛ فرصت استثنایی توسعه شبکه و سرمایه‌گذاری بین‌المللی</span>
             </div>
-            <button class="ad-close-btn" onclick="closeAdBanner()">×</button>
+            <button class="ad-close-btn" onclick="closeAdBanner()">&times;</button>
         </div>
 
+        <!-- ZONE 2: MAIN GIS MAP SECTION WITH N&B WATERMARK -->
         <div class="globe-stage-wrapper">
-            <div id="gis-globe-root"></div>
+            <!-- Phase 10 Yellow Corner Badge -->
+            <div class="phase-10-badge">10</div>
+
+            <!-- Giant Watermark N B Overlay -->
+            <div class="nb-watermark-overlay">
+                <span class="watermark-letter">N</span>
+                <span class="watermark-letter">B</span>
+            </div>
+
+            <!-- Leaflet Map Canvas -->
+            <div id="gis-globe-root">
+                <div id="live-map-canvas"></div>
+            </div>
+
+            <!-- Map Floating Legend -->
+            <div class="map-legend-box">
+                <div class="legend-item"><span class="dot participant"></span> Participants</div>
+                <div class="legend-item"><span class="dot networker"></span> Networkers</div>
+                <div class="legend-item"><span class="dot project"></span> Projects</div>
+                <div class="legend-item"><span class="dot china"></span> China</div>
+            </div>
         </div>
 
-        <!-- داک کنترل یکپارچه پایین صفحه (Command Bottom Dock) -->
+        <!-- ZONE 3 & 4: COMMAND BOTTOM DOCK (Stats, Dice, Challenge Steps) -->
         <div class="command-bottom-dock">
             
-            <!-- ردیف بالای داک: باکس چپ، نمودارهای مرکزی، و باکس راست (تاس + سرمایه) -->
+            <!-- Top Dock Row: Stats, Countries & Dice -->
             <div class="dock-top-row">
-                <!-- باکس چپ -->
+                <!-- Participants Counter & Leaderboard -->
                 <div class="step-box dock-side-box">
-                    <div class="box-title">
-                        <span>گام ۶: شبکه</span>
-                        <span>[گسترش]</span>
+                    <div class="counter-header">
+                        <i class="fa-solid fa-user-group"></i>
+                        <span class="box-title">Participants Counter</span>
                     </div>
-                    <button onclick="openGlobalNetwork()" class="btn-gold" style="margin-top: 4px; padding: 3px;">فعال‌سازی</button>
+                    <div class="counter-value" id="participantCount">10</div>
+                    <span class="sub-label">Leaderboard</span>
                 </div>
 
-                <!-- نمودارهای میله‌ای مرکزی با پرچم و نام کشور در منتهی‌الیه چپ -->
+                <!-- Country Progress Bars -->
                 <div class="bottom-mini-charts-container">
                     <div class="micro-chart-row">
                         <div class="micro-country-info">
                             <span class="country-flag">🇨🇭</span>
-                            <span class="micro-chart-label">سوییس</span>
+                            <span class="micro-chart-label">SWT</span>
                         </div>
-                        <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 75%;"></div></div>
+                        <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 85%;"></div></div>
+                        <span class="bar-val">0</span>
                     </div>
                     <div class="micro-chart-row">
                         <div class="micro-country-info">
                             <span class="country-flag">🇩🇰</span>
-                            <span class="micro-chart-label">دانمارک</span>
+                            <span class="micro-chart-label">Den</span>
                         </div>
                         <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 60%;"></div></div>
+                        <span class="bar-val">0</span>
                     </div>
                     <div class="micro-chart-row">
                         <div class="micro-country-info">
                             <span class="country-flag">🇸🇬</span>
-                            <span class="micro-chart-label">سنگاپور</span>
+                            <span class="micro-chart-label">Sin</span>
                         </div>
-                        <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 85%;"></div></div>
+                        <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 45%;"></div></div>
+                        <span class="bar-val">0</span>
                     </div>
                 </div>
 
-                <!-- خوشه سمت راست (باکس سرمایه + تاس شانس کنار هم) -->
-                <div class="dock-right-cluster">
-                    <div class="step-box small-mini-box">
-                        <div class="box-title" style="margin-bottom: 2px;">
-                            <span>گام ۵: سرمایه</span>
-                        </div>
-                        <button onclick="finalizeTemple()" class="btn-gold" style="padding: 2px 4px; font-size: 7px;">دریافت</button>
-                    </div>
-                    
-                    <!-- تاس شانس -->
-                    <div class="step-box dice-card-box" id="floating-polyhedral-dice" onclick="rollPolyhedralDice()" title="پرتاب تاس شانس">
-                        <div class="dice-icon-wrapper">
-                            <svg viewBox="0 0 100 100" class="d20-svg">
-                                <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#064e3b" stroke="#f59e0b" stroke-width="3"/>
-                                <polygon points="50,5 50,50 10,25" fill="#047857" stroke="#fbbf24" stroke-width="2"/>
-                                <polygon points="50,5 90,25 50,50" fill="#10b981" stroke="#fbbf24" stroke-width="2"/>
-                                <polygon points="10,25 50,50 10,75" fill="#065f46" stroke="#fbbf24" stroke-width="2"/>
-                                <polygon points="90,25 90,75 50,50" fill="#059669" stroke="#fbbf24" stroke-width="2"/>
-                                <polygon points="10,75 50,50 50,95" fill="#047857" stroke="#fbbf24" stroke-width="2"/>
-                                <polygon points="90,75 50,95 50,50" fill="#10b981" stroke="#fbbf24" stroke-width="2"/>
-                                <text x="50" y="58" font-size="22" font-weight="bold" fill="#fef3c7" text-anchor="middle" id="dice-val-text">12</text>
-                            </svg>
-                        </div>
+                <!-- D20 Polyhedral Dice -->
+                <div class="step-box dice-card-box" id="diceContainer" onclick="rollPolyhedralDice()">
+                    <div class="dice-icon-wrapper">
+                        <svg viewBox="0 0 100 100" class="d20-svg">
+                            <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="#fef08a" stroke="#ca8a04" stroke-width="3"/>
+                            <polygon points="50,5 50,50 10,25" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
+                            <polygon points="50,5 50,50 90,25" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
+                            <polygon points="10,25 50,50 10,75" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
+                            <polygon points="90,25 50,50 90,75" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
+                            <polygon points="10,75 50,50 50,95" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
+                            <polygon points="90,75 50,50 50,95" fill="none" stroke="#ca8a04" stroke-width="1.5"/>
+                            <text x="50" y="58" font-size="22" text-anchor="middle" fill="#854d0e" font-weight="bold" id="diceVal">D20</text>
+                        </svg>
                     </div>
                 </div>
             </div>
 
-            <!-- ردیف پایین داک: ۴ باکس اصلی گام‌ها -->
+            <!-- Challenge Steps Row -->
             <div class="steps-container">
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۱: کلمات ($2)</span>
-                        <span>[۷ روز]</span>
+                <!-- Step 1: Words -->
+                <div class="step-box challenge-bubble">
+                    <div class="pencil-badge"><i class="fa-solid fa-pencil"></i></div>
+                    <div class="box-title">Words Challenge</div>
+                    <p class="step-desc">Rules to access progression</p>
+                    <div class="input-group">
+                        <input type="text" id="user-word-input" placeholder="کلمات کلیدی...">
+                        <button class="btn-enter" onclick="checkWordSubmission()">Enters</button>
                     </div>
-                    <input type="text" id="user-word-input" class="input-custom" placeholder="کلمه...">
-                    <button onclick="checkWordSubmission()" class="btn-gold">ثبت</button>
+                    <div class="payment-node">[P]</div>
                 </div>
 
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۲: عناوین ($4)</span>
-                        <span>[۸ روز]</span>
+                <!-- Step 2: Titles -->
+                <div class="step-box challenge-bubble">
+                    <div class="box-title">Titles Challenge</div>
+                    <p class="step-desc">Rules to access progression</p>
+                    <div class="input-group">
+                        <input type="text" id="user-title-input" placeholder="عنوان پیشنهادی...">
+                        <button class="btn-enter" onclick="checkTitleSubmission()">Enters</button>
                     </div>
-                    <input type="text" id="user-title-input" class="input-custom" placeholder="عنوان...">
-                    <button onclick="checkTitleSubmission()" class="btn-gold">پرداخت ۴$</button>
+                    <div class="payment-node">[P]</div>
                 </div>
 
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۳: بیزینس پلن</span>
-                        <span>[روز ۸-۹]</span>
+                <!-- Step 3: Webinar Stage -->
+                <div class="step-box challenge-bubble">
+                    <div class="box-title">Webinar Stage</div>
+                    <p class="step-desc">Rules to access progression</p>
+                    <div class="input-group">
+                        <button class="btn-enter btn-full" onclick="joinStageWebinar()">Enters</button>
                     </div>
-                    <input type="text" id="user-proposal-input" class="input-custom" placeholder="لینک پلن...">
-                    <button onclick="checkProposalSubmission()" class="btn-gold">ارسال</button>
-                </div>
-
-                <div class="step-box">
-                    <div class="box-title">
-                        <span>گام ۴: وبینار زنده</span>
-                        <span>[روز ۱۰]</span>
-                    </div>
-                    <button onclick="joinStageWebinar()" class="btn-gold" style="margin-top: 10px;">ورود</button>
+                    <div class="payment-node">[P]</div>
                 </div>
             </div>
+
+            <!-- ZONE 5: CHAT ROOM & FOOTER AD -->
+            <div class="zone5-container">
+                <div class="chat-room-box">
+                    <div class="chat-title">Challenge Chat Room</div>
+                    <div class="chat-messages" id="chatMessages">
+                        <p>[1:32:38] @User1: Nice map</p>
+                        <p>[1:32:38] @User2: V</p>
+                        <p>[1:42:38] @User1: Working on Words Challenge</p>
+                        <p>[1:42:38] @User1: Bh</p>
+                        <p>[1:42:38] @User2: Dice rolled!</p>
+                        <p>[1:43:38] @User3: Mare</p>
+                        <p>[1:43:38] @User3: Dice rolled!</p>
+                    </div>
+                    <div class="chat-input-row">
+                        <input type="text" id="chatInput" placeholder="پیام خود را بنویسید...">
+                        <button onclick="sendChatMessage()">Send</button>
+                    </div>
+                </div>
+
+                <div class="right-companion-panel">
+                    <!-- Space for dynamic analysis or extra reports -->
+                </div>
+            </div>
+
+            <!-- FOOTER BANNER -->
+            <footer class="footer-ad-bar">
+                <span>Advertisements</span>
+                <span class="highlight">FEATURED PROJECT: MICRO-EQUITY OPPORTUNITY</span>
+                <span class="highlight">FEATURED PROJECT: MICRO-EQUITY OPPORTUNITY</span>
+            </footer>
+
         </div>
     </div>
 
+    <!-- JS SCRIPTS -->
     <script src="C02-config.js"></script>
     <script src="C06-landing-gateway.js"></script>
-    <script src="C10-gis-main-map.js?v=29.0"></script>
+    <script src="C07-audio.js"></script>
+    <script src="C10-gis-main-map.js"></script>
     <script src="C12-challenge-group1-words.js"></script>
     <script src="C13-challenge-group2-titles.js"></script>
-    <script src="C14-challenge-group3-proposals.js"></script>
+    <script src="C14-challenge-group3-tender.js"></script>
     <script src="C15-micro-equity-engine.js"></script>
+    <script src="C18-navigation-controls.js"></script>
+    <script src="C20-security-anti-cheat.js"></script>
 
     <script>
+        // Inline Helper for Clock & Roll
+        function updateClock() {
+            const now = new Date();
+            const utcString = now.toUTCString().split(' ')[4] + ' UTC';
+            document.getElementById('liveClock').innerText = utcString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
         function closeAdBanner() {
-            const banner = document.getElementById('ad-banner-bar');
-            if (banner) {
-                banner.style.display = 'none';
-            }
+            document.getElementById('ad-banner').style.display = 'none';
         }
 
         function rollPolyhedralDice() {
-            const diceEl = document.getElementById('floating-polyhedral-dice');
-            const textEl = document.getElementById('dice-val-text');
-            
+            const diceEl = document.getElementById('diceContainer');
+            const textEl = document.getElementById('diceVal');
             diceEl.classList.add('rolling-anim');
-            
             let count = 0;
             const interval = setInterval(() => {
-                const rand = Math.floor(Math.random() * 12) + 1;
+                const rand = Math.floor(Math.random() * 20) + 1;
                 textEl.textContent = rand;
                 count++;
-                if (count > 12) {
+                if (count > 10) {
                     clearInterval(interval);
                     diceEl.classList.remove('rolling-anim');
-                    const finalRes = Math.floor(Math.random() * 12) + 1;
-                    textEl.textContent = finalRes;
                 }
-            }, 60);
+            }, 50);
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            if (input.value.trim() !== '') {
+                const msgBox = document.getElementById('chatMessages');
+                const p = document.createElement('p');
+                const time = new Date().toLocaleTimeString();
+                p.textContent = `[${time}] @Me: ${input.value}`;
+                msgBox.appendChild(p);
+                input.value = '';
+                msgBox.scrollTop = msgBox.scrollHeight;
+            }
         }
     </script>
 </body>
