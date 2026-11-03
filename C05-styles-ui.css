@@ -1,34 +1,85 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - STACKED CHALLENGES, MONITOR & CHAT BELOW (C05)
+   NOVO-BAY UI STYLES - STRICT EQUAL HEIGHT & UNDER-MAP BARS (C05)
    ========================================================== */
 
+/* Full-Width Country Bars Directly Under Map */
+.country-bars-under-map {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 2px solid #bfdbfe;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.country-bars-under-map .micro-chart-row {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.country-bars-under-map .micro-country-info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 55px;
+}
+
+.country-bars-under-map .micro-bar-track {
+    flex: 1;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.country-bars-under-map .micro-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 5px;
+}
+
+.country-bars-under-map .bar-val {
+    font-size: 10px;
+    font-weight: bold;
+    color: #475569;
+    min-width: 30px;
+}
+
+/* Command Bottom Dock Main Container */
 .command-bottom-dock {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 12px 16px;
+    gap: 14px;
+    padding: 14px 16px;
     background: #e0f2fe;
     width: 100%;
 }
 
-/* Main Challenges & Monitor Row */
+/* Challenge Row & Monitor Display Grid Layout (Flex Equal Stretch) */
 .challenge-display-row {
     display: flex;
     gap: 14px;
     width: 100%;
-    align-items: stretch;
+    align-items: stretch; /* Forces equal height between Left Stack & Right Display */
 }
 
-/* Left Stacked Column (3 Challenges) */
+/* Left Stacked Column */
 .stacked-challenges-column {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 10px;
     min-width: 290px;
 }
 
-/* Stacked Challenge Card with Payment Node on Right Edge */
 .challenge-bubble-stacked {
     background: #eff6ff;
     border: 2px solid #93c5fd;
@@ -39,6 +90,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex: 1;
 }
 
 .challenge-main-content {
@@ -115,24 +167,17 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Right Column: Companion Monitor + Chat Room Directly Underneath */
-.right-monitor-chat-column {
-    flex: 1.2;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-width: 290px;
-}
-
+/* Right Companion Panel - Exactly Equal Height to Left Stack */
 .right-companion-panel-large {
+    flex: 1.2;
     background: #ffffff;
     border: 2px solid #93c5fd;
-    border-radius: 12px;
+    border-radius: 14px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
-    height: 165px;
+    min-width: 290px;
 }
 
 .companion-header {
@@ -160,7 +205,7 @@
 }
 
 .companion-body {
-    padding: 12px;
+    padding: 14px;
     flex: 1;
     overflow-y: auto;
     font-size: 11px;
@@ -175,11 +220,11 @@
     height: 100%;
     color: #64748b;
     text-align: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .pulse-icon {
-    font-size: 22px;
+    font-size: 26px;
     color: #3b82f6;
     animation: pulseIcon 2s infinite ease-in-out;
 }
@@ -189,7 +234,14 @@
     50% { transform: scale(1.15); opacity: 1; }
 }
 
-/* Chat Room Box (Directly Under White Monitor) */
+/* Lower Section: Chat Room Box & Bottom Tools */
+.lower-interactive-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
 .chat-room-box {
     width: 100%;
     background: #fef9c3;
@@ -198,7 +250,7 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    height: 125px;
+    height: 130px;
 }
 
 .chat-title {
@@ -243,7 +295,7 @@
     cursor: pointer;
 }
 
-/* Bottom Tools Row: Participants, Country Bars, Rewards & Dice */
+/* Bottom Tools Row */
 .dock-bottom-tools-row {
     display: flex;
     align-items: center;
@@ -251,7 +303,6 @@
     gap: 10px;
     width: 100%;
     flex-wrap: wrap;
-    margin-top: 4px;
 }
 
 .dock-side-box {
@@ -293,55 +344,6 @@
     text-transform: uppercase;
 }
 
-/* Mini Country Progress Bars */
-.bottom-mini-charts-container {
-    flex: 2;
-    background: #ffffff;
-    border: 1px solid #bfdbfe;
-    border-radius: 10px;
-    padding: 8px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-width: 240px;
-}
-
-.micro-chart-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.micro-country-info {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    width: 50px;
-    font-size: 10px;
-    font-weight: bold;
-}
-
-.micro-bar-track {
-    flex: 1;
-    height: 8px;
-    background: #e2e8f0;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.micro-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-    border-radius: 4px;
-}
-
-.bar-val {
-    font-size: 9px;
-    font-weight: bold;
-    color: #64748b;
-}
-
-/* Dice Box */
 .dice-card-box-borderless {
     background: transparent;
     border: none;
@@ -473,5 +475,9 @@
 @media (max-width: 768px) {
     .challenge-display-row {
         flex-direction: column;
+    }
+    .country-bars-under-map {
+        flex-direction: column;
+        gap: 8px;
     }
 }
