@@ -1,25 +1,25 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - HORIZONTAL COUNTRY STRIP UNDER MAP (C05)
+   NOVO-BAY UI STYLES - FULL WIDTH COUNTRY BARS (C05)
    ========================================================== */
 
-/* Full-Width Single-Line Horizontal Strip Directly Under Map */
+/* Full-Width Parallel Country Bars (Right to Left) */
 .country-bars-horizontal-strip {
     width: 100%;
     background: #ffffff;
     border-bottom: 2px solid #bfdbfe;
-    padding: 10px 18px;
+    padding: 12px 18px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    flex-direction: column; /* Stacked parallel rows */
+    gap: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
 .horizontal-bar-item {
-    flex: 1;
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 15px;
 }
 
 .horizontal-bar-item .micro-country-info {
@@ -28,28 +28,29 @@
     gap: 6px;
     font-size: 11px;
     font-weight: bold;
-    min-width: 60px;
+    min-width: 65px;
 }
 
 .horizontal-bar-item .micro-bar-track {
-    flex: 1;
-    height: 10px;
+    flex: 1; /* Stretches from right to left across full width */
+    height: 12px;
     background: #e2e8f0;
-    border-radius: 5px;
+    border-radius: 6px;
     overflow: hidden;
 }
 
 .horizontal-bar-item .micro-bar-fill {
     height: 100%;
     background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-    border-radius: 5px;
+    border-radius: 6px;
 }
 
 .horizontal-bar-item .bar-val {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
     color: #475569;
-    min-width: 32px;
+    min-width: 35px;
+    text-align: left;
 }
 
 /* Command Bottom Dock */
@@ -411,7 +412,7 @@
 }
 
 .status-pill {
-    display inline-block;
+    display: inline-block;
     padding: 4px 12px;
     border-radius: 12px;
     font-size: 11px;
@@ -475,9 +476,5 @@
 @media (max-width: 768px) {
     .challenge-display-row {
         flex-direction: column;
-    }
-    .country-bars-horizontal-strip {
-        flex-direction: column;
-        gap: 8px;
     }
 }
