@@ -1,326 +1,48 @@
-/* ==========================================================
-   NOVO-BAY UI STYLES - TROPHY, WEBINAR & DOCKS FIX (C05)
-   ========================================================== */
-
-.command-bottom-dock {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 12px 16px;
-    background: #e0f2fe;
-    width: 100%;
-}
-
-/* Top Dock Row with Counter, Country Bars, Trophy & Dice */
-.dock-top-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    flex-wrap: wrap;
-}
-
-.dock-side-box {
-    background: #ffffff;
-    border: 1px solid #bfdbfe;
-    border-radius: 10px;
-    padding: 8px 12px;
-    min-width: 120px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-    flex: 1;
-}
-
-.trophy-box {
-    border: 1px solid #fde047;
-    background: #fefce8;
-}
-
-.counter-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    font-size: 10px;
-    color: #1e40af;
-    font-weight: bold;
-}
-
-.counter-value {
-    font-size: 22px;
-    font-weight: 900;
-    color: #1e293b;
-    margin: 2px 0;
-}
-
-.sub-label {
-    font-size: 9px;
-    color: #64748b;
-    text-transform: uppercase;
-}
-
-/* Mini Country Progress Bars */
-.bottom-mini-charts-container {
-    flex: 2;
-    background: #ffffff;
-    border: 1px solid #bfdbfe;
-    border-radius: 10px;
-    padding: 8px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-width: 240px;
-}
-
-.micro-chart-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.micro-country-info {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    width: 50px;
-    font-size: 10px;
-    font-weight: bold;
-}
-
-.micro-bar-track {
-    flex: 1;
-    height: 8px;
-    background: #e2e8f0;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.micro-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-    border-radius: 4px;
-}
-
-.bar-val {
-    font-size: 9px;
-    font-weight: bold;
-    color: #64748b;
-}
-
-/* D20 Dice Box */
-.dice-card-box {
-    background: #ffffff;
-    border: 2px solid #facc15;
-    border-radius: 10px;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgba(234, 179, 8, 0.2);
-    transition: transform 0.2s ease;
-    flex-shrink: 0;
-}
-
-.dice-card-box:hover {
-    transform: scale(1.05);
-}
-
-.rolling-anim {
-    animation: spinDice 0.4s infinite linear;
-}
-
-@keyframes spinDice {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.d20-svg {
-    width: 46px;
-    height: 46px;
-}
-
-/* Challenge Steps Container (3 Bubbles Side-by-Side) */
-.steps-container {
-    display: flex;
-    gap: 12px;
-    justify-content: space-between;
-    width: 100%;
-    flex-wrap: wrap;
-}
-
-.challenge-bubble {
-    flex: 1;
-    min-width: 250px;
-    background: #eff6ff;
-    border: 2px solid #93c5fd;
-    border-radius: 14px;
-    padding: 12px;
-    position: relative;
-    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.08);
-}
-
-.pencil-badge {
-    position: absolute;
-    top: -10px;
-    left: 14px;
-    background: #facc15;
-    color: #854d0e;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-}
-
-.box-title {
-    font-size: 13px;
-    font-weight: 800;
-    color: #1e3a8a;
-    margin-bottom: 2px;
-}
-
-.step-desc {
-    font-size: 10px;
-    color: #64748b;
-    margin-bottom: 8px;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.input-group input {
-    padding: 6px 8px;
-    border: 1px solid #bfdbfe;
-    border-radius: 4px;
-    font-size: 11px;
-    width: 100%;
-}
-
-.btn-enter {
-    background: #2563eb;
-    color: #ffffff;
-    border: none;
-    padding: 6px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 11px;
-    width: 100%;
-}
-
-.btn-enter:hover {
-    background: #1d4ed8;
-}
-
-.payment-node {
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #991b1b;
-    color: #ffffff;
-    font-size: 9px;
-    font-weight: bold;
-    padding: 1px 6px;
-    border-radius: 3px;
-    border: 1px solid #f87171;
-}
-
-/* Zone 5: Chat Room & Companion Box */
-.zone5-container {
-    display: flex;
-    gap: 12px;
-    width: 100%;
-    flex-wrap: wrap;
-}
-
-.chat-room-box {
-    flex: 1;
-    min-width: 280px;
-    background: #fef9c3;
-    border: 1px solid #fde047;
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    height: 160px;
-}
-
-.chat-title {
-    font-size: 12px;
-    font-weight: bold;
-    color: #854d0e;
-    margin-bottom: 4px;
-}
-
-.chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    font-size: 10px;
-    font-family: monospace;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    color: #334155;
-}
-
-.chat-input-row {
-    display: flex;
-    gap: 4px;
-    margin-top: 4px;
-}
-
-.chat-input-row input {
-    flex: 1;
-    padding: 3px 6px;
-    border-radius: 3px;
-    border: 1px solid #fde047;
-    font-size: 10px;
-}
-
-.chat-input-row button {
-    background: #ca8a04;
-    color: #ffffff;
-    border: none;
-    padding: 3px 8px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
+/* Connected Display Panel & Glassmorphism Modal */
 .right-companion-panel {
     flex: 1;
     min-width: 280px;
     background: #ffffff;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #93c5fd;
     border-radius: 10px;
-    height: 160px;
-}
-
-/* Footer Ad Bar */
-.footer-ad-bar {
-    background: #facc15;
-    color: #78350f;
-    padding: 5px 12px;
-    font-size: 10px;
-    font-weight: bold;
+    height: 170px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 2px solid #eab308;
-    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.footer-ad-bar .highlight {
-    color: #991b1b;
+/* Glassmorphic Expanded Modal Mode (4-5mm Margin from Screen Edges) */
+.glass-modal-expanded {
+    position: fixed !important;
+    top: 18px !important;
+    left: 18px !important;
+    right: 18px !important;
+    bottom: 18px !important;
+    width: auto !important;
+    height: auto !important;
+    z-index: 99999 !important;
+    background: rgba(255, 255, 255, 0.83) !important;
+    backdrop-filter: blur(14px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+    border: 2px solid rgba(147, 197, 253, 0.7) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25) !important;
+}
+
+.glass-modal-expanded .companion-header {
+    background: rgba(239, 246, 255, 0.88);
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(147, 197, 253, 0.6);
+}
+
+.glass-modal-expanded .companion-title {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.glass-modal-expanded .companion-body {
+    padding: 24px;
+    font-size: 14px;
 }
