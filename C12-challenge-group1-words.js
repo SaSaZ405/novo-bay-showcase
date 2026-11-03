@@ -1,51 +1,63 @@
-// C12-challenge-group1-words.js - Word Submission & VIP Verification Engine (Merged)
+/* ==========================================================
+   NOVO-BAY CHALLENGE CONTROLLER & GLASS DISPLAY GATEWAY
+   ========================================================== */
 
-function checkWordSubmission() {
-    // پشتیبانی از هر دو شناسه ورودی (user-word-input و hourlyWordInput) برای سازگاری کامل با صفحه
-    const wordInput = document.getElementById('user-word-input') || document.getElementById('hourlyWordInput');
-    const word = wordInput ? wordInput.value.trim() : '';
+function activateChallengeDisplay(type) {
+    const displayTitle = document.getElementById('companionTitle');
+    const displayBody = document.getElementById('companionBodyContent');
 
-    if (!word) {
-        alert('لطفاً کلمه یا ایده خود را وارد کنید.');
-        return;
+    if (type === 'words') {
+        const val = document.getElementById('user-word-input').value.trim() || 'واژگان کلیدی چالش';
+        displayTitle.innerHTML = `<i class="fa-solid fa-pencil" style="color:#d97706;"></i> پردازش زنده چالش کلمات: ${val}`;
+        displayBody.innerHTML = `
+            <div class="active-challenge-view">
+                <div class="status-pill active">چالش کلمات کلیدی فعال شد</div>
+                <h4>ورودی ثبت‌شده: <span style="color:#2563eb;">${val}</span></h4>
+                <p>سیستم در حال ارزیابی وزن معنایی کلمه در الگوریتم‌های شبکه است...</p>
+                <div class="loading-bar-shim"><div class="fill"></div></div>
+            </div>
+        `;
+    } else if (type === 'titles') {
+        const val = document.getElementById('user-title-input').value.trim() || 'عنوان پیشنهادی چالش';
+        displayTitle.innerHTML = `<i class="fa-solid fa-heading" style="color:#2563eb;"></i> پردازش زنده چالش عناوین: ${val}`;
+        displayBody.innerHTML = `
+            <div class="active-challenge-view">
+                <div class="status-pill active">چالش ثبت عنوان فعال شد</div>
+                <h4>عنوان ثبت‌شده: <span style="color:#2563eb;">${val}</span></h4>
+                <p>در حال تطبیق با استانداردهای ساختاری و مالکیت معنوی طرح...</p>
+                <div class="loading-bar-shim"><div class="fill"></div></div>
+            </div>
+        `;
+    } else if (type === 'webinar') {
+        displayTitle.innerHTML = `<i class="fa-solid fa-video" style="color:#dc2626;"></i> اتاق زنده وبینار و مناقصه بین‌المللی`;
+        displayBody.innerHTML = `
+            <div class="active-challenge-view">
+                <div class="status-pill active" style="background:#fee2e2; color:#991b1b;">استیج وبینار فعال است</div>
+                <h4>اتصال به پنل اصلی ارائه و ویدیو کنفرانس چالش</h4>
+                <p>کلیه تعاملات زنده، آمار شرکت‌کنندگان و مناقصات لحظه‌ای در این صفحه نمایش داده می‌شود.</p>
+                <button class="stage-join-btn" onclick="expandGlassDisplay()">بزرگ‌نمایی کامل استیج</button>
+            </div>
+        `;
     }
 
-    // گرفتن ایمیل ثبت‌شده کاربر از حافظه مرورگر یا ورودی فرم
-    const userEmailInput = document.getElementById('userEmailInput');
-    const currentEmail = (userEmailInput && userEmailInput.value.trim()) 
-        ? userEmailInput.value.trim().toLowerCase() 
-        : (localStorage.getItem('novo_user_email') || '').toLowerCase();
-
-    // ایمیل استثنا (مدیر سیستم - سعیده جان)
-    const adminEmail = "s.zakeri.1365@gmail.com";
-
-    // اگر ایمیل شما بود، محدودیت زمانی کاملاً دور زده می‌شود و دسترسی VIP فعال می‌گردد
-    if (currentEmail === adminEmail) {
-        console.log("⚡ دسترسی ویژه مدیر (VIP Access): محدودیت یک‌ساعته لغو شد.");
-        alert(`[دسترسی مدیر VIP] بررسی ۵ ثانیه‌ای انجام شد؛ کلمه "${word}" با موفقیت ثبت گردید. شما می‌توانید بدون محدودیت تست کنید!`);
-        if (wordInput) wordInput.value = '';
-        return;
-    }
-
-    // بررسی محدودیت زمانی ۱ ساعته برای سایر کاربران عادی (در صورت تعریف کانفیگ)
-    if (typeof NOVO_CONFIG !== 'undefined' && NOVO_CONFIG.hourlyWordLimitMs) {
-        const lastSubmit = localStorage.getItem('novo_last_word_time');
-        const now = new Date().getTime();
-
-        if (lastSubmit && (now - lastSubmit < NOVO_CONFIG.hourlyWordLimitMs)) {
-            alert('شما در این ساعت شرکت کرده‌اید. لطفاً تا ساعت بعدی منتظر بمانید.');
-            return;
-        }
-        // ثبت زمان برای کاربران عادی
-        localStorage.setItem('novo_last_word_time', now);
-    }
-
-    // اعمال قوانین گام اول و بررسی ۵ ثانیه‌ای برای کاربر عادی
-    alert(`گام اول: بررسی ۵ ثانیه‌ای کلمه «${word}» با موفقیت انجام شد و در مارپیچ کلمات ثبت گردید!`);
-    if (wordInput) wordInput.value = '';
+    // هدایت خودکار به حالت بزرگ‌نمایی شیشه‌ای هنگام فعال‌سازی
+    expandGlassDisplay();
 }
 
-// تابع کمکی برای سازگاری با نام‌گذاری‌های قبلی
-function submitHourlyWord() {
-    return checkWordSubmission();
+function expandGlassDisplay() {
+    const panel = document.getElementById('companionDisplayPanel');
+    if (panel) {
+        panel.classList.add('glass-modal-expanded');
+        document.querySelector('.glass-expand-btn').style.display = 'none';
+        document.querySelector('.glass-close-btn').style.display = 'inline-block';
+    }
+}
+
+function shrinkGlassDisplay() {
+    const panel = document.getElementById('companionDisplayPanel');
+    if (panel) {
+        panel.classList.remove('glass-modal-expanded');
+        document.querySelector('.glass-expand-btn').style.display = 'inline-block';
+        document.querySelector('.glass-close-btn').style.display = 'none';
+    }
 }
