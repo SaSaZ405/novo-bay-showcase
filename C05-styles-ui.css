@@ -1,5 +1,5 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - FIXED ZONE 5 & COMPANION PANEL (C05)
+   NOVO-BAY UI STYLES - STACKED CHALLENGES & SIDE DISPLAY (C05)
    ========================================================== */
 
 .command-bottom-dock {
@@ -118,7 +118,6 @@
     cursor: pointer;
     gap: 4px;
     flex-shrink: 0;
-    transition: transform 0.2s ease;
 }
 
 .two-dice-svg-box {
@@ -142,43 +141,58 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-/* Challenge Steps Container */
-.steps-container {
+/* Main Row Layout: Stacked Challenges Left + Large Monitor Right */
+.challenge-display-row {
     display: flex;
-    gap: 12px;
-    justify-content: space-between;
+    gap: 14px;
     width: 100%;
-    flex-wrap: wrap;
+    align-items: stretch;
 }
 
-.challenge-bubble {
+/* Left Stacked Column */
+.stacked-challenges-column {
     flex: 1;
-    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 300px;
+}
+
+/* Stacked Challenge Card with Payment Node on Right Edge */
+.challenge-bubble-stacked {
     background: #eff6ff;
     border: 2px solid #93c5fd;
-    border-radius: 14px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 10px 14px;
     position: relative;
-    box-shadow: 0 3px 10px rgba(59, 130, 246, 0.08);
+    box-shadow: 0 3px 8px rgba(59, 130, 246, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.challenge-main-content {
+    flex: 1;
+    padding-left: 10px;
 }
 
 .pencil-badge {
     position: absolute;
-    top: -10px;
-    left: 14px;
+    top: -8px;
+    left: 10px;
     background: #facc15;
     color: #854d0e;
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .box-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 800;
     color: #1e3a8a;
     margin-bottom: 2px;
@@ -187,129 +201,67 @@
 .step-desc {
     font-size: 10px;
     color: #64748b;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .input-group {
     display: flex;
-    flex-direction: column;
     gap: 6px;
 }
 
 .input-group input {
-    padding: 6px 8px;
+    padding: 5px 8px;
     border: 1px solid #bfdbfe;
     border-radius: 4px;
     font-size: 11px;
-    width: 100%;
+    flex: 1;
 }
 
 .btn-enter {
     background: #2563eb;
     color: #ffffff;
     border: none;
-    padding: 6px;
+    padding: 5px 12px;
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
     font-size: 11px;
-    width: 100%;
 }
 
-.payment-node {
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
+/* Payment Badge on Right Side of the Box */
+.payment-node-right {
     background: #991b1b;
     color: #ffffff;
-    font-size: 9px;
-    font-weight: bold;
-    padding: 1px 6px;
-    border-radius: 3px;
-}
-
-/* Zone 5: Chat & Connected Companion Display Box (Side-by-Side Flex Layout) */
-.zone5-container {
-    display: flex;
-    gap: 12px;
-    width: 100%;
-    flex-wrap: nowrap;
-    align-items: stretch;
-}
-
-.chat-room-box {
-    flex: 1;
-    min-width: 0;
-    background: #fef9c3;
-    border: 1px solid #fde047;
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    height: 180px;
-}
-
-.chat-title {
-    font-size: 12px;
-    font-weight: bold;
-    color: #854d0e;
-    margin-bottom: 4px;
-}
-
-.chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    font-size: 10px;
-    font-family: monospace;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.chat-input-row {
-    display: flex;
-    gap: 4px;
-    margin-top: 4px;
-}
-
-.chat-input-row input {
-    flex: 1;
-    padding: 4px 6px;
-    border-radius: 3px;
-    border: 1px solid #fde047;
-    font-size: 10px;
-}
-
-.chat-input-row button {
-    background: #ca8a04;
-    color: #ffffff;
-    border: none;
-    padding: 4px 10px;
-    border-radius: 3px;
     font-size: 10px;
     font-weight: bold;
-    cursor: pointer;
+    padding: 8px 6px;
+    border-radius: 6px;
+    border: 1px solid #f87171;
+    writing-mode: vertical-lr;
+    text-align: center;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Connected Display Panel */
-.right-companion-panel {
-    flex: 1;
-    min-width: 0;
+/* Right Column: Large Companion Display (Matching Height of 3 Stacked Boxes) */
+.right-companion-panel-large {
+    flex: 1.2;
     background: #ffffff;
-    border: 1px solid #93c5fd;
-    border-radius: 10px;
-    height: 180px;
+    border: 2px solid #93c5fd;
+    border-radius: 14px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    min-height: 280px;
 }
 
 .companion-header {
     background: #eff6ff;
-    padding: 6px 12px;
+    padding: 8px 14px;
     border-bottom: 1px solid #bfdbfe;
     display: flex;
     align-items: center;
@@ -317,12 +269,9 @@
 }
 
 .companion-title {
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 12px;
+    font-weight: 800;
     color: #1e3a8a;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .companion-controls button {
@@ -335,7 +284,7 @@
 }
 
 .companion-body {
-    padding: 10px;
+    padding: 14px;
     flex: 1;
     overflow-y: auto;
     font-size: 11px;
@@ -350,11 +299,11 @@
     height: 100%;
     color: #64748b;
     text-align: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .pulse-icon {
-    font-size: 22px;
+    font-size: 26px;
     color: #3b82f6;
     animation: pulseIcon 2s infinite ease-in-out;
 }
@@ -364,7 +313,7 @@
     50% { transform: scale(1.15); opacity: 1; }
 }
 
-/* Glassmorphic Expanded Modal Mode (4-5mm Margin from Screen Edges) */
+/* Glassmorphic Expanded Modal Mode */
 .glass-modal-expanded {
     position: fixed !important;
     top: 18px !important;
@@ -429,15 +378,63 @@
     100% { transform: translateX(100%); }
 }
 
-.stage-join-btn {
-    background: #2563eb;
-    color: #fff;
+/* Chat Room Container */
+.zone5-container {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.chat-room-box {
+    width: 100%;
+    background: #fef9c3;
+    border: 1px solid #fde047;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+}
+
+.chat-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #854d0e;
+    margin-bottom: 4px;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 10px;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.chat-input-row {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.chat-input-row input {
+    flex: 1;
+    padding: 4px 6px;
+    border-radius: 3px;
+    border: 1px solid #fde047;
+    font-size: 10px;
+}
+
+.chat-input-row button {
+    background: #ca8a04;
+    color: #ffffff;
     border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 10px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 12px;
 }
 
 /* Footer Banner */
@@ -460,10 +457,10 @@
 
 /* Responsive adjustment for small screens */
 @media (max-width: 768px) {
-    .zone5-container {
+    .challenge-display-row {
         flex-direction: column;
     }
-    .chat-room-box, .right-companion-panel {
-        width: 100%;
+    .right-companion-panel-large {
+        min-height: 200px;
     }
 }
