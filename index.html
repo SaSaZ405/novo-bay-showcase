@@ -1,483 +1,418 @@
-/* ==========================================================
-   NOVO-BAY UI STYLES - STRICT EQUAL HEIGHT & UNDER-MAP BARS (C05)
-   ========================================================== */
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NOVO-BAY | Global Command Center</title>
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="C03-styles-core.css">
+    <link rel="stylesheet" href="C04-styles-gis.css">
+    <link rel="stylesheet" href="C05-styles-ui.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-ice-minimal">
 
-/* Full-Width Country Bars Directly Under Map */
-.country-bars-under-map {
-    width: 100%;
-    background: #ffffff;
-    border-bottom: 2px solid #bfdbfe;
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-}
+    <!-- COMMAND VIEWPORT MAIN -->
+    <div class="command-viewport" id="mainDashboard">
 
-.country-bars-under-map .micro-chart-row {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        <!-- ZONE 1: TOP HEADER BAR -->
+        <header class="top-header-bar">
+            <div class="header-row-primary">
+                <div class="header-brand-cluster">
+                    <div class="rotating-nb-logo">NB</div>
+                    <span class="brand-title">NOVO-BAY</span>
+                </div>
 
-.country-bars-under-map .micro-country-info {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    font-weight: bold;
-    min-width: 55px;
-}
+                <div class="header-center-tools">
+                    <div class="header-clock" id="liveClock">00:00:00 UTC</div>
+                </div>
 
-.country-bars-under-map .micro-bar-track {
-    flex: 1;
-    height: 10px;
-    background: #e2e8f0;
-    border-radius: 5px;
-    overflow: hidden;
-}
+                <div class="header-controls-cluster">
+                    <select id="language-switcher" class="lang-select" onchange="changeLanguage(this.value)">
+                        <option value="en">En</option>
+                        <option value="fa" selected>فارسی</option>
+                        <option value="ru">Русский</option>
+                        <option value="zh">中文</option>
+                        <option value="ar">العربية</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="it">Italiano</option>
+                    </select>
 
-.country-bars-under-map .micro-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-    border-radius: 5px;
-}
+                    <button class="header-btn" title="منو" onclick="togglePanel('sideMenu')">
+                        <i class="fa-solid fa-bars"></i> Menu
+                    </button>
+                </div>
+            </div>
 
-.country-bars-under-map .bar-val {
-    font-size: 10px;
-    font-weight: bold;
-    color: #475569;
-    min-width: 30px;
-}
+            <div class="header-row-secondary">
+                <div class="news-ticker">
+                    <i class="fa-solid fa-bullhorn news-icon"></i>
+                    <marquee scrollamount="4" behavior="scroll" direction="right" id="newsMarquee">
+                        آخرین اخبار و مناقصات: اطلاعیه ثبت پیشنهادات چالش ۱۰ روزه بین‌المللی NOVO-BAY | فرصت سرمایه‌گذاری میکرو-اکویتی فعال شد...
+                    </marquee>
+                </div>
 
-/* Command Bottom Dock Main Container */
-.command-bottom-dock {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 14px 16px;
-    background: #e0f2fe;
-    width: 100%;
-}
+                <div class="audio-player-mini">
+                    <button class="header-btn audio-btn" id="audioToggleBtn" onclick="toggleAudio()">
+                        <i class="fa-solid fa-music" id="playIcon"></i>
+                    </button>
 
-/* Challenge Row & Monitor Display Grid Layout (Flex Equal Stretch) */
-.challenge-display-row {
-    display: flex;
-    gap: 14px;
-    width: 100%;
-    align-items: stretch; /* Forces equal height between Left Stack & Right Display */
-}
+                    <div class="media-nav-btns">
+                        <button class="nav-btn"><i class="fa-solid fa-backward-step"></i></button>
+                        <button class="nav-btn"><i class="fa-solid fa-play"></i></button>
+                        <button class="nav-btn"><i class="fa-solid fa-forward-step"></i></button>
+                    </div>
+                </div>
+            </div>
+        </header>
 
-/* Left Stacked Column */
-.stacked-challenges-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 10px;
-    min-width: 290px;
-}
+        <!-- ADVERTISEMENT BANNER -->
+        <div class="ad-banner-bar" id="ad-banner">
+            <div class="ad-content">
+                <span class="ad-badge">پروژه ویژه</span>
+                <span class="ad-text" id="txt-ad-el">پلتفرم جهانی نوآوری؛ فرصت استثنایی توسعه شبکه و سرمایه‌گذاری بین‌المللی</span>
+            </div>
+            <button class="ad-close-btn" onclick="closeAdBanner()">&times;</button>
+        </div>
 
-.challenge-bubble-stacked {
-    background: #eff6ff;
-    border: 2px solid #93c5fd;
-    border-radius: 12px;
-    padding: 10px 14px;
-    position: relative;
-    box-shadow: 0 3px 8px rgba(59, 130, 246, 0.08);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex: 1;
-}
+        <!-- ZONE 2: ENLARGED & WIDE GIS MAP SECTION -->
+        <div class="globe-stage-wrapper">
+            <div class="phase-10-badge-bottom-left">
+                <span class="fraction-text" id="dayFractionDisplay"><strong id="currentDayVal">5</strong><span class="slash-red">/</span><span id="cycleEditionVal">1</span></span>
+            </div>
 
-.challenge-main-content {
-    flex: 1;
-    padding-left: 10px;
-}
+            <div class="nb-watermark-overlay">
+                <span class="watermark-letter">NB</span>
+            </div>
 
-.pencil-badge {
-    position: absolute;
-    top: -8px;
-    left: 10px;
-    background: #facc15;
-    color: #854d0e;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-}
+            <div id="gis-globe-root">
+                <div id="live-map-canvas"></div>
+            </div>
 
-.box-title {
-    font-size: 12px;
-    font-weight: 800;
-    color: #1e3a8a;
-    margin-bottom: 2px;
-}
+            <div class="map-legend-box">
+                <div class="legend-item"><span class="dot participant"></span> Participants</div>
+                <div class="legend-item"><span class="dot networker"></span> Networkers</div>
+                <div class="legend-item"><span class="dot project"></span> Projects</div>
+                <div class="legend-item"><span class="dot china"></span> China</div>
+            </div>
+        </div>
 
-.step-desc {
-    font-size: 10px;
-    color: #64748b;
-    margin-bottom: 6px;
-}
+        <!-- HORIZONTAL SINGLE-LINE COUNTRY PROGRESS BARS DIRECTLY UNDER MAP -->
+        <div class="country-bars-horizontal-strip">
+            <div class="horizontal-bar-item">
+                <div class="micro-country-info">
+                    <span class="country-flag">🇨🇭</span>
+                    <span class="micro-chart-label">SWT</span>
+                </div>
+                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 85%;"></div></div>
+                <span class="bar-val">85%</span>
+            </div>
 
-.input-group {
-    display: flex;
-    gap: 6px;
-}
+            <div class="horizontal-bar-item">
+                <div class="micro-country-info">
+                    <span class="country-flag">🇩🇰</span>
+                    <span class="micro-chart-label">Den</span>
+                </div>
+                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 60%;"></div></div>
+                <span class="bar-val">60%</span>
+            </div>
 
-.input-group input {
-    padding: 5px 8px;
-    border: 1px solid #bfdbfe;
-    border-radius: 4px;
-    font-size: 11px;
-    flex: 1;
-}
+            <div class="horizontal-bar-item">
+                <div class="micro-country-info">
+                    <span class="country-flag">🇸🇬</span>
+                    <span class="micro-chart-label">Sin</span>
+                </div>
+                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 45%;"></div></div>
+                <span class="bar-val">45%</span>
+            </div>
+        </div>
 
-.btn-enter {
-    background: #2563eb;
-    color: #ffffff;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 11px;
-}
+        <!-- ZONE 3 & 4: COMMAND BOTTOM DOCK -->
+        <div class="command-bottom-dock">
+            
+            <!-- MAIN CHALLENGE & DISPLAY ROW (EQUAL HEIGHT ALIGNMENT) -->
+            <div class="challenge-display-row">
+                
+                <!-- Left Column: Stacked 3 Challenge Boxes -->
+                <div class="stacked-challenges-column" id="leftChallengesStack">
+                    <!-- 1. Words Challenge -->
+                    <div class="step-box challenge-bubble-stacked" id="boxWords">
+                        <div class="pencil-badge"><i class="fa-solid fa-pencil"></i></div>
+                        <div class="challenge-main-content">
+                            <div class="box-title">Words Challenge</div>
+                            <p class="step-desc">Rules to access progression</p>
+                            <div class="input-group">
+                                <input type="text" id="user-word-input" placeholder="کلمات کلیدی...">
+                                <button class="btn-enter" onclick="activateChallengeDisplay('words')">Enters</button>
+                            </div>
+                        </div>
+                        <div class="payment-node-right">[P]</div>
+                    </div>
 
-.payment-node-right {
-    background: #991b1b;
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 8px 6px;
-    border-radius: 6px;
-    border: 1px solid #f87171;
-    writing-mode: vertical-lr;
-    text-align: center;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+                    <!-- 2. Titles Challenge -->
+                    <div class="step-box challenge-bubble-stacked" id="boxTitles">
+                        <div class="challenge-main-content">
+                            <div class="box-title">Titles Challenge</div>
+                            <p class="step-desc">Rules to access progression</p>
+                            <div class="input-group">
+                                <input type="text" id="user-title-input" placeholder="عنوان پیشنهادی...">
+                                <button class="btn-enter" onclick="activateChallengeDisplay('titles')">Enters</button>
+                            </div>
+                        </div>
+                        <div class="payment-node-right">[P]</div>
+                    </div>
 
-/* Right Companion Panel - Exactly Equal Height to Left Stack */
-.right-companion-panel-large {
-    flex: 1.2;
-    background: #ffffff;
-    border: 2px solid #93c5fd;
-    border-radius: 14px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
-    min-width: 290px;
-}
+                    <!-- 3. Webinar Stage -->
+                    <div class="step-box challenge-bubble-stacked" id="boxWebinar">
+                        <div class="challenge-main-content">
+                            <div class="box-title">Webinar Stage</div>
+                            <p class="step-desc">Rules to access progression</p>
+                            <div class="input-group">
+                                <button class="btn-enter btn-full" onclick="activateChallengeDisplay('webinar')">Enters</button>
+                            </div>
+                        </div>
+                        <div class="payment-node-right">[P]</div>
+                    </div>
+                </div>
 
-.companion-header {
-    background: #eff6ff;
-    padding: 8px 14px;
-    border-bottom: 1px solid #bfdbfe;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+                <!-- Right Column: White Companion Monitor Display -->
+                <div class="right-companion-panel-large" id="companionDisplayPanel">
+                    <div class="companion-header">
+                        <span class="companion-title" id="companionTitle"><i class="fa-solid fa-desktop"></i> نمایشگر مرکزی سیستم</span>
+                        <div class="companion-controls">
+                            <button class="glass-expand-btn" title="بزرگ‌نمایی شیشه‌ای" onclick="expandGlassDisplay()">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                            <button class="glass-close-btn" title="بستن" onclick="shrinkGlassDisplay()" style="display:none;">
+                                <i class="fa-solid fa-compress"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="companion-body" id="companionBodyContent">
+                        <div class="display-placeholder">
+                            <i class="fa-solid fa-circle-nodes pulse-icon"></i>
+                            <p>هر یک از چالش‌های سمت چپ را فعال کنید تا عملکرد آن در این مانیتور زنده پردازش و نمایش داده شود.</p>
+                        </div>
+                    </div>
+                </div>
 
-.companion-title {
-    font-size: 12px;
-    font-weight: 800;
-    color: #1e3a8a;
-}
+            </div>
 
-.companion-controls button {
-    background: transparent;
-    border: none;
-    color: #2563eb;
-    cursor: pointer;
-    font-size: 12px;
-    padding: 2px 4px;
-}
+            <!-- LOWER SECTION: Chat Room Box & Bottom Tools -->
+            <div class="lower-interactive-section">
+                <!-- Chat Room Box -->
+                <div class="chat-room-box">
+                    <div class="chat-title">Challenge Chat Room</div>
+                    <div class="chat-messages" id="chatMessages">
+                        <p>[1:32:38] @User1: Nice map</p>
+                        <p>[1:42:38] @User1: Working on Challenges</p>
+                        <p>[1:43:38] @User3: Active session</p>
+                    </div>
+                    <div class="chat-input-row">
+                        <input type="text" id="chatInput" placeholder="پیام خود را بنویسید...">
+                        <button onclick="sendChatMessage()">Send</button>
+                    </div>
+                </div>
 
-.companion-body {
-    padding: 14px;
-    flex: 1;
-    overflow-y: auto;
-    font-size: 11px;
-    color: #334155;
-}
+                <!-- Bottom Tools: Participants, Rewards & Dice -->
+                <div class="dock-bottom-tools-row">
+                    <!-- Participants Counter -->
+                    <div class="step-box dock-side-box">
+                        <div class="counter-header">
+                            <i class="fa-solid fa-user-group"></i>
+                            <span class="box-title">Participants</span>
+                        </div>
+                        <div class="counter-value" id="participantCount">--</div>
+                        <span class="sub-label">Live Counter</span>
+                    </div>
 
-.display-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: #64748b;
-    text-align: center;
-    gap: 8px;
-}
+                    <!-- Rewards & Trophies -->
+                    <div class="step-box dock-side-box trophy-box">
+                        <div class="counter-header">
+                            <i class="fa-solid fa-trophy" style="color: #ca8a04;"></i>
+                            <span class="box-title">Rewards</span>
+                        </div>
+                        <div class="counter-value" style="font-size: 16px; color: #ca8a04;">🏆 10 Days</div>
+                        <span class="sub-label">Trophy Pass</span>
+                    </div>
 
-.pulse-icon {
-    font-size: 26px;
-    color: #3b82f6;
-    animation: pulseIcon 2s infinite ease-in-out;
-}
+                    <!-- Interactive Dice Box -->
+                    <div class="step-box dice-card-box-borderless" id="diceContainer" onclick="rollClassicDice()">
+                        <div class="two-dice-svg-box">
+                            <svg viewBox="0 0 120 52" class="two-dice-svg" id="diceSvg">
+                                <g id="die1Group" transform="translate(4, 2)">
+                                    <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
+                                    <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
+                                    <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
+                                    <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                                    <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
+                                    <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
+                                </g>
+                                <g id="die2Group" transform="translate(60, 2)">
+                                    <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
+                                    <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="dice-result-box" id="diceValBox">تاس‌ها: ۵ و ۱ (مجموع: ۶)</div>
+                    </div>
+                </div>
+            </div>
 
-@keyframes pulseIcon {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.15); opacity: 1; }
-}
+            <!-- FOOTER BANNER -->
+            <footer class="footer-ad-bar">
+                <span>Advertisements</span>
+                <span class="highlight">FEATURED PROJECT: MICRO-EQUITY OPPORTUNITY</span>
+                <span class="highlight">FEATURED PROJECT: MICRO-EQUITY OPPORTUNITY</span>
+            </footer>
 
-/* Lower Section: Chat Room Box & Bottom Tools */
-.lower-interactive-section {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-}
+        </div>
+    </div>
 
-.chat-room-box {
-    width: 100%;
-    background: #fef9c3;
-    border: 1px solid #fde047;
-    border-radius: 12px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    height: 130px;
-}
+    <!-- JS SCRIPTS -->
+    <script src="C02-config.js"></script>
+    <script src="C06-landing-gateway.js"></script>
+    <script src="C07-audio.js"></script>
+    <script src="C10-gis-main-map.js"></script>
+    <script src="C12-challenge-group1-words.js"></script>
+    <script src="C13-challenge-group2-titles.js"></script>
+    <script src="C14-challenge-group3-tender.js"></script>
+    <script src="C15-micro-equity-engine.js"></script>
+    <script src="C18-navigation-controls.js"></script>
+    <script src="C20-security-anti-cheat.js"></script>
 
-.chat-title {
-    font-size: 11px;
-    font-weight: bold;
-    color: #854d0e;
-    margin-bottom: 2px;
-}
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const utcString = now.toUTCString().split(' ')[4] + ' UTC';
+            document.getElementById('liveClock').innerText = utcString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
 
-.chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    font-size: 10px;
-    font-family: monospace;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
+        let currentDayNum = 5;
+        setInterval(() => {
+            currentDayNum = currentDayNum >= 10 ? 1 : currentDayNum + 1;
+            const badgeEl = document.getElementById('currentDayVal');
+            if (badgeEl) badgeEl.textContent = currentDayNum;
+        }, 1500);
 
-.chat-input-row {
-    display: flex;
-    gap: 4px;
-    margin-top: 4px;
-}
+        function closeAdBanner() {
+            document.getElementById('ad-banner').style.display = 'none';
+        }
 
-.chat-input-row input {
-    flex: 1;
-    padding: 4px 6px;
-    border-radius: 3px;
-    border: 1px solid #fde047;
-    font-size: 10px;
-}
+        function getDieDotsSVG(val) {
+            const dot = (cx, cy) => `<circle cx="${cx}" cy="${cy}" r="4.5" fill="#1e293b"/>`;
+            let dotsHTML = '';
+            
+            if (val === 1) {
+                dotsHTML += dot(23, 23);
+            } else if (val === 2) {
+                dotsHTML += dot(12, 12) + dot(34, 34);
+            } else if (val === 3) {
+                dotsHTML += dot(12, 12) + dot(23, 23) + dot(34, 34);
+            } else if (val === 4) {
+                dotsHTML += dot(12, 12) + dot(34, 12) + dot(12, 34) + dot(34, 34);
+            } else if (val === 5) {
+                dotsHTML += dot(12, 12) + dot(34, 12) + dot(23, 23) + dot(12, 34) + dot(34, 34);
+            } else if (val === 6) {
+                dotsHTML += dot(12, 12) + dot(34, 12) + dot(12, 23) + dot(34, 23) + dot(12, 34) + dot(34, 34);
+            }
+            return `<rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>` + dotsHTML;
+        }
 
-.chat-input-row button {
-    background: #ca8a04;
-    color: #ffffff;
-    border: none;
-    padding: 4px 10px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: bold;
-    cursor: pointer;
-}
+        function rollClassicDice() {
+            const d1 = Math.floor(Math.random() * 6) + 1;
+            const d2 = Math.floor(Math.random() * 6) + 1;
+            const sum = d1 + d2;
+            
+            document.getElementById('die1Group').innerHTML = getDieDotsSVG(d1);
+            document.getElementById('die2Group').innerHTML = getDieDotsSVG(d2);
+            document.getElementById('diceValBox').textContent = `تاس‌ها: ${d1} و ${d2} (مجموع: ${sum})`;
+            
+            const svgBox = document.getElementById('diceSvg');
+            svgBox.style.transform = "scale(1.15) rotate(8deg)";
+            setTimeout(() => {
+                svgBox.style.transform = "scale(1) rotate(0deg)";
+            }, 250);
+        }
 
-/* Bottom Tools Row */
-.dock-bottom-tools-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    flex-wrap: wrap;
-}
+        function activateChallengeDisplay(type) {
+            const displayTitle = document.getElementById('companionTitle');
+            const displayBody = document.getElementById('companionBodyContent');
 
-.dock-side-box {
-    background: #ffffff;
-    border: 1px solid #bfdbfe;
-    border-radius: 10px;
-    padding: 8px 12px;
-    min-width: 120px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-    flex: 1;
-}
+            if (type === 'words') {
+                const val = document.getElementById('user-word-input').value.trim() || 'واژگان عمومی';
+                displayTitle.innerHTML = `<i class="fa-solid fa-pencil" style="color:#d97706;"></i> پردازش چالش کلمات: ${val}`;
+                displayBody.innerHTML = `
+                    <div class="active-challenge-view">
+                        <div class="status-pill active">چالش واژگان فعال شد</div>
+                        <p><strong>ورودی کاربر:</strong> ${val}</p>
+                        <p>در حال تطبیق کلیدواژه‌ها با شبکه بین‌المللی NOVO-BAY...</p>
+                        <div class="loading-bar-shim"><div class="fill"></div></div>
+                    </div>
+                `;
+            } else if (type === 'titles') {
+                const val = document.getElementById('user-title-input').value.trim() || 'عنوان پیشنهادی';
+                displayTitle.innerHTML = `<i class="fa-solid fa-heading" style="color:#2563eb;"></i> پردازش چالش عناوین: ${val}`;
+                displayBody.innerHTML = `
+                    <div class="active-challenge-view">
+                        <div class="status-pill active">چالش عناوین فعال شد</div>
+                        <p><strong>عنوان ثبت‌شده:</strong> ${val}</p>
+                        <p>ارزیابی نمره‌دهی هوشمند و اعتبار سنجی لایه‌های حقوقی پروژه...</p>
+                        <div class="loading-bar-shim"><div class="fill"></div></div>
+                    </div>
+                `;
+            } else if (type === 'webinar') {
+                displayTitle.innerHTML = `<i class="fa-solid fa-video" style="color:#dc2626;"></i> اتاق زنده وبینار و مناقصه`;
+                displayBody.innerHTML = `
+                    <div class="active-challenge-view">
+                        <div class="status-pill active" style="background:#fee2e2; color:#991b1b;">استیج وبینار برخط</div>
+                        <p>ارتباط زنده با استیج بین‌المللی و بررسی پیشنهادات مناقصه...</p>
+                        <button class="stage-join-btn" onclick="expandGlassDisplay()">ورود به استیج بزرگ شیشه‌ای</button>
+                    </div>
+                `;
+            }
 
-.trophy-box {
-    border: 1px solid #fde047;
-    background: #fefce8;
-}
+            expandGlassDisplay();
+        }
 
-.counter-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    font-size: 10px;
-    color: #1e40af;
-    font-weight: bold;
-}
+        function expandGlassDisplay() {
+            const panel = document.getElementById('companionDisplayPanel');
+            if (panel) {
+                panel.classList.add('glass-modal-expanded');
+                const expandBtn = document.querySelector('.glass-expand-btn');
+                const closeBtn = document.querySelector('.glass-close-btn');
+                if (expandBtn) expandBtn.style.display = 'none';
+                if (closeBtn) closeBtn.style.display = 'inline-block';
+            }
+        }
 
-.counter-value {
-    font-size: 22px;
-    font-weight: 900;
-    color: #1e293b;
-    margin: 2px 0;
-}
+        function shrinkGlassDisplay() {
+            const panel = document.getElementById('companionDisplayPanel');
+            if (panel) {
+                panel.classList.remove('glass-modal-expanded');
+                const expandBtn = document.querySelector('.glass-expand-btn');
+                const closeBtn = document.querySelector('.glass-close-btn');
+                if (expandBtn) expandBtn.style.display = 'inline-block';
+                if (closeBtn) closeBtn.style.display = 'none';
+            }
+        }
 
-.sub-label {
-    font-size: 9px;
-    color: #64748b;
-    text-transform: uppercase;
-}
-
-.dice-card-box-borderless {
-    background: transparent;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    gap: 4px;
-    flex-shrink: 0;
-}
-
-.two-dice-svg-box {
-    width: 110px;
-    height: 50px;
-}
-
-.two-dice-svg {
-    width: 100%;
-    height: 100%;
-}
-
-.dice-result-box {
-    background: #ffffff;
-    border: 1px solid #93c5fd;
-    border-radius: 6px;
-    padding: 2px 8px;
-    font-size: 10px;
-    font-weight: bold;
-    color: #1e3a8a;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-/* Glassmorphic Expanded Modal Mode */
-.glass-modal-expanded {
-    position: fixed !important;
-    top: 18px !important;
-    left: 18px !important;
-    right: 18px !important;
-    bottom: 18px !important;
-    width: auto !important;
-    height: auto !important;
-    z-index: 99999 !important;
-    background: rgba(255, 255, 255, 0.85) !important;
-    backdrop-filter: blur(14px) saturate(160%) !important;
-    -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
-    border: 2px solid rgba(147, 197, 253, 0.7) !important;
-    border-radius: 18px !important;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25) !important;
-}
-
-.glass-modal-expanded .companion-header {
-    background: rgba(239, 246, 255, 0.9);
-    padding: 14px 20px;
-    border-bottom: 1px solid rgba(147, 197, 253, 0.6);
-}
-
-.glass-modal-expanded .companion-title {
-    font-size: 15px;
-}
-
-.glass-modal-expanded .companion-body {
-    padding: 24px;
-    font-size: 14px;
-}
-
-.status-pill {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: bold;
-    background: #dbeafe;
-    color: #1e40af;
-    margin-bottom: 12px;
-}
-
-.loading-bar-shim {
-    width: 100%;
-    height: 6px;
-    background: #e2e8f0;
-    border-radius: 3px;
-    overflow: hidden;
-    margin-top: 15px;
-}
-
-.loading-bar-shim .fill {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
-    animation: shimAnim 1.5s infinite linear;
-}
-
-@keyframes shimAnim {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-.stage-join-btn {
-    background: #2563eb;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 12px;
-}
-
-/* Footer Banner */
-.footer-ad-bar {
-    background: #facc15;
-    color: #78350f;
-    padding: 5px 12px;
-    font-size: 10px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 2px solid #eab308;
-    width: 100%;
-}
-
-.footer-ad-bar .highlight {
-    color: #991b1b;
-}
-
-/* Responsive adjustment for small screens */
-@media (max-width: 768px) {
-    .challenge-display-row {
-        flex-direction: column;
-    }
-    .country-bars-under-map {
-        flex-direction: column;
-        gap: 8px;
-    }
-}
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            if (input.value.trim() !== '') {
+                const msgBox = document.getElementById('chatMessages');
+                const p = document.createElement('p');
+                const time = new Date().toLocaleTimeString();
+                p.textContent = `[${time}] @Me: ${input.value}`;
+                msgBox.appendChild(p);
+                input.value = '';
+                msgBox.scrollTop = msgBox.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
