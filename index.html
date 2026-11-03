@@ -77,7 +77,7 @@
             <button class="ad-close-btn" onclick="closeAdBanner()">&times;</button>
         </div>
 
-        <!-- ZONE 2: RESTORED & ENLARGED GIS MAP SECTION -->
+        <!-- ZONE 2: GIS MAP SECTION -->
         <div class="globe-stage-wrapper">
             <div class="phase-10-badge-bottom-left">
                 <span class="fraction-text" id="dayFractionDisplay"><strong id="currentDayVal">5</strong><span class="slash-red">/</span><span id="cycleEditionVal">1</span></span>
@@ -99,14 +99,42 @@
             </div>
         </div>
 
+        <!-- FULL-WIDTH COUNTRY PROGRESS BARS DIRECTLY UNDER THE MAP -->
+        <div class="country-bars-under-map">
+            <div class="micro-chart-row">
+                <div class="micro-country-info">
+                    <span class="country-flag">🇨🇭</span>
+                    <span class="micro-chart-label">SWT</span>
+                </div>
+                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 85%;"></div></div>
+                <span class="bar-val">85%</span>
+            </div>
+            <div class="micro-chart-row">
+                <div class="micro-country-info">
+                    <span class="country-flag">🇩🇰</span>
+                    <span class="micro-chart-label">Den</span>
+                </div>
+                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 60%;"></div></div>
+                <span class="bar-val">60%</span>
+            </div>
+            <div class="micro-chart-row">
+                <div class="micro-country-info">
+                    <span class="country-flag">🇸🇬</span>
+                    <span class="micro-chart-label">Sin</span>
+                </div>
+                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 45%;"></div></div>
+                <span class="bar-val">45%</span>
+            </div>
+        </div>
+
         <!-- ZONE 3 & 4: COMMAND BOTTOM DOCK -->
         <div class="command-bottom-dock">
             
-            <!-- MAIN CHALLENGE & DISPLAY INTERACTIVE SECTION -->
+            <!-- MAIN CHALLENGE & DISPLAY ROW (EQUAL HEIGHT ALIGNMENT) -->
             <div class="challenge-display-row">
                 
                 <!-- Left Column: Stacked 3 Challenge Boxes -->
-                <div class="stacked-challenges-column">
+                <div class="stacked-challenges-column" id="leftChallengesStack">
                     <!-- 1. Words Challenge -->
                     <div class="step-box challenge-bubble-stacked" id="boxWords">
                         <div class="pencil-badge"><i class="fa-solid fa-pencil"></i></div>
@@ -147,115 +175,87 @@
                     </div>
                 </div>
 
-                <!-- Right Column: Interactive Companion Monitor Display + Chat Room Directly Underneath -->
-                <div class="right-monitor-chat-column">
-                    <!-- White Companion Monitor Display -->
-                    <div class="right-companion-panel-large" id="companionDisplayPanel">
-                        <div class="companion-header">
-                            <span class="companion-title" id="companionTitle"><i class="fa-solid fa-desktop"></i> نمایشگر مرکزی سیستم</span>
-                            <div class="companion-controls">
-                                <button class="glass-expand-btn" title="بزرگ‌نمایی شیشه‌ای" onclick="expandGlassDisplay()">
-                                    <i class="fa-solid fa-expand"></i>
-                                </button>
-                                <button class="glass-close-btn" title="بستن" onclick="shrinkGlassDisplay()" style="display:none;">
-                                    <i class="fa-solid fa-compress"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="companion-body" id="companionBodyContent">
-                            <div class="display-placeholder">
-                                <i class="fa-solid fa-circle-nodes pulse-icon"></i>
-                                <p>هر یک از چالش‌های سمت چپ را فعال کنید تا عملکرد آن در این مانیتور زنده پردازش شود.</p>
-                            </div>
+                <!-- Right Column: White Companion Monitor Display (Equal Height to Left Stack) -->
+                <div class="right-companion-panel-large" id="companionDisplayPanel">
+                    <div class="companion-header">
+                        <span class="companion-title" id="companionTitle"><i class="fa-solid fa-desktop"></i> نمایشگر مرکزی سیستم</span>
+                        <div class="companion-controls">
+                            <button class="glass-expand-btn" title="بزرگ‌نمایی شیشه‌ای" onclick="expandGlassDisplay()">
+                                <i class="fa-solid fa-expand"></i>
+                            </button>
+                            <button class="glass-close-btn" title="بستن" onclick="shrinkGlassDisplay()" style="display:none;">
+                                <i class="fa-solid fa-compress"></i>
+                            </button>
                         </div>
                     </div>
-
-                    <!-- Yellow Chat Room Box (Directly Under White Monitor) -->
-                    <div class="chat-room-box">
-                        <div class="chat-title">Challenge Chat Room</div>
-                        <div class="chat-messages" id="chatMessages">
-                            <p>[1:32:38] @User1: Nice map</p>
-                            <p>[1:42:38] @User1: Working on Challenges</p>
-                            <p>[1:43:38] @User3: Active session</p>
-                        </div>
-                        <div class="chat-input-row">
-                            <input type="text" id="chatInput" placeholder="پیام خود را بنویسید...">
-                            <button onclick="sendChatMessage()">Send</button>
+                    <div class="companion-body" id="companionBodyContent">
+                        <div class="display-placeholder">
+                            <i class="fa-solid fa-circle-nodes pulse-icon"></i>
+                            <p>هر یک از چالش‌های سمت چپ را فعال کنید تا عملکرد آن در این مانیتور زنده پردازش و نمایش داده شود.</p>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- LOWER DOCK ROW: Participant Counter, Country Bars, Rewards & Dice -->
-            <div class="dock-bottom-tools-row">
-                <!-- Participants Counter -->
-                <div class="step-box dock-side-box">
-                    <div class="counter-header">
-                        <i class="fa-solid fa-user-group"></i>
-                        <span class="box-title">Participants</span>
+            <!-- LOWER SECTION: Chat Room Box & Bottom Tools -->
+            <div class="lower-interactive-section">
+                <!-- Chat Room Box -->
+                <div class="chat-room-box">
+                    <div class="chat-title">Challenge Chat Room</div>
+                    <div class="chat-messages" id="chatMessages">
+                        <p>[1:32:38] @User1: Nice map</p>
+                        <p>[1:42:38] @User1: Working on Challenges</p>
+                        <p>[1:43:38] @User3: Active session</p>
                     </div>
-                    <div class="counter-value" id="participantCount">--</div>
-                    <span class="sub-label">Live Counter</span>
-                </div>
-
-                <!-- Country Progress Bars -->
-                <div class="bottom-mini-charts-container">
-                    <div class="micro-chart-row">
-                        <div class="micro-country-info">
-                            <span class="country-flag">🇨🇭</span>
-                            <span class="micro-chart-label">SWT</span>
-                        </div>
-                        <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 85%;"></div></div>
-                        <span class="bar-val">0</span>
-                    </div>
-                    <div class="micro-chart-row">
-                        <div class="micro-country-info">
-                            <span class="country-flag">🇩🇰</span>
-                            <span class="micro-chart-label">Den</span>
-                        </div>
-                        <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 60%;"></div></div>
-                        <span class="bar-val">0</span>
-                    </div>
-                    <div class="micro-chart-row">
-                        <div class="micro-country-info">
-                            <span class="country-flag">🇸🇬</span>
-                            <span class="micro-chart-label">Sin</span>
-                        </div>
-                        <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 45%;"></div></div>
-                        <span class="bar-val">0</span>
+                    <div class="chat-input-row">
+                        <input type="text" id="chatInput" placeholder="پیام خود را بنویسید...">
+                        <button onclick="sendChatMessage()">Send</button>
                     </div>
                 </div>
 
-                <!-- Rewards & Trophies -->
-                <div class="step-box dock-side-box trophy-box">
-                    <div class="counter-header">
-                        <i class="fa-solid fa-trophy" style="color: #ca8a04;"></i>
-                        <span class="box-title">Rewards</span>
+                <!-- Bottom Tools: Participants, Rewards & Dice -->
+                <div class="dock-bottom-tools-row">
+                    <!-- Participants Counter -->
+                    <div class="step-box dock-side-box">
+                        <div class="counter-header">
+                            <i class="fa-solid fa-user-group"></i>
+                            <span class="box-title">Participants</span>
+                        </div>
+                        <div class="counter-value" id="participantCount">--</div>
+                        <span class="sub-label">Live Counter</span>
                     </div>
-                    <div class="counter-value" style="font-size: 16px; color: #ca8a04;">🏆 10 Days</div>
-                    <span class="sub-label">Trophy Pass</span>
-                </div>
 
-                <!-- Interactive Dice Box -->
-                <div class="step-box dice-card-box-borderless" id="diceContainer" onclick="rollClassicDice()">
-                    <div class="two-dice-svg-box">
-                        <svg viewBox="0 0 120 52" class="two-dice-svg" id="diceSvg">
-                            <g id="die1Group" transform="translate(4, 2)">
-                                <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
-                                <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
-                                <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
-                                <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                                <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
-                                <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
-                            </g>
-                            <g id="die2Group" transform="translate(60, 2)">
-                                <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
-                                <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                            </g>
-                        </svg>
+                    <!-- Rewards & Trophies -->
+                    <div class="step-box dock-side-box trophy-box">
+                        <div class="counter-header">
+                            <i class="fa-solid fa-trophy" style="color: #ca8a04;"></i>
+                            <span class="box-title">Rewards</span>
+                        </div>
+                        <div class="counter-value" style="font-size: 16px; color: #ca8a04;">🏆 10 Days</div>
+                        <span class="sub-label">Trophy Pass</span>
                     </div>
-                    <div class="dice-result-box" id="diceValBox">تاس‌ها: ۵ و ۱ (مجموع: ۶)</div>
+
+                    <!-- Interactive Dice Box -->
+                    <div class="step-box dice-card-box-borderless" id="diceContainer" onclick="rollClassicDice()">
+                        <div class="two-dice-svg-box">
+                            <svg viewBox="0 0 120 52" class="two-dice-svg" id="diceSvg">
+                                <g id="die1Group" transform="translate(4, 2)">
+                                    <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
+                                    <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
+                                    <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
+                                    <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                                    <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
+                                    <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
+                                </g>
+                                <g id="die2Group" transform="translate(60, 2)">
+                                    <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
+                                    <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="dice-result-box" id="diceValBox">تاس‌ها: ۵ و ۱ (مجموع: ۶)</div>
+                    </div>
                 </div>
             </div>
 
