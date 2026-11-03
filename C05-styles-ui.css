@@ -1,37 +1,37 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - STRICT EQUAL HEIGHT & UNDER-MAP BARS (C05)
+   NOVO-BAY UI STYLES - HORIZONTAL COUNTRY STRIP UNDER MAP (C05)
    ========================================================== */
 
-/* Full-Width Country Bars Directly Under Map */
-.country-bars-under-map {
+/* Full-Width Single-Line Horizontal Strip Directly Under Map */
+.country-bars-horizontal-strip {
     width: 100%;
     background: #ffffff;
     border-bottom: 2px solid #bfdbfe;
-    padding: 8px 16px;
+    padding: 10px 18px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    gap: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
-.country-bars-under-map .micro-chart-row {
+.horizontal-bar-item {
     flex: 1;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
 }
 
-.country-bars-under-map .micro-country-info {
+.horizontal-bar-item .micro-country-info {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     font-size: 11px;
     font-weight: bold;
-    min-width: 55px;
+    min-width: 60px;
 }
 
-.country-bars-under-map .micro-bar-track {
+.horizontal-bar-item .micro-bar-track {
     flex: 1;
     height: 10px;
     background: #e2e8f0;
@@ -39,20 +39,20 @@
     overflow: hidden;
 }
 
-.country-bars-under-map .micro-bar-fill {
+.horizontal-bar-item .micro-bar-fill {
     height: 100%;
     background: linear-gradient(90deg, #3b82f6, #1d4ed8);
     border-radius: 5px;
 }
 
-.country-bars-under-map .bar-val {
+.horizontal-bar-item .bar-val {
     font-size: 10px;
     font-weight: bold;
     color: #475569;
-    min-width: 30px;
+    min-width: 32px;
 }
 
-/* Command Bottom Dock Main Container */
+/* Command Bottom Dock */
 .command-bottom-dock {
     display: flex;
     flex-direction: column;
@@ -62,12 +62,12 @@
     width: 100%;
 }
 
-/* Challenge Row & Monitor Display Grid Layout (Flex Equal Stretch) */
+/* Challenge Row & Monitor Display Grid Layout */
 .challenge-display-row {
     display: flex;
     gap: 14px;
     width: 100%;
-    align-items: stretch; /* Forces equal height between Left Stack & Right Display */
+    align-items: stretch;
 }
 
 /* Left Stacked Column */
@@ -167,7 +167,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Right Companion Panel - Exactly Equal Height to Left Stack */
+/* Right Companion Panel - Equal Height */
 .right-companion-panel-large {
     flex: 1.2;
     background: #ffffff;
@@ -411,7 +411,7 @@
 }
 
 .status-pill {
-    display: inline-block;
+    display inline-block;
     padding: 4px 12px;
     border-radius: 12px;
     font-size: 11px;
@@ -471,12 +471,12 @@
     color: #991b1b;
 }
 
-/* Responsive adjustment for small screens */
+/* Mobile Responsive */
 @media (max-width: 768px) {
     .challenge-display-row {
         flex-direction: column;
     }
-    .country-bars-under-map {
+    .country-bars-horizontal-strip {
         flex-direction: column;
         gap: 8px;
     }
