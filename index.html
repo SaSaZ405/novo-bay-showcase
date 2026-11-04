@@ -99,10 +99,10 @@
             </div>
         </div>
 
-        <!-- SECTION: BARS ATTACHED TO LEFT, GAP & DICE AT FAR RIGHT -->
-        <div class="country-dice-master-container">
-            <!-- Left Group: Progress Bars Attached to the Left Boundary -->
-            <div class="country-bars-shortened-group">
+        <!-- COUNTRY PROGRESS BARS (LEFT) & COMPACT DICE WITH COUNTER (RIGHT) -->
+        <div class="country-progress-dice-row">
+            <!-- Left Group: Progress Bars -->
+            <div class="country-bars-full-left">
                 <!-- Row 1: Switzerland -->
                 <div class="horizontal-bar-item">
                     <div class="micro-country-info">
@@ -134,22 +134,25 @@
                 </div>
             </div>
 
-            <!-- Right Slot: Dice at the Far Right Corner in the Open Gap -->
-            <div class="independent-dice-slot-far-right" id="diceContainer" onclick="rollClassicDice()">
-                <svg viewBox="0 0 120 52" class="dice-svg-inline" id="diceSvg">
-                    <g id="die1Group" transform="translate(4, 2)">
-                        <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                        <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
-                        <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
-                        <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                        <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
-                        <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
-                    </g>
-                    <g id="die2Group" transform="translate(60, 2)">
-                        <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                        <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                    </g>
-                </svg>
+            <!-- Right Slot: Compact Dice & Counter Stacked Underneath -->
+            <div class="compact-dice-right-slot" id="diceContainer" onclick="rollClassicDice()">
+                <div class="two-dice-svg-box-compact">
+                    <svg viewBox="0 0 120 52" class="two-dice-svg" id="diceSvg">
+                        <g id="die1Group" transform="translate(4, 2)">
+                            <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+                            <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
+                            <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
+                            <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                            <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
+                            <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
+                        </g>
+                        <g id="die2Group" transform="translate(60, 2)">
+                            <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+                            <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="dice-result-box-compact" id="diceValBox">تاس‌ها: ۵ و ۱ (مجموع: ۶)</div>
             </div>
         </div>
 
@@ -330,13 +333,15 @@
         function rollClassicDice() {
             const d1 = Math.floor(Math.random() * 6) + 1;
             const d2 = Math.floor(Math.random() * 6) + 1;
+            const sum = d1 + d2;
             
             document.getElementById('die1Group').innerHTML = getDieDotsSVG(d1);
             document.getElementById('die2Group').innerHTML = getDieDotsSVG(d2);
+            document.getElementById('diceValBox').textContent = `تاس‌ها: ${d1} و ${d2} (مجموع: ${sum})`;
             
             const svgBox = document.getElementById('diceSvg');
             if (svgBox) {
-                svgBox.style.transform = "scale(1.2) rotate(12deg)";
+                svgBox.style.transform = "scale(1.15) rotate(8deg)";
                 setTimeout(() => {
                     svgBox.style.transform = "scale(1) rotate(0deg)";
                 }, 250);
