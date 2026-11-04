@@ -1,14 +1,15 @@
-// C14-challenge-group3-proposals.js - Proposals and Business Plan Management (Merged)
-
-function checkProposalSubmission() {
-    const proposal = document.getElementById('user-proposal-input').value;
-    if(!proposal) { 
-        alert("لطفاً پروپوزال یا بیزینس پلن خود را وارد کنید."); 
-        return; 
-    }
-    alert(`گام سوم: بیزینس پلن برای کمیته ارزیابی ارسال شد.`);
-}
-
-function joinTender() {
-    alert('اتصال به گروه سوم: بررسی ایده‌ها توسط سرمایه‌گذاران و اعلام آمادگی تندر.');
+// C14: Webinar / Tender Challenge Logic
+function handleWebinarChallenge() {
+    const displayTitle = document.getElementById('companionTitle');
+    const displayBody = document.getElementById('companionBodyContent');
+    
+    displayTitle.innerHTML = `<i class="fa-solid fa-video" style="color:#dc2626;"></i> اتاق زنده وبینار و مناقصه`;
+    displayBody.innerHTML = `
+        <div class="active-challenge-view">
+            <div class="status-pill active" style="background:#fee2e2; color:#991b1b;">استیج وبینار برخط</div>
+            <p>ارتباط زنده با استیج بین‌المللی و بررسی پیشنهادات مناقصه...</p>
+            <button class="stage-join-btn" onclick="expandGlassDisplay()">ورود به استیج بزرگ شیشه‌ای</button>
+        </div>
+    `;
+    if (typeof expandGlassDisplay === 'function') expandGlassDisplay();
 }
