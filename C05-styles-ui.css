@@ -1,41 +1,6 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - SEAMLESS BORDERLESS DICE BEHIND BARS (C05)
+   NOVO-BAY UI STYLES - INTEGRATED BORDERLESS DICE IN FLAGS (C05)
    ========================================================== */
-
-/* Fully Seamless & Borderless Dice Element Directly Behind/Above Country Bars */
-.dice-strip-seamless {
-    background: transparent;
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 20px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.two-dice-svg-box {
-    width: 100px;
-    height: 44px;
-    background: transparent;
-}
-
-.two-dice-svg {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-}
-
-.dice-result-text {
-    font-size: 11px;
-    font-weight: bold;
-    color: #1e3a8a;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-}
 
 /* Full-Width Parallel Country Bars */
 .country-bars-horizontal-strip {
@@ -63,7 +28,8 @@
     gap: 6px;
     font-size: 11px;
     font-weight: bold;
-    min-width: 65px;
+    min-width: 120px;
+    position: relative;
 }
 
 .horizontal-bar-item .micro-bar-track {
@@ -86,6 +52,36 @@
     color: #475569;
     min-width: 35px;
     text-align: left;
+}
+
+/* Borderless Dice Placed Directly Behind the Flag */
+.inline-dice-box {
+    background: transparent;
+    border: none !important;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 4px;
+}
+
+.two-dice-svg-box {
+    width: 50px;
+    height: 22px;
+    background: transparent;
+}
+
+.two-dice-svg {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.dice-inline-text {
+    font-size: 10px;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-right: 4px;
+    white-space: nowrap;
 }
 
 /* Command Bottom Dock */
@@ -209,7 +205,7 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Bottom Tools Stacked Under Challenges (Participants, Rewards) */
+/* Bottom Tools Stacked Under Challenges */
 .dock-left-stacked-tools {
     display: flex;
     flex-direction: column;
