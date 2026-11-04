@@ -1,28 +1,27 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - BARS ATTACHED LEFT & DICE FAR RIGHT (C05)
+   NOVO-BAY UI STYLES - BARS LEFT & COMPACT DICE RIGHT (C05)
    ========================================================== */
 
-/* Main Container: Direction Row */
-.country-dice-master-container {
+/* Main Container Row for Progress Bars and Far-Right Dice Slot */
+.country-progress-dice-row {
     width: 100%;
     background: #ffffff;
     border-bottom: 2px solid #bfdbfe;
     padding: 10px 16px;
     display: flex;
-    flex-direction: row; /* Horizontal Alignment */
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
-/* Progress Bars Stack (Attached to Left Edge) */
-.country-bars-shortened-group {
+/* Left Group: Progress Bars spanning from left to right gap */
+.country-bars-full-left {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-right: 120px; /* Shortens bars on the right side matching legend box width */
 }
 
 .horizontal-bar-item {
@@ -64,24 +63,43 @@
     text-align: left;
 }
 
-/* Borderless Dice Slot Placed at the Far-Right Corner Gap */
-.independent-dice-slot-far-right {
-    width: 110px;
-    height: 48px;
-    background: transparent;
-    border: none !important;
+/* Right Slot: Compact Dice & Counter Stacked at Far Right */
+.compact-dice-right-slot {
+    width: 125px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 4px;
     cursor: pointer;
     flex-shrink: 0;
+    background: transparent;
+    border: none;
 }
 
-.dice-svg-inline {
+.two-dice-svg-box-compact {
+    width: 90px;
+    height: 38px;
+}
+
+.two-dice-svg {
     width: 100%;
     height: 100%;
     background: transparent;
     transition: transform 0.2s ease;
+}
+
+.dice-result-box-compact {
+    background: #f8fafc;
+    border: 1px solid #93c5fd;
+    border-radius: 6px;
+    padding: 2px 6px;
+    font-size: 9px;
+    font-weight: bold;
+    color: #1e3a8a;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 /* Command Bottom Dock */
