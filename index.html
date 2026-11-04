@@ -99,57 +99,57 @@
             </div>
         </div>
 
-        <!-- HORIZONTAL COUNTRY PROGRESS BARS WITH EXACT LEGEND ALIGNMENT & INLINE DICE -->
-        <div class="country-bars-horizontal-strip">
-            
-            <!-- Row 1: Switzerland + Borderless Dice in the Right Margin -->
-            <div class="horizontal-bar-item">
-                <div class="micro-country-info">
-                    <span class="country-flag">🇨🇭</span>
-                    <span class="micro-chart-label">SWT</span>
+        <!-- SECTION: SHORTENED COUNTRY PROGRESS BARS & INDEPENDENT DICE CONTAINER -->
+        <div class="country-dice-master-container">
+            <!-- Left Group: All Three Country Bars Shortened Together -->
+            <div class="country-bars-shortened-group">
+                <!-- Row 1: Switzerland -->
+                <div class="horizontal-bar-item">
+                    <div class="micro-country-info">
+                        <span class="country-flag">🇨🇭</span>
+                        <span class="micro-chart-label">SWT</span>
+                    </div>
+                    <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 85%;"></div></div>
+                    <span class="bar-val">85%</span>
                 </div>
-                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 85%;"></div></div>
-                <span class="bar-val">85%</span>
-                
-                <!-- Seamless Borderless Dice Placed in the Right Margin Gap -->
-                <div class="legend-aligned-dice-box" id="diceContainer" onclick="rollClassicDice()">
-                    <svg viewBox="0 0 120 52" class="dice-svg-inline" id="diceSvg">
-                        <g id="die1Group" transform="translate(4, 2)">
-                            <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                            <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
-                            <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
-                            <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                            <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
-                            <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
-                        </g>
-                        <g id="die2Group" transform="translate(60, 2)">
-                            <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                            <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                        </g>
-                    </svg>
+
+                <!-- Row 2: Denmark -->
+                <div class="horizontal-bar-item">
+                    <div class="micro-country-info">
+                        <span class="country-flag">🇩🇰</span>
+                        <span class="micro-chart-label">Den</span>
+                    </div>
+                    <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 60%;"></div></div>
+                    <span class="bar-val">60%</span>
+                </div>
+
+                <!-- Row 3: Singapore -->
+                <div class="horizontal-bar-item">
+                    <div class="micro-country-info">
+                        <span class="country-flag">🇸🇬</span>
+                        <span class="micro-chart-label">Sin</span>
+                    </div>
+                    <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 45%;"></div></div>
+                    <span class="bar-val">45%</span>
                 </div>
             </div>
 
-            <!-- Row 2: Denmark -->
-            <div class="horizontal-bar-item">
-                <div class="micro-country-info">
-                    <span class="country-flag">🇩🇰</span>
-                    <span class="micro-chart-label">Den</span>
-                </div>
-                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 60%;"></div></div>
-                <span class="bar-val">60%</span>
-                <div class="legend-margin-placeholder"></div>
-            </div>
-
-            <!-- Row 3: Singapore -->
-            <div class="horizontal-bar-item">
-                <div class="micro-country-info">
-                    <span class="country-flag">🇸🇬</span>
-                    <span class="micro-chart-label">Sin</span>
-                </div>
-                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 45%;"></div></div>
-                <span class="bar-val">45%</span>
-                <div class="legend-margin-placeholder"></div>
+            <!-- Right Group: Standalone Borderless Dice in the Created Gap -->
+            <div class="independent-dice-slot" id="diceContainer" onclick="rollClassicDice()">
+                <svg viewBox="0 0 120 52" class="dice-svg-inline" id="diceSvg">
+                    <g id="die1Group" transform="translate(4, 2)">
+                        <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+                        <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
+                        <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
+                        <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                        <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
+                        <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
+                    </g>
+                    <g id="die2Group" transform="translate(60, 2)">
+                        <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+                        <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                    </g>
+                </svg>
             </div>
         </div>
 
