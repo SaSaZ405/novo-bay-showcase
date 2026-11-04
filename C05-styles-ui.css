@@ -1,26 +1,28 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - SHORTENED BARS & INDEPENDENT DICE (C05)
+   NOVO-BAY UI STYLES - BARS ATTACHED LEFT & DICE FAR RIGHT (C05)
    ========================================================== */
 
-/* Master Container for Shortened Country Bars + Independent Dice Slot */
+/* Main Container: Direction Row */
 .country-dice-master-container {
     width: 100%;
     background: #ffffff;
     border-bottom: 2px solid #bfdbfe;
     padding: 10px 16px;
     display: flex;
+    flex-direction: row; /* Horizontal Alignment */
     align-items: center;
     justify-content: space-between;
     gap: 16px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
-/* Left Group: Shortened Country Progress Bars */
+/* Progress Bars Stack (Attached to Left Edge) */
 .country-bars-shortened-group {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-right: 120px; /* Shortens bars on the right side matching legend box width */
 }
 
 .horizontal-bar-item {
@@ -62,10 +64,10 @@
     text-align: left;
 }
 
-/* Right Group: Standalone Borderless Dice Slot in the Gap */
-.independent-dice-slot {
-    width: 120px;
-    height: 52px;
+/* Borderless Dice Slot Placed at the Far-Right Corner Gap */
+.independent-dice-slot-far-right {
+    width: 110px;
+    height: 48px;
     background: transparent;
     border: none !important;
     display: flex;
@@ -476,9 +478,5 @@
 @media (max-width: 768px) {
     .challenge-display-row {
         flex-direction: column;
-    }
-    .country-dice-master-container {
-        flex-direction: column;
-        align-items: stretch;
     }
 }
