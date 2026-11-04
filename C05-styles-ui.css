@@ -1,5 +1,5 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - FIXED PARALLEL BARS & INLINE DICE (C05)
+   NOVO-BAY UI STYLES - LEGEND-ALIGNED RIGHT MARGIN GAP (C05)
    ========================================================== */
 
 .country-bars-horizontal-strip {
@@ -19,6 +19,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+    position: relative;
 }
 
 .horizontal-bar-item .micro-country-info {
@@ -28,7 +29,6 @@
     font-size: 11px;
     font-weight: bold;
     min-width: 70px;
-    position: relative;
 }
 
 .horizontal-bar-item .micro-bar-track {
@@ -37,6 +37,7 @@
     background: #e2e8f0;
     border-radius: 6px;
     overflow: hidden;
+    margin-left: 110px; /* Leaves exact gap matching map legend width on the right */
 }
 
 .horizontal-bar-item .micro-bar-fill {
@@ -51,16 +52,18 @@
     color: #475569;
     min-width: 32px;
     text-align: left;
+    position: absolute;
+    left: 115px;
 }
 
-/* Seamless Transparent Dice Placed Right Behind the First Flag */
-.flag-behind-dice {
+/* Seamless Borderless Dice placed precisely in the right margin gap matching legend */
+.legend-aligned-dice-box {
     position: absolute;
-    right: -42px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    width: 36px;
-    height: 18px;
+    width: 95px;
+    height: 24px;
     background: transparent;
     border: none !important;
     cursor: pointer;
@@ -72,6 +75,11 @@
     height: 100%;
     background: transparent;
     transition: transform 0.2s ease;
+}
+
+.legend-margin-placeholder {
+    width: 110px;
+    flex-shrink: 0;
 }
 
 /* Command Bottom Dock */
