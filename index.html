@@ -91,7 +91,7 @@
                 <div id="live-map-canvas"></div>
             </div>
 
-            <div class="map-legend-box">
+            <div class="map-legend-box" id="mapLegendBox">
                 <div class="legend-item"><span class="dot participant"></span> Participants</div>
                 <div class="legend-item"><span class="dot networker"></span> Networkers</div>
                 <div class="legend-item"><span class="dot project"></span> Projects</div>
@@ -99,35 +99,35 @@
             </div>
         </div>
 
-        <!-- HORIZONTAL COUNTRY PROGRESS BARS (PARALLEL STACK) -->
+        <!-- HORIZONTAL COUNTRY PROGRESS BARS WITH EXACT LEGEND ALIGNMENT & INLINE DICE -->
         <div class="country-bars-horizontal-strip">
             
-            <!-- Row 1: Switzerland + Transparent Dice Behind Flag -->
+            <!-- Row 1: Switzerland + Borderless Dice in the Right Margin -->
             <div class="horizontal-bar-item">
                 <div class="micro-country-info">
-                    <!-- Pure Transparent Borderless Dice Placed Behind Flag -->
-                    <div class="flag-behind-dice" id="diceContainer" onclick="rollClassicDice()">
-                        <svg viewBox="0 0 120 52" class="dice-svg-inline" id="diceSvg">
-                            <g id="die1Group" transform="translate(4, 2)">
-                                <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                                <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
-                                <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
-                                <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                                <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
-                                <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
-                            </g>
-                            <g id="die2Group" transform="translate(60, 2)">
-                                <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-                                <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                            </g>
-                        </svg>
-                    </div>
-
                     <span class="country-flag">🇨🇭</span>
                     <span class="micro-chart-label">SWT</span>
                 </div>
                 <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 85%;"></div></div>
                 <span class="bar-val">85%</span>
+                
+                <!-- Seamless Borderless Dice Placed in the Right Margin Gap -->
+                <div class="legend-aligned-dice-box" id="diceContainer" onclick="rollClassicDice()">
+                    <svg viewBox="0 0 120 52" class="dice-svg-inline" id="diceSvg">
+                        <g id="die1Group" transform="translate(4, 2)">
+                            <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+                            <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
+                            <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
+                            <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                            <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
+                            <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
+                        </g>
+                        <g id="die2Group" transform="translate(60, 2)">
+                            <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+                            <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
+                        </g>
+                    </svg>
+                </div>
             </div>
 
             <!-- Row 2: Denmark -->
@@ -138,6 +138,7 @@
                 </div>
                 <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 60%;"></div></div>
                 <span class="bar-val">60%</span>
+                <div class="legend-margin-placeholder"></div>
             </div>
 
             <!-- Row 3: Singapore -->
@@ -147,7 +148,8 @@
                     <span class="micro-chart-label">Sin</span>
                 </div>
                 <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 45%;"></div></div>
-                <span class="bar-val" id="diceValBox">45%</span>
+                <span class="bar-val">45%</span>
+                <div class="legend-margin-placeholder"></div>
             </div>
         </div>
 
@@ -328,7 +330,6 @@
         function rollClassicDice() {
             const d1 = Math.floor(Math.random() * 6) + 1;
             const d2 = Math.floor(Math.random() * 6) + 1;
-            const sum = d1 + d2;
             
             document.getElementById('die1Group').innerHTML = getDieDotsSVG(d1);
             document.getElementById('die2Group').innerHTML = getDieDotsSVG(d2);
@@ -357,4 +358,65 @@
                         <div class="loading-bar-shim"><div class="fill"></div></div>
                     </div>
                 `;
-            } else if (type === 'titles')
+            } else if (type === 'titles') {
+                const val = document.getElementById('user-title-input').value.trim() || 'عنوان پیشنهادی';
+                displayTitle.innerHTML = `<i class="fa-solid fa-heading" style="color:#2563eb;"></i> پردازش چالش عناوین: ${val}`;
+                displayBody.innerHTML = `
+                    <div class="active-challenge-view">
+                        <div class="status-pill active">چالش عناوین فعال شد</div>
+                        <p><strong>عنوان ثبت‌شده:</strong> ${val}</p>
+                        <p>ارزیابی نمره‌دهی هوشمند و اعتبار سنجی لایه‌های حقوقی پروژه...</p>
+                        <div class="loading-bar-shim"><div class="fill"></div></div>
+                    </div>
+                `;
+            } else if (type === 'webinar') {
+                displayTitle.innerHTML = `<i class="fa-solid fa-video" style="color:#dc2626;"></i> اتاق زنده وبینار و مناقصه`;
+                displayBody.innerHTML = `
+                    <div class="active-challenge-view">
+                        <div class="status-pill active" style="background:#fee2e2; color:#991b1b;">استیج وبینار برخط</div>
+                        <p>ارتباط زنده با استیج بین‌المللی و بررسی پیشنهادات مناقصه...</p>
+                        <button class="stage-join-btn" onclick="expandGlassDisplay()">ورود به استیج بزرگ شیشه‌ای</button>
+                    </div>
+                `;
+            }
+
+            expandGlassDisplay();
+        }
+
+        function expandGlassDisplay() {
+            const panel = document.getElementById('companionDisplayPanel');
+            if (panel) {
+                panel.classList.add('glass-modal-expanded');
+                const expandBtn = document.querySelector('.glass-expand-btn');
+                const closeBtn = document.querySelector('.glass-close-btn');
+                if (expandBtn) expandBtn.style.display = 'none';
+                if (closeBtn) closeBtn.style.display = 'inline-block';
+            }
+        }
+
+        function shrinkGlassDisplay() {
+            const panel = document.getElementById('companionDisplayPanel');
+            if (panel) {
+                panel.classList.remove('glass-modal-expanded');
+                const expandBtn = document.querySelector('.glass-expand-btn');
+                const closeBtn = document.querySelector('.glass-close-btn');
+                if (expandBtn) expandBtn.style.display = 'inline-block';
+                if (closeBtn) closeBtn.style.display = 'none';
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            if (input.value.trim() !== '') {
+                const msgBox = document.getElementById('chatMessages');
+                const p = document.createElement('p');
+                const time = new Date().toLocaleTimeString();
+                p.textContent = `[${time}] @Me: ${input.value}`;
+                msgBox.appendChild(p);
+                input.value = '';
+                msgBox.scrollTop = msgBox.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
