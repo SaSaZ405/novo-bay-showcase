@@ -1,8 +1,7 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - BARS LEFT & COMPACT DICE RIGHT (C05)
+   NOVO-BAY UI STYLES - MODULARIZED (C05)
    ========================================================== */
 
-/* Main Container Row for Progress Bars and Far-Right Dice Slot */
 .country-progress-dice-row {
     width: 100%;
     background: #ffffff;
@@ -14,14 +13,15 @@
     justify-content: space-between;
     gap: 16px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    position: relative;
 }
 
-/* Left Group: Progress Bars spanning from left to right gap */
 .country-bars-full-left {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-right: 130px;
 }
 
 .horizontal-bar-item {
@@ -63,8 +63,9 @@
     text-align: left;
 }
 
-/* Right Slot: Compact Dice & Counter Stacked at Far Right */
 .compact-dice-right-slot {
+    position: absolute;
+    right: 16px;
     width: 125px;
     display: flex;
     flex-direction: column;
@@ -75,6 +76,7 @@
     flex-shrink: 0;
     background: transparent;
     border: none;
+    z-index: 10;
 }
 
 .two-dice-svg-box-compact {
@@ -102,7 +104,6 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-/* Command Bottom Dock */
 .command-bottom-dock {
     display: flex;
     flex-direction: column;
@@ -112,7 +113,6 @@
     width: 100%;
 }
 
-/* Main Layout Grid */
 .challenge-display-row {
     display: flex;
     gap: 16px;
@@ -120,7 +120,6 @@
     align-items: flex-start;
 }
 
-/* Left Column */
 .left-challenges-tools-column {
     flex: 1;
     display: flex;
@@ -223,7 +222,6 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Bottom Tools Stacked Under Challenges */
 .dock-left-stacked-tools {
     display: flex;
     flex-direction: column;
@@ -269,7 +267,6 @@
     text-transform: uppercase;
 }
 
-/* Right Column */
 .right-monitor-chat-column {
     flex: 1.2;
     display: flex;
@@ -343,7 +340,6 @@
     50% { transform: scale(1.15); opacity: 1; }
 }
 
-/* Chat Room Box */
 .chat-room-box {
     width: 100%;
     background: #fef9c3;
@@ -398,7 +394,6 @@
     cursor: pointer;
 }
 
-/* Glassmorphic Expanded Modal Mode */
 .glass-modal-expanded {
     position: fixed !important;
     top: 18px !important;
@@ -474,7 +469,6 @@
     margin-top: 12px;
 }
 
-/* Footer Banner */
 .footer-ad-bar {
     background: #facc15;
     color: #78350f;
@@ -492,7 +486,6 @@
     color: #991b1b;
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
     .challenge-display-row {
         flex-direction: column;
