@@ -1,16 +1,26 @@
 /* ==========================================================
-   NOVO-BAY UI STYLES - LEGEND-ALIGNED RIGHT MARGIN GAP (C05)
+   NOVO-BAY UI STYLES - SHORTENED BARS & INDEPENDENT DICE (C05)
    ========================================================== */
 
-.country-bars-horizontal-strip {
+/* Master Container for Shortened Country Bars + Independent Dice Slot */
+.country-dice-master-container {
     width: 100%;
     background: #ffffff;
     border-bottom: 2px solid #bfdbfe;
     padding: 10px 16px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+/* Left Group: Shortened Country Progress Bars */
+.country-bars-shortened-group {
+    flex: 1;
+    display: flex;
     flex-direction: column;
     gap: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
 .horizontal-bar-item {
@@ -19,7 +29,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    position: relative;
 }
 
 .horizontal-bar-item .micro-country-info {
@@ -37,7 +46,6 @@
     background: #e2e8f0;
     border-radius: 6px;
     overflow: hidden;
-    margin-left: 110px; /* Leaves exact gap matching map legend width on the right */
 }
 
 .horizontal-bar-item .micro-bar-fill {
@@ -52,22 +60,19 @@
     color: #475569;
     min-width: 32px;
     text-align: left;
-    position: absolute;
-    left: 115px;
 }
 
-/* Seamless Borderless Dice placed precisely in the right margin gap matching legend */
-.legend-aligned-dice-box {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 95px;
-    height: 24px;
+/* Right Group: Standalone Borderless Dice Slot in the Gap */
+.independent-dice-slot {
+    width: 120px;
+    height: 52px;
     background: transparent;
     border: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    z-index: 10;
+    flex-shrink: 0;
 }
 
 .dice-svg-inline {
@@ -75,11 +80,6 @@
     height: 100%;
     background: transparent;
     transition: transform 0.2s ease;
-}
-
-.legend-margin-placeholder {
-    width: 110px;
-    flex-shrink: 0;
 }
 
 /* Command Bottom Dock */
@@ -476,5 +476,9 @@
 @media (max-width: 768px) {
     .challenge-display-row {
         flex-direction: column;
+    }
+    .country-dice-master-container {
+        flex-direction: column;
+        align-items: stretch;
     }
 }
