@@ -99,65 +99,15 @@
             </div>
         </div>
 
-        <!-- BORDERLESS DICE STRIP (BEHIND / ABOVE COUNTRY BARS) -->
-        <div class="dice-strip-seamless" id="diceContainer" onclick="rollClassicDice()">
-            <div class="two-dice-svg-box">
-                <svg viewBox="0 0 120 52" class="two-dice-svg" id="diceSvg">
-                    <g id="die1Group" transform="translate(4, 2)">
-                        <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
-                        <circle cx="12" cy="12" r="4.5" fill="#1e293b"/>
-                        <circle cx="34" cy="12" r="4.5" fill="#1e293b"/>
-                        <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                        <circle cx="12" cy="34" r="4.5" fill="#1e293b"/>
-                        <circle cx="34" cy="34" r="4.5" fill="#1e293b"/>
-                    </g>
-                    <g id="die2Group" transform="translate(60, 2)">
-                        <rect x="0" y="0" width="46" height="46" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" filter="drop-shadow(2px 4px 6px rgba(0,0,0,0.25))"/>
-                        <circle cx="23" cy="23" r="4.5" fill="#1e293b"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="dice-result-text" id="diceValBox">تاس‌ها: ۵ و ۱ (مجموع: ۶)</div>
-        </div>
-
-        <!-- HORIZONTAL COUNTRY PROGRESS BARS (LOCATED AFTER DICE) -->
+        <!-- HORIZONTAL COUNTRY PROGRESS BARS WITH INTEGRATED BORDERLESS DICE -->
         <div class="country-bars-horizontal-strip">
             <div class="horizontal-bar-item">
                 <div class="micro-country-info">
                     <span class="country-flag">🇨🇭</span>
                     <span class="micro-chart-label">SWT</span>
-                </div>
-                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 85%;"></div></div>
-                <span class="bar-val">85%</span>
-            </div>
-
-            <div class="horizontal-bar-item">
-                <div class="micro-country-info">
-                    <span class="country-flag">🇩🇰</span>
-                    <span class="micro-chart-label">Den</span>
-                </div>
-                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 60%;"></div></div>
-                <span class="bar-val">60%</span>
-            </div>
-
-            <div class="horizontal-bar-item">
-                <div class="micro-country-info">
-                    <span class="country-flag">🇸🇬</span>
-                    <span class="micro-chart-label">Sin</span>
-                </div>
-                <div class="micro-bar-track"><div class="micro-bar-fill" style="width: 45%;"></div></div>
-                <span class="bar-val">45%</span>
-            </div>
-        </div>
-
-        <!-- ZONE 3 & 4: COMMAND BOTTOM DOCK -->
-        <div class="command-bottom-dock">
-            
-            <div class="challenge-display-row">
-                
-                <!-- Left Column: Challenges Stack + Tools Stack -->
-                <div class="left-challenges-tools-column">
-                    <!-- 3 Stacked Challenges -->
-                    <div class="stacked-challenges-column">
-                        <!-- 1. Words Challenge -->
-                        <div class="step-box challenge-bubble-stacked" id="boxWords">
+                    
+                    <!-- BORDERLESS DICE PLACED DIRECTLY BEHIND THE FIRST FLAG -->
+                    <div class="inline-dice-box" id="diceContainer" onclick="rollClassicDice()">
+                        <div class="two-dice-svg-box">
+                            <svg viewBox="0 0 120 52" class="two-dice-svg" id="diceSvg">
+                                <g id="die1Group" transform="translate(4
