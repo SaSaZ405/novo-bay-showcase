@@ -1,14 +1,17 @@
-// C13-challenge-group2-titles.js - Challenge Group 2: Titles & Innovation (Merged)
-
-function openAnalysisModule() {
-    alert('ورود به بخش گروه دوم: پردازش کلمات ساعت ۲۴ و نگارش مقالات تخصصی و ایده‌پردازی.');
-}
-
-function checkTitleSubmission() {
-    const title = document.getElementById('user-title-input').value;
-    if(!title) { 
-        alert("لطفاً عنوان نوآورانه خود را وارد کنید."); 
-        return; 
-    }
-    alert(`گام دوم: پرداخت ۴$ و آزمون پینوکیو روی عنوان «${title}» با موفقیت انجام شد.`);
+// C13: Titles Challenge Logic
+function handleTitlesChallenge() {
+    const val = document.getElementById('user-title-input').value.trim() || 'عنوان پیشنهادی';
+    const displayTitle = document.getElementById('companionTitle');
+    const displayBody = document.getElementById('companionBodyContent');
+    
+    displayTitle.innerHTML = `<i class="fa-solid fa-heading" style="color:#2563eb;"></i> پردازش چالش عناوین: ${val}`;
+    displayBody.innerHTML = `
+        <div class="active-challenge-view">
+            <div class="status-pill active">چالش عناوین فعال شد</div>
+            <p><strong>عنوان ثبت‌شده:</strong> ${val}</p>
+            <p>ارزیابی نمره‌دهی هوشمند و اعتبار سنجی لایه‌های حقوقی پروژه...</p>
+            <div class="loading-bar-shim"><div class="fill"></div></div>
+        </div>
+    `;
+    if (typeof expandGlassDisplay === 'function') expandGlassDisplay();
 }
